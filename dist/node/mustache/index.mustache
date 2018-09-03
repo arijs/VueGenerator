@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
+    <title>SHIFT INC</title>
+    <meta name="description" content="">
+    <meta http-equiv="Content-Language" content="pt-br">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!--  -->
+    <style>*,:after,:before{box-sizing:border-box;outline:0;margin:0;padding:0}body,html{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-color:#fff;color:#000;width:100%;height:100%}</style>
+    <link rel="stylesheet" href="public/css/font.css">
+    <link rel="stylesheet" href="public/css/vuebar.css">
+    <!--  -->
+    <script type="text/javascript">
+        window.["{{globalName}}"] = window[{{globalName}}] || {};
+        window.['{{globalName}}'].BaseUrl = location.pathname;
+        if (window.location.host !== 'localhost')
+            document.write('<base href="' + window[{{globalName}}].BaseUrl + '">');
+    </script>
+</head>
+
+<body>
+    <div id="mount">{{texto}}</div>
+    <!--  -->
+    <script src="public/js/vue.js"></script>
+    <script src="public/js/vuex.js"></script>
+    <script src="public/js/vue-text-mask.min.js"></script>
+    <script src="public/js/vuebar.js"></script>
+    <!--  -->
+    <script src="app/utils/utils.js"></script>
+    <script src="app/env/env.js"></script>
+    <script src="app/services/services.js"></script>
+    <script src="app/store/store.js"></script>
+    <!--  -->
+    <script src="app/main.js"></script>
+</body>
+
+</html>
