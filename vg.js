@@ -2,7 +2,18 @@ var http = require('http'),
     fs = require('fs'),
     path = require('path'),
     url = require('url'),
-    spawn = require('child_process').spawn;
+    spawn = require('child_process').spawn,
+    webfont = require('webfont').default,
+    mustache = require('mustache');
+
+if (webfont) {
+    webfont({
+        files: './**/*.ttf',
+        fontName: 'webfonts'
+    }).then(result => {
+        console.log(result);
+    });
+}
 
 http.createServer(function(req, res) {
     var file = {
@@ -92,18 +103,14 @@ var downloadFile = function(file_url, path, cb) {
 // downloadFile('https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js');
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js');
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.min.js');
-(function() {
-    var DOWNLOAD_DIR = './dl/';
-    downloadFile('https://cdn.jsdelivr.net/npm/mustache/mustache.min.js', DOWNLOAD_DIR, function() {
-        var mustache = require('./dl/mustache.min.js');
-        var json = fs.readFileSync('./env/prod/prod.json', 'utf8'),
-            html = fs.readFileSync('./env/index.mustache', 'utf8');
-        html = mustache.to_html(html, JSON.parse(json));
-        fs.writeFile('./index.html', html, function(err) {
-            if (err)
-                return console.log(err);
-        });
+if (mustache) {
+    var json = fs.readFileSync('./dist/env/index/prod.json', 'utf8'),
+        header = fs.readFileSync('./dist/template/pages/_header.mustache', 'utf8'),
+        footer = fs.readFileSync('./dist/template/pages/_footer.mustache', 'utf8'),
+        html = fs.readFileSync('./dist/template/pages/index.mustache', 'utf8');
+    html = mustache.to_html(header + html + footer, JSON.parse(json));
+    fs.writeFile('./dist/pages/index.html', html, function(err) {
+        if (err)
+            return console.log(err);
     });
-}());
-
-
+}
