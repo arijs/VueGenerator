@@ -47,7 +47,7 @@ http.createServer(function(req, res) {
 		file.type = types[0];
 		file.path = file.path.replace(/\/$/, '') + '/index.html';
 	} else
-		file.type = file.types[indexOf];
+		file.type = types[indexOf];
 	fs.readFile(file.path, function(error, content) {
 		if (error) {
 			console.log(error.code + ': ' + error.path);
