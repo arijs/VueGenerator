@@ -27,8 +27,9 @@ http.createServer(function(req, res) {
 	var file = {
 			path: '.' + req.url,
 			ext: path.extname(req.url),
-			type: typeMap[file.ext.replace(/^\./,'')]
+			type: undefined
 		};
+	file.type = typeMap[file.ext.replace(/^\./,'')];
 	if (!file.type) {
 		file.type = typeMap.html;
 		file.path = file.path.replace(/\/$/, '') + '/index.html';
