@@ -8,5 +8,6 @@
 		"vuex.js",
 		"vuebar.js",
 		"vue-text-mask.js"
-	]
+	],
+	"path": "index.html"
 }

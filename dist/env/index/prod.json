@@ -4,5 +4,6 @@
 		"vuex.min.js",
 		"vuebar.min.js",
 		"vue-text-mask.min.js"
-	]
+	],
+	"path": "Views/Order/Automacao/Pos/Index.cshtml"
 }
