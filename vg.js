@@ -67,21 +67,22 @@ http.createServer(function(req, res) {
     });
 }).listen(80);
 
-var downloadFile = function(file_url, path, cb) {
-    var file_name = url.parse(file_url).pathname.split('/').pop();
-    if (!fs.existsSync(path + file_name)) {
-        var file = fs.createWriteStream(path + file_name);
+var downloadFile = function(file_url, save_dir, cb) {
+    var file_name = path.basename(file_url);
+    var file_path = save_dir + file_name;
+    if (!fs.existsSync(file_path)) {
+        var file = fs.createWriteStream(file_path);
         var curl = spawn('curl', ['-L', file_url]);
         curl.stdout.on('data', function(data) { file.write(data); });
         curl.stdout.on('end', function(data) {
             file.end();
-            console.log(file_name + ' downloaded to ' + path);
+            console.log(file_name + ' downloaded to ' + save_dir);
             if (cb)
                 cb();
         });
         curl.on('exit', function(code) {
             if (code != 0) {
-                console.log('Failed: ' + code);
+                console.error('Failed: ' + code);
             }
         });
     } else if (cb)
