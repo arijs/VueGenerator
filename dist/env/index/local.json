@@ -1,1 +1,8 @@
-{\rtf1}
+{
+	"scripts": [
+		"vue.js",
+		"vuex.js",
+		"vuebar.js",
+		"vue-text-mask.js"
+	]
+}

@@ -13,13 +13,12 @@ http.createServer(function(req, res) {
                 '.html',
                 '.js',
                 '.css',
-                '.json',
                 '.ico',
                 '.png',
                 '.gif',
                 '.jpg',
-                '.jpeg',
                 '.svg',
+                '.json',
                 '.ttf',
                 '.woff',
                 '.woff2',
@@ -30,13 +29,12 @@ http.createServer(function(req, res) {
                 'text/html',
                 'text/javascript',
                 'text/css',
-                'application/json',
                 'image/x-icon',
                 'image/png',
                 'image/gif',
-                'image/jpg',
                 'image/jpeg',
                 'image/svg+xml',
+                'application/json',
                 'application/x-font-ttf',
                 'application/font-woff',
                 'application/font-woff2',
@@ -54,7 +52,7 @@ http.createServer(function(req, res) {
         if (error) {
             console.log(error.code + ': ' + error.path);
             if (error.code == 'ENOENT') {
-                fs.readFile('./server/404.html', function(error, content) {
+                fs.readFile('./404.html', function(error, content) {
                     res.writeHead(200, { 'Content-Type': file.type });
                     res.end(content, 'utf-8');
                 });
