@@ -80,12 +80,12 @@ var downloadFile = function(file_url, save_dir, cb) {
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js');
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.min.js');
 if (mustache) {
-    var json = fs.readFileSync('./dist/env/index/prod.json', 'utf8'),
-        header = fs.readFileSync('./dist/template/pages/_header.mustache', 'utf8'),
-        footer = fs.readFileSync('./dist/template/pages/_footer.mustache', 'utf8'),
-        html = fs.readFileSync('./dist/template/pages/index.mustache', 'utf8');
+    var json = fs.readFileSync('./env/index/prod.json', 'utf8'),
+        header = fs.readFileSync('./template/pages/_header.mustache', 'utf8'),
+        footer = fs.readFileSync('./template/pages/_footer.mustache', 'utf8'),
+        html = fs.readFileSync('./template/pages/index.mustache', 'utf8');
     html = mustache.to_html(header + html + footer, JSON.parse(json));
-    fs.writeFile('./dist/pages/index.html', html, function(err) {
+    fs.writeFile('./pages/index.html', html, function(err) {
         if (err)
             return console.log(err);
     });
@@ -101,16 +101,16 @@ if (webfont && !webfont) {
 if (compressor) {
     compressor.minify({
         compressor: 'uglify-es',
-        input: './dist/vendor/js/*.js',
-        output: './dist/vendor/bundle/vendor.min.js',
+        input: './vendor/js/*.js',
+        output: './vendor/bundle/vendor.min.js',
         callback: function(err, min) {
             console.log('MINIFIED JS');
         }
     });
     compressor.minify({
         compressor: 'crass',
-        input: './dist/vendor/css/*.css',
-        output: './dist/vendor/bundle/vendor.min.css',
+        input: './vendor/css/*.css',
+        output: './vendor/bundle/vendor.min.css',
         callback: function(err, min) {
             console.log('MINIFIED CSS');
         }
