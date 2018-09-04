@@ -3,51 +3,33 @@ var http = require('http'),
 	path = require('path'),
 	url = require('url'),
 	spawn = require('child_process').spawn,
-	exts: [
-		'.html',
-		'.js',
-		'.css',
-		'.ico',
-		'.png',
-		'.gif',
-		'.jpg',
-		'.svg',
-		'.json',
-		'.ttf',
-		'.woff',
-		'.woff2',
-		'.eot',
-		'.otf'
-	],
-	types: [
-		'text/html',
-		'text/javascript',
-		'text/css',
-		'image/x-icon',
-		'image/png',
-		'image/gif',
-		'image/jpeg',
-		'image/svg+xml',
-		'application/json',
-		'application/x-font-ttf',
-		'application/font-woff',
-		'application/font-woff2',
-		'application/vnd.ms-fontobject',
-		'application/x-font-opentype'
-	];
+	typeMap = {
+		html: 'text/html',
+		js: 'text/javascript',
+		css: 'text/css',
+		ico: 'image/x-icon',
+		png: 'image/png',
+		gif: 'image/gif',
+		jpg: 'image/jpeg',
+		svg: 'image/svg+xml',
+		json: 'application/json',
+		ttf: 'application/x-font-ttf',
+		woff: 'application/font-woff',
+		woff2: 'application/font-woff2',
+		eot: 'application/vnd.ms-fontobject',
+		otf: 'application/x-font-opentype'
+	};
 
 http.createServer(function(req, res) {
 	var file = {
 			path: '.' + req.url,
 			ext: path.extname(req.url),
-			type: ''
-		},
-		indexOf = exts.indexOf(file.ext);
-	if (indexOf < 0) {
-		file.type = types[0];
+			type: typeMap[file.ext.replace(/^\./,'')]
+		};
+	if (!file.type) {
+		file.type = typeMap.html;
 		file.path = file.path.replace(/\/$/, '') + '/index.html';
-	} else
-		file.type = types[indexOf];
+	}
 	fs.readFile(file.path, function(error, content) {
 		if (error) {
 			console.log(error.code + ': ' + error.path);
