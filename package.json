@@ -1,0 +1,25 @@
+{
+  "name": "vuegenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vg.js",
+  "scripts": {
+    "start": "node vg.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiftinc/VueGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiftinc/VueGenerator/issues"
+  },
+  "homepage": "https://github.com/shiftinc/VueGenerator#readme",
+  "dependencies": {
+    "mustache": "^2.3.2",
+    "node-minify": "^3.4.0",
+    "webfont": "^8.1.4"
+  }
+}
