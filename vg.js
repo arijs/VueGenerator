@@ -5,20 +5,34 @@ var http = require('http'),
     spawn = require('child_process').spawn,
     webfont = require('webfont').default,
     mustache = require('mustache'),
-    compressor = require('node-minify');
+    compressor = require('node-minify'),
+    typeMap = {
+        html: 'text/html',
+        js: 'text/javascript',
+        css: 'text/css',
+        ico: 'image/x-icon',
+        png: 'image/png',
+        gif: 'image/gif',
+        jpg: 'image/jpeg',
+        svg: 'image/svg+xml',
+        json: 'application/json',
+        ttf: 'application/x-font-ttf',
+        woff: 'application/font-woff',
+        woff2: 'application/font-woff2',
+        eot: 'application/vnd.ms-fontobject',
+        otf: 'application/x-font-opentype'
+    };
 
 http.createServer(function(req, res) {
     var file = {
             path: '.' + req.url,
             ext: path.extname(req.url),
-            type: ''
-        },
-        indexOf = exts.indexOf(file.ext);
-    if (indexOf < 0) {
-        file.type = types[0];
+            type: typeMap[file.ext.replace(/^\./,'')]
+        };
+    if (!file.type) {
+        file.type = typeMap.html;
         file.path = file.path.replace(/\/$/, '') + '/index.html';
-    } else
-        file.type = types[indexOf];
+    }
     fs.readFile(file.path, function(error, content) {
         if (error) {
             console.log(error.code + ': ' + error.path);
@@ -36,6 +50,7 @@ http.createServer(function(req, res) {
             res.end(content, 'utf-8');
         }
     });
+
 }).listen(80);
 
 var downloadFile = function(file_url, save_dir, cb) {
