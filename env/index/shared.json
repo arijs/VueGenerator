@@ -1,13 +1,14 @@
 {
-	"styles": [
-		"reset.css",
-		"vuebar.css"
+	"head_styles": [
+		{"href":"reset.css"},
+		{"href":"vuebar.css"}
 	],
-	"scripts": [
-		"vue.js",
-		"vuex.js",
-		"vuebar.js",
-		"vue-text-mask.js"
+	"foot_scripts": [
+		{"src": "vue.js"},
+		{"src": "vuex.js"},
+		{"src": "vuebar.js"},
+		{"src": "vue-text-mask.js"}
 	],
-	"path": "index.html"
+	"template": "index.mustache",
+	"output": "index.html"
 }

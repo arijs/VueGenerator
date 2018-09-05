@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{PAGE_LANG}}">
+<head>
+{{> head_basic }}
+{{> head_cache }}
+{{> head_title_desc }}
+{{> head_viewport }}
+{{> head_icon }}
+{{> head_styles }}
+{{> head_scripts }}
+	<script>
+		window.{{GLOBAL_NAME}} = window.{{GLOBAL_NAME}} || {};
+		window.{{GLOBAL_NAME}}.BaseUrl = {{& base_url }};
+		{{!
+		if (window.location.hostname !== 'localhost')
+			document.write('<base href="' + window.GLOBAL_NAME.BaseUrl + '">');
+		}}
+	</script>
+</head>
+<body>

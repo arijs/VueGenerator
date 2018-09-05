@@ -1,9 +1,3 @@
 {
-	"scripts": [
-		"vue.min.js",
-		"vuex.min.js",
-		"vuebar.min.js",
-		"vue-text-mask.min.js"
-	],
-	"path": "Views/Order/Automacao/Pos/Index.cshtml"
+	"output": "Views/Order/Automacao/Pos/Index.cshtml"
 }

@@ -1,12 +1,3 @@
 {
-	"styles": [
-		"reset.css",
-		"vuebar.css"
-	],
-	"scripts": [
-		"vue.js",
-		"vuex.js",
-		"vuebar.js",
-		"vue-text-mask.js"
-	]
+	"output": "homolog.html"
 }
