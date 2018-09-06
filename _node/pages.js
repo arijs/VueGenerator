@@ -27,13 +27,14 @@ function getPageEnvConfig(page, env) {
 	if (!sharedConfig && !envConfig) {
 		throw new Error('No config found for page '+page);
 	}
-	var copy = {
+	var config = {};
+	sharedConfig && extend(config, sharedConfig);
+	envConfig && extend(config, envConfig);
+	extend(config, {
 		__page: page,
 		__env: env
-	};
-	sharedConfig && extend(copy, sharedConfig);
-	envConfig && extend(copy, envConfig);
-	return copy;
+	});
+	return config;
 }
 
 function renderPage(config, partials, cb) {

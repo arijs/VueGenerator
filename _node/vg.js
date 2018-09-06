@@ -13,6 +13,7 @@ var http = require('http'),
 	typeMap = {
 		html: 'text/html',
 		js: 'text/javascript',
+		mjs: 'text/javascript',
 		css: 'text/css',
 		ico: 'image/x-icon',
 		png: 'image/png',
@@ -28,13 +29,14 @@ var http = require('http'),
 	};
 
 loadPartials(function(err, partials) {
+	if (err) throw err;
 
 	var pageIndexLocal = pages.getEnvConfig('index', 'local');
 	console.log(pageIndexLocal);
 
 	pages.render(pageIndexLocal, partials, function(err) {
 		if (err) throw err;
-		console.log('> page '+pageIndexLocal.__page+' rendered for env '+pageIndexLocal.__env+' at file '+pageIndexLocal.output);
+		console.log('> page '+pageIndexLocal.page+' rendered for env '+pageIndexLocal.env+' at file '+pageIndexLocal.config.output);
 	});
 
 });
