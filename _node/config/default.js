@@ -4,12 +4,10 @@ var scopes = {
 	Global: { JS_GLOBAL: '_var$', NAME: 'Global' }
 };
 var scopesJson = [
-	'{',
 	'"App":'+JSON.stringify(scopes.App)+',',
 	'"VComp":'+JSON.stringify(scopes.VComp)+',',
-	'"Global":'+JSON.stringify(scopes.Global),
-	'}'
-].join('\n');
+	'"Global":'+JSON.stringify(scopes.Global)
+];
 
 module.exports = {
 	scopes: scopes,

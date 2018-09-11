@@ -3,7 +3,7 @@ var config = require('./default');
 
 config = extend.merge({}, config, {
 	template_vars: {
-		BYTE_ORDER_MARK: String.fromCharCode(0xEF, 0xBB, 0xBF),
+		BYTE_ORDER_MARK: '\ufeff',
 	},
 	pages: {
 		index: {

@@ -1,7 +1,11 @@
 (function(vars) {
 	'use strict';
+	var vars = this.{{GLOBAL_VAR}};
 	var Utils = vars.Utils;
-	vars.compMap['{{COMP_PATH}}'] = {
+	vars.compMap['{{COMP_PATH}}'] = function(callback) {
+		callback(null, comp);
+	};
+	var comp = {
 		/*
 		props: {
 			propA: {
@@ -18,4 +22,4 @@
 		beforeDestroy: function() {}
 		*/
 	};
-})(window.{{GLOBAL_VAR}});
+})();

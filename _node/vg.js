@@ -34,10 +34,14 @@ var http = require('http'),
 loadPartials(function(err, partials) {
 	if (err) throw err;
 
-	renderPage = pages.fnRender(env, envConfig, partials);
-	renderPage('index', function(err, template, output, page, env) {
-		console.log('> page '+page+' rendered for env '+env+' at file '+output);
-		if (err) throw err;
+	renderPage = pages.fnRenderEnv(env, envConfig, partials);
+	renderPage.allPages(function(state) {
+		var done = state.done;
+		for (var i = 0, ii = done.length; i < ii; i++) {
+			var p = done[i];
+			console.log('> page '+p.page+' rendered for env '+p.env+' at file '+p.output);
+			if (p.error) console.error(p.error);
+		}
 	});
 
 });
