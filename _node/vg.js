@@ -43,6 +43,14 @@ loadPartials(function(err, partials) {
 			if (p.error) console.error(p.error);
 		}
 	});
+	var cPath = 'app/root';
+	renderPage.createComponent(cPath, null, function(err, result) {
+		if (err) {
+			console.error('Error creating component '+cPath);
+			throw err;
+		}
+		console.log('> created component '+cPath);
+	});
 
 });
 

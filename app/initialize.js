@@ -5,8 +5,8 @@ var App = this._app$;
 var VComp = this._vcomp$;
 
 var Utils = vars.Utils;
-Utils.extend.newOnly(App, vars);
-Utils.extend.newOnly(VComp, vars);
+App.Utils = Utils;
+VComp.Utils = Utils;
 
 var appLoader = Utils.fnPrefixLoader({
 	prefix: 'app--',

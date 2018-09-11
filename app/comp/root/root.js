@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
-	var vars = this.{{JS_GLOBAL}};
+	var vars = this._app$;
 	var Utils = vars.Utils;
-	vars.compMap[{{& COMP_PATH}}] = function(callback) {
+	vars.compMap["app/root"] = function(callback) {
 		callback(null, comp);
 	};
 	var comp = {

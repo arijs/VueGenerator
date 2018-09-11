@@ -1,12 +1,12 @@
-.{{COMP_CSS_CLASS}} {
+.app--root {
 }
 
 @media (orientation:portrait) {
-	.{{COMP_CSS_CLASS}} {
+	.app--root {
 	}
 }
 
 @media (max-width: 1024px) {
-	.{{COMP_CSS_CLASS}} {
+	.app--root {
 	}
 }

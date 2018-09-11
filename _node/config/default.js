@@ -1,6 +1,6 @@
 var scopes = {
-	App: { JS_GLOBAL: '_app$', CSS_PREFIX: 'app--', COMP_PATH_PREFIX: 'app/comp/', NAME: 'App' },
-	VComp: { JS_GLOBAL: '_vcomp$', CSS_PREFIX: 'vcomp--', COMP_URL: 'https://unpkg.com/@arijs/frontend@0.1.0/vcomp/', NAME: 'VComp' },
+	App: { JS_GLOBAL: '_app$', PREFIX: 'app', COMP_PATH_PREFIX: 'app/comp/', NAME: 'App' },
+	VComp: { JS_GLOBAL: '_vcomp$', PREFIX: 'vcomp', COMP_URL: 'https://unpkg.com/@arijs/frontend@0.1.0/vcomp/', NAME: 'VComp' },
 	Global: { JS_GLOBAL: '_var$', NAME: 'Global' }
 };
 var scopesJson = [

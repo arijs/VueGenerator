@@ -5,6 +5,10 @@ var EXISTS = {};
 var CREATED = {};
 var ERROR = {};
 
+function splitDirs(pathName) {
+	return pathName.replace(/^[\\\/]+|[\\\/]+$/g,'').split(/[\\\/]+/g);
+}
+
 function testaDir(dir, cb) {
 	fs.stat(dir, function(err, stat) {
 		if (err) {
@@ -110,5 +114,6 @@ openDir.sub = openDirSub;
 openDir.array = openDirArray;
 openDir.test = testaDir;
 openDir.testFile = testaFile;
+openDir.splitDirs = splitDirs;
 
 module.exports = openDir;
