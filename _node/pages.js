@@ -86,7 +86,7 @@ function fnRenderEnv(envName, envConfig, partials) {
 			}
 			var ctx = {
 				JS_GLOBAL: scope.JS_GLOBAL,
-				COMP_PATH: JSON.stringify(String(pathFs)),
+				COMP_PATH: JSON.stringify(String(componentPath.slice(1).join('/'))),
 				COMP_TAG_ROOT: tagRoot || 'div',
 				COMP_CSS_CLASS: componentPath.join('--')
 			};

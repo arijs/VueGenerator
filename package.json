@@ -21,6 +21,7 @@
   "dependencies": {
     "buble": "git+https://github.com/arijs/buble.git#export-rollup-create-config",
     "dir-files": "^1.0.0-rc.14",
+    "minimist": "^1.2.0",
     "mustache": "^2.3.2",
     "node-minify": "^3.4.0",
     "rollup": "^0.65.2",

@@ -7,7 +7,7 @@
 {{/ SCOPES_JSON }}
 			};
 {{#SCOPES}}
-			this.{{JS_GLOBAL}} = { BaseUrl: baseUrl, __scopes: scopes };
+			this.{{JS_GLOBAL}} = { BaseUrl: baseUrl, __scopes: scopes, compMap: {} };
 {{/SCOPES}}
 		})();
 	</script>

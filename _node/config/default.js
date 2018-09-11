@@ -26,8 +26,10 @@ module.exports = {
 			{ href: '/css/mobile.css', media: '(max-width: 1024px)' }
 		],
 		FOOT_SCRIPTS_LIBS: [
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/javascript.js' },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/loaders.js' },
+			// { src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/javascript.js' },
+			{ src: '/vendor/js/utils/javascript.js' }, // use o local para testar alterações
+			// { src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/loaders.js' },
+			{ src: '/vendor/js/utils/loaders.js' }, // ou enquanto o unpkg não reflete a última versão
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/form.js' },
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/string.js' },
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/animation.js' },

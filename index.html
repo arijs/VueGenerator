@@ -23,20 +23,20 @@
 		(function() {
 			var baseUrl = "/";
 			var scopes = {
-				"App":{"JS_GLOBAL":"_app$","CSS_PREFIX":"app--","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
-				"VComp":{"JS_GLOBAL":"_vcomp$","CSS_PREFIX":"vcomp--","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.0/vcomp/","NAME":"VComp"},
+				"App":{"JS_GLOBAL":"_app$","PREFIX":"app","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
+				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.0/vcomp/","NAME":"VComp"},
 				"Global":{"JS_GLOBAL":"_var$","NAME":"Global"}
 			};
-			this._app$ = { BaseUrl: baseUrl, __scopes: scopes };
-			this._vcomp$ = { BaseUrl: baseUrl, __scopes: scopes };
-			this._var$ = { BaseUrl: baseUrl, __scopes: scopes };
+			this._app$ = { BaseUrl: baseUrl, __scopes: scopes, compMap: {} };
+			this._vcomp$ = { BaseUrl: baseUrl, __scopes: scopes, compMap: {} };
+			this._var$ = { BaseUrl: baseUrl, __scopes: scopes, compMap: {} };
 		})();
 	</script>
 </head>
 <body>
 	<div id="mount"><!--index.html--></div>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.0/utils/javascript.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.0/utils/loaders.js"></script>
+	<script src="/vendor/js/utils/javascript.js"></script>
+	<script src="/vendor/js/utils/loaders.js"></script>
 	<script src="https://unpkg.com/@arijs/frontend@0.1.0/utils/form.js"></script>
 	<script src="https://unpkg.com/@arijs/frontend@0.1.0/utils/string.js"></script>
 	<script src="https://unpkg.com/@arijs/frontend@0.1.0/utils/animation.js"></script>

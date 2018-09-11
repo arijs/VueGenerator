@@ -84,5 +84,5 @@
 		actions: actions,
 		mutations: mutations
 	});
-	vars.store = store;
+	App.store = store;
 })();

@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
-	var vars = this._app$;
+	var vars = window._app$;
 	var Utils = vars.Utils;
-	vars.compMap["app/root"] = function(callback) {
+	vars.compMap["root"] = function(callback) {
 		callback(null, comp);
 	};
 	var comp = {

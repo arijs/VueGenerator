@@ -3,10 +3,7 @@
 var vars = this._var$;
 var App = this._app$;
 var VComp = this._vcomp$;
-
 var Utils = vars.Utils;
-App.Utils = Utils;
-VComp.Utils = Utils;
 
 var appLoader = Utils.fnPrefixLoader({
 	prefix: 'app--',
@@ -44,7 +41,7 @@ var loadManager = Utils.fnLoadManager({
 Vue.mixin({
 	_lazyLoadComponent: Utils.vueDynamicComponent({
 		getLoader: loadManager.getLoader
-	});
+	})
 });
 
 // Vue.component('masked-input', vueTextMask.default);

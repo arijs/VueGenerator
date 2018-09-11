@@ -7,10 +7,13 @@ var http = require('http'),
 	mustache = require('mustache'),
 	compressor = require('node-minify'),
 	dirFiles = require('dir-files'),
+	minimist = require('minimist'),
 	loadPartials = require('./load-partials'),
 	pages = require('./pages'),
-	env = process.argv[2] || 'local',
+	argv = minimist(process.argv.slice(2)),
+	env = argv.env || argv.e || 'local',
 	envConfig = require('./config/'+env),
+	localport = argv.port || argv.p || 80,
 	dfp = dirFiles.plugins,
 	typeMap = {
 		html: 'text/html',
@@ -43,15 +46,17 @@ loadPartials(function(err, partials) {
 			if (p.error) console.error(p.error);
 		}
 	});
-	var cPath = 'app/root';
-	renderPage.createComponent(cPath, null, function(err, result) {
-		if (err) {
-			console.error('Error creating component '+cPath);
-			throw err;
-		}
-		console.log('> created component '+cPath);
-	});
 
+	var cPath = argv.component || argv.c;
+	if (cPath) {
+		renderPage.createComponent(cPath, argv.tag || argv.t, function(err, result) {
+			if (err) {
+				console.error('Error creating component '+cPath);
+				throw err;
+			}
+			console.log('> created component '+cPath);
+		});
+	}
 });
 
 function getEnvs(cb) {
@@ -62,10 +67,10 @@ function startLocalServer() {
 
 	http.createServer(function(req, res) {
 		var file = {
-				path: '.' + req.url,
-				ext: path.extname(req.url),
-				type: undefined
-			};
+			path: '.' + req.url,
+			ext: path.extname(req.url),
+			type: undefined
+		};
 		file.type = typeMap[file.ext.replace(/^\./,'')];
 		if (!file.type) {
 			file.type = typeMap.html;
@@ -89,7 +94,9 @@ function startLocalServer() {
 			}
 		});
 
-	}).listen(80);
+	}).listen(localport, function() {
+		console.log('> Server running on port '+localport);
+	});
 
 }
 
@@ -166,3 +173,5 @@ function compressVendorCss() {
 		});
 	}
 }
+
+startLocalServer();
