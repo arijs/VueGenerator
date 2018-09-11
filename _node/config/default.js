@@ -26,13 +26,13 @@ module.exports = {
 			{ href: '/css/mobile.css', media: '(max-width: 1024px)' }
 		],
 		FOOT_SCRIPTS_LIBS: [
-			// { src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/javascript.js' },
-			{ src: '/vendor/js/utils/javascript.js' }, // use o local para testar alterações
-			// { src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/loaders.js' },
-			{ src: '/vendor/js/utils/loaders.js' }, // ou enquanto o unpkg não reflete a última versão
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/form.js' },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/string.js' },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.0/utils/animation.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/javascript.js' },
+			// { src: '/vendor/js/utils/javascript.js' }, // use o local para testar alterações
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/loaders.js' },
+			// { src: '/vendor/js/utils/loaders.js' }, // ou enquanto o unpkg não reflete a última versão
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/form.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/string.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/animation.js' },
 			{ src: 'https://unpkg.com/@arijs/vue@2.5.17-beta.0/dist/vue.min.js'},
 			{ src: 'https://unpkg.com/vuex@3.0.1/dist/vuex.min.js' },
 			{ src: 'https://unpkg.com/vuebar@0.0.18/vuebar.js' }
