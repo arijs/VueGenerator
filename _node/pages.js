@@ -1,55 +1,33 @@
 var fs = require('fs');
 var path = require('path');
 var mustache = require('mustache');
-var hop = Object.prototype.hasOwnProperty;
 
-function extend(target, source) {
-	for (var k in source) {
-		if (hop.call(source, k)) {
-			target[k] = source[k];
-		}
-	}
-	return target;
-}
+function renderPage(template, output, vars, partials, cb) {
 
-function getPageEnvConfig(page, env) {
-	var sharedConfig, envConfig;
-	try {
-		sharedConfig = require(path.join(__dirname, '../env', page, 'shared'));
-	} catch(e) {
-		console.error(e);
-	}
-	try {
-		envConfig = require(path.join(__dirname, '../env', page, env));
-	} catch(e) {
-		console.error(e);
-	}
-	if (!sharedConfig && !envConfig) {
-		throw new Error('No config found for page '+page);
-	}
-	var config = {};
-	sharedConfig && extend(config, sharedConfig);
-	envConfig && extend(config, envConfig);
-	extend(config, {
-		__page: page,
-		__env: env
-	});
-	return config;
-}
-
-function renderPage(config, partials, cb) {
-
-	fs.readFile(path.join(__dirname, '../template/pages', config.template), 'utf8', function(err, template) {
+	fs.readFile(path.join(__dirname, './template/pages', template), 'utf8', function(err, source) {
 		if (err) return cb(err);
-		var html = mustache.render(template, config, partials);
+		var html = mustache.render(source, vars, partials);
 		// console.log(html);
-		fs.writeFile(path.join(__dirname, '..', config.output), html, 'utf8', cb);
+		fs.writeFile(path.join(__dirname, '..', output), html, 'utf8', cb);
 		// process.exit();
 	});
 
 }
 
+function fnRenderPage(envName, envConfig, partials) {
+	return function(pageName, callback) {
+		var pageConfig = envConfig.pages[pageName];
+		var template = pageConfig.template || pageName+'.mustache';
+		var output = pageConfig.output || pageName+'.html';
+		var vars = envConfig.template_vars;
+
+		renderPage(template, output, vars, partials, function(err) {
+			callback(err, template, output, pageName, envName);
+		});
+	};
+}
+
 module.exports = {
-	getEnvConfig: getPageEnvConfig,
-	render: renderPage
+	render: renderPage,
+	fnRender: fnRenderPage
 };

@@ -1,9 +1,9 @@
 <script>
-	window['-vcomp'] = window['-vcomp'] || {}; {{! Vue Component Map (componentes compartilhados entre projetos) }}
-	window.{{GLOBAL_NAME}} = window.{{GLOBAL_NAME}} || {};
-	window.{{GLOBAL_NAME}}.BaseUrl = {{& BASE_URL }};
-	{{!
-	if (window.location.hostname !== 'localhost')
-		document.write('<base href="' + window.GLOBAL_NAME.BaseUrl + '">');
-	}}
+	(function() {
+		var baseUrl = {{& BASE_URL }};
+		var scopes = {{& SCOPES_JSON }};
+{{#SCOPES}}
+		this.{{JS_GLOBAL}} = { BaseUrl: baseUrl, __scopes: scopes };
+{{/SCOPES}}
+	})();
 </script>

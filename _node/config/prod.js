@@ -1,7 +1,7 @@
-var lib = require('../lib');
+var extend = require('../extend');
 var config = require('./default');
 
-module.exports = lib.merge({}, config, {
+config = extend.merge({}, config, {
 	template_vars: {
 		BYTE_ORDER_MARK: String.fromCharCode(0xEF, 0xBB, 0xBF),
 	},
@@ -17,3 +17,9 @@ module.exports = lib.merge({}, config, {
 		}
 	}
 });
+
+var fsa = config.template_vars.FOOT_SCRIPTS_APP;
+fsa = [{src:'/app/env/prod.js'}].concat(fsa || []);
+config.template_vars.FOOT_SCRIPTS_APP = fsa;
+
+module.exports = config;

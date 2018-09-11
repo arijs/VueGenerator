@@ -69,7 +69,7 @@ function loadPartials(cb) {
 
 	dirFiles({
 		//,path: node_path.join(file.fullpath, 'static'),
-		path: [path.join(__dirname, '../template/pages/_partials')],
+		path: [path.join(__dirname, './template/pages/_partials')],
 		result: {},
 		callback: cb,
 		processPlugins: [{

@@ -7,8 +7,10 @@ var http = require('http'),
 	mustache = require('mustache'),
 	compressor = require('node-minify'),
 	dirFiles = require('dir-files'),
-	loadPartials = require('./_node/load-partials'),
-	pages = require('./_node/pages'),
+	loadPartials = require('./load-partials'),
+	pages = require('./pages'),
+	env = process.argv[2] || 'local',
+	envConfig = require('./config/'+env),
 	dfp = dirFiles.plugins,
 	typeMap = {
 		html: 'text/html',
@@ -26,17 +28,16 @@ var http = require('http'),
 		woff2: 'application/font-woff2',
 		eot: 'application/vnd.ms-fontobject',
 		otf: 'application/x-font-opentype'
-	};
+	},
+	renderPage;
 
 loadPartials(function(err, partials) {
 	if (err) throw err;
 
-	var pageIndexLocal = pages.getEnvConfig('index', 'local');
-	console.log(pageIndexLocal);
-
-	pages.render(pageIndexLocal, partials, function(err) {
+	renderPage = pages.fnRender(env, envConfig, partials);
+	renderPage('index', function(err, template, output, page, env) {
+		console.log('> page '+page+' rendered for env '+env+' at file '+output);
 		if (err) throw err;
-		console.log('> page '+pageIndexLocal.page+' rendered for env '+pageIndexLocal.env+' at file '+pageIndexLocal.config.output);
 	});
 
 });
