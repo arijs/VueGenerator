@@ -1,6 +1,6 @@
 {{#FOOT_SCRIPTS_LIBS}}
-	<script{{#src}} src="{{&.}}"{{/src}}{{#attrs}} {{name}}="{{&value}}"{{/attrs}}>{{&body}}</script>
+	<script{{#src}} src="{{& addBaseUrl_this }}"{{/src}}{{#attrs}} {{name}}="{{&value}}"{{/attrs}}>{{&body}}</script>
 {{/FOOT_SCRIPTS_LIBS}}
 {{#FOOT_SCRIPTS_APP}}
-	<script{{#src}} src="{{&.}}"{{/src}}{{#attrs}} {{name}}="{{&value}}"{{/attrs}}>{{&body}}</script>
+	<script{{#src}} src="{{& addBaseUrl_this }}"{{/src}}{{#attrs}} {{name}}="{{&value}}"{{/attrs}}>{{&body}}</script>
 {{/FOOT_SCRIPTS_APP}}

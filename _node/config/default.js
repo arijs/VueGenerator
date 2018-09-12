@@ -8,28 +8,50 @@ var scopesJson = [
 	'"VComp":'+JSON.stringify(scopes.VComp)+',',
 	'"Global":'+JSON.stringify(scopes.Global)
 ];
+var baseUrl = function(url) {
+	return ''+(url || '');
+};
+var baseUrlOutraPagina = function(url) {
+	return '../../'+(url || '');
+}
+var hop = Object.prototype.hasOwnProperty;
+
+function fnPrintBaseUrl(propName, baseUrl) {
+	return function() {
+		var value = propName === false ? this : this[propName];
+		if (value != null && hop.call(value, 'addBaseUrl')) {
+			return baseUrl(value.addBaseUrl);
+		}
+		return value;
+	};
+}
 
 module.exports = {
 	scopes: scopes,
+	base_url: baseUrl,
+	fnPrintBaseUrl: fnPrintBaseUrl,
 	template_vars: {
+		addBaseUrl_href: fnPrintBaseUrl('href', baseUrl),
+		addBaseUrl_src: fnPrintBaseUrl('src', baseUrl),
+		addBaseUrl_this: fnPrintBaseUrl(false, baseUrl),
 		SCOPES: [scopes.App, scopes.VComp, scopes.Global],
 		SCOPES_JSON: scopesJson,
 		PAGE_LANG: 'pt-br',
 		PAGE_TITLE: 'VueGenerator',
 		PAGE_DESCRIPTION: '',
-		BASE_URL: JSON.stringify('/'),
+		BASE_URL_STRING: JSON.stringify(baseUrl()),
 		HEAD_STYLES: [
-			{ href: '/css/font.css' },
-			{ href: '/vendor/css/reset.css' },
-			{ href: '/vendor/css/vuebar.css' },
-			{ href: '/css/desktop.css' },
-			{ href: '/css/mobile.css', media: '(max-width: 1024px)' }
+			{ href: { addBaseUrl: 'css/font.css' } },
+			{ href: { addBaseUrl: 'vendor/css/reset.css' } },
+			{ href: { addBaseUrl: 'vendor/css/vuebar.css' } },
+			{ href: { addBaseUrl: 'css/desktop.css' } },
+			{ href: { addBaseUrl: 'css/mobile.css' }, media: '(max-width: 1024px)' }
 		],
 		FOOT_SCRIPTS_LIBS: [
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/javascript.js' },
-			// { src: '/vendor/js/utils/javascript.js' }, // use o local para testar alterações
+			// { src: baseUrl+'vendor/js/utils/javascript.js' }, // use o local para testar alterações
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/loaders.js' },
-			// { src: '/vendor/js/utils/loaders.js' }, // ou enquanto o unpkg não reflete a última versão
+			// { src: baseUrl+'vendor/js/utils/loaders.js' }, // ou enquanto o unpkg não reflete a última versão
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/form.js' },
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/string.js' },
 			{ src: 'https://unpkg.com/@arijs/frontend@0.1.1/utils/animation.js' },
@@ -38,9 +60,9 @@ module.exports = {
 			{ src: 'https://unpkg.com/vuebar@0.0.18/vuebar.js' }
 		],
 		FOOT_SCRIPTS_APP: [
-			{ src: '/app/services.js' },
-			{ src: '/app/store.js' },
-			{ src: '/app/initialize.js' }
+			{ src: { addBaseUrl: 'app/services.js' } },
+			{ src: { addBaseUrl: 'app/store.js' } },
+			{ src: { addBaseUrl: 'app/initialize.js' } }
 		]
 	},
 	pages: {
@@ -48,7 +70,16 @@ module.exports = {
 			template: null, // usar como padrão o nome da chave ("index" neste caso)
 			output: null // como padrão, o nome da chave + ".html" ("index.html")
 		},
-		outra_pagina: {},
+		outra_pagina: {
+			output: 'outra/pagina/index.html',
+			base_url: baseUrlOutraPagina,
+			template_vars: {
+				addBaseUrl_href: fnPrintBaseUrl('href', baseUrlOutraPagina),
+				addBaseUrl_src: fnPrintBaseUrl('src', baseUrlOutraPagina),
+				addBaseUrl_this: fnPrintBaseUrl(false, baseUrlOutraPagina),
+				BASE_URL_STRING: JSON.stringify(baseUrlOutraPagina())
+			}
+		},
 		404: {}
 	}
 };

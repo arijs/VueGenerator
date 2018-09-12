@@ -34,6 +34,8 @@ var http = require('http'),
 	},
 	renderPage;
 
+console.log('> using env '+env);
+
 loadPartials(function(err, partials) {
 	if (err) throw err;
 
@@ -42,7 +44,7 @@ loadPartials(function(err, partials) {
 		var done = state.done;
 		for (var i = 0, ii = done.length; i < ii; i++) {
 			var p = done[i];
-			console.log('> page '+p.page+' rendered for env '+p.env+' at file '+p.output);
+			console.log('> page '+p.page+' rendered at file '+p.output);
 			if (p.error) console.error(p.error);
 		}
 	});
