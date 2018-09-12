@@ -1,6 +1,6 @@
 {
-  "name": "vuegenerator",
-  "version": "1.0.0",
+  "name": "@arijs/vue-generator",
+  "version": "0.1.0",
   "description": "",
   "main": "vg.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shiftinc/VueGenerator.git"
+    "url": "https://github.com/arijs/VueGenerator.git"
   },
-  "author": "",
+  "author": "Rafael Hengles, Andreas Volker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shiftinc/VueGenerator/issues"
+    "url": "https://github.com/arijs/VueGenerator/issues"
   },
-  "homepage": "https://github.com/shiftinc/VueGenerator#readme",
+  "homepage": "https://github.com/arijs/VueGenerator#readme",
   "dependencies": {
     "buble": "git+https://github.com/arijs/buble.git#export-rollup-create-config",
     "dir-files": "^1.0.0-rc.14",
