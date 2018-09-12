@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var mustache = require('mustache');
+var extend = require('./extend');
 var all = require('./all');
 var openDir = require('./open-dir');
 var loadComponentTemplates = require('./load-component-templates');
@@ -38,10 +39,12 @@ function fnRenderEnv(envName, envConfig, partials) {
 		var template = pageConfig.template || pageName+'.mustache';
 		var output = pageConfig.output || pageName+'.html';
 		var vars = envConfig.template_vars;
+		var pvars = pageConfig.template_vars;
+		pvars = pvars ? extend.merge({}, pvars, vars) : vars;
 		var outputDir = path.join(__dirname, '..');
 		template = path.join(__dirname, './template/pages', template);
 
-		renderTemplate(template, outputDir, output, vars, partials, function(err) {
+		renderTemplate(template, outputDir, output, pvars, partials, function(err) {
 			callback(err, template, output, pageName, envName);
 		});
 	}
