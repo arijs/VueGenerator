@@ -27,28 +27,29 @@
 			var baseUrl = "../../";
 			var scopes = {
 				"App":{"JS_GLOBAL":"_app$","PREFIX":"app","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
-				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.0/vcomp/","NAME":"VComp"},
+				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.2/vcomp/","NAME":"VComp"},
 				"Global":{"JS_GLOBAL":"_var$","NAME":"Global"}
 			};
 			this._app$ = initScope(scopes.App);
 			this._vcomp$ = initScope(scopes.VComp);
 			this._var$ = initScope(scopes.Global);
+			this._app$.compInit = [{"MOUNT":"#mount","ID":"app/exemplo-form","SAVE":"$root"}];
 		})();
 	</script>
 </head>
 <body>
 	<div id="mount"><!--outra_pagina.html--></div>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.1/utils/javascript.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.1/utils/loaders.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.1/utils/form.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.1/utils/string.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.1/utils/animation.js"></script>
-	<script src="https://unpkg.com/@arijs/vue@2.5.17-beta.0/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.2/utils/javascript.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.2/utils/loaders.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.2/utils/form.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.2/utils/string.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.2/utils/animation.js"></script>
+	<script src="https://unpkg.com/@arijs/vue@2.5.17-beta0.0/dist/vue.js"></script>
 	<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
 	<script src="https://unpkg.com/vuebar@0.0.18/vuebar.js"></script>
 	<script src="../../app/env/local.js"></script>
 	<script src="../../app/services.js"></script>
 	<script src="../../app/store.js"></script>
-	<script src="../../app/initialize.js"></script>
+	<script src="../../app/initialize-outra-pagina.js"></script>
 </body>
 </html>
