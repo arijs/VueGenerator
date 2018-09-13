@@ -10,7 +10,7 @@ var http = require('http'),
 	minimist = require('minimist'),
 	loadPartials = require('./load-partials'),
 	pages = require('./pages'),
-	argv = minimist(process.argv.slice(2)),
+	argv = minimist(process.argv.slice(2), { default: { server: true } }),
 	env = argv.env || argv.e || 'local',
 	envConfig = require('./config/'+env),
 	localport = argv.port || argv.p || 80,
@@ -40,14 +40,21 @@ loadPartials(function(err, partials) {
 	if (err) throw err;
 
 	renderPage = pages.fnRenderEnv(env, envConfig, partials);
-	renderPage.allPages(function(state) {
-		var done = state.done;
-		for (var i = 0, ii = done.length; i < ii; i++) {
-			var p = done[i];
-			console.log('> page '+p.page+' rendered at file '+p.output);
-			if (p.error) console.error(p.error);
-		}
-	});
+	var aPage = argv.page; // "p" é usado para a porta do servidor local
+	if (aPage) {
+		renderPage.page(aPage, function(err, template, output, pageName, envName) {
+			console.log('> page '+pageName+' rendered at file '+output);
+		});
+	} else {
+		renderPage.allPages(function(state) {
+			var done = state.done;
+			for (var i = 0, ii = done.length; i < ii; i++) {
+				var p = done[i];
+				console.log('> page '+p.page+' rendered at file '+p.output);
+				if (p.error) console.error(p.error);
+			}
+		});
+	}
 
 	var cPath = argv.component || argv.c;
 	if (cPath) {
@@ -176,4 +183,4 @@ function compressVendorCss() {
 	}
 }
 
-startLocalServer();
+argv['server'] && startLocalServer();

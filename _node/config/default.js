@@ -37,7 +37,7 @@ module.exports = {
 		SCOPES: [scopes.App, scopes.VComp, scopes.Global],
 		SCOPES_JSON: scopesJson,
 		PAGE_LANG: 'pt-br',
-		PAGE_TITLE: 'VueGenerator',
+		PAGE_TITLE: 'VueGenerator - NONE',
 		PAGE_DESCRIPTION: '',
 		BASE_URL_STRING: JSON.stringify(baseUrl()),
 		HEAD_STYLES: [
@@ -68,7 +68,10 @@ module.exports = {
 	pages: {
 		index: {
 			template: null, // usar como padrão o nome da chave ("index" neste caso)
-			output: null // como padrão, o nome da chave + ".html" ("index.html")
+			output: 'example.html', // como padrão, o nome da chave + ".html" ("index.html")
+			template_vars: {
+				PAGE_TITLE: 'VueGenerator - INDEX'
+			}
 		},
 		outra_pagina: {
 			output: 'outra/pagina/index.html',
@@ -77,9 +80,14 @@ module.exports = {
 				addBaseUrl_href: fnPrintBaseUrl('href', baseUrlOutraPagina),
 				addBaseUrl_src: fnPrintBaseUrl('src', baseUrlOutraPagina),
 				addBaseUrl_this: fnPrintBaseUrl(false, baseUrlOutraPagina),
-				BASE_URL_STRING: JSON.stringify(baseUrlOutraPagina())
+				BASE_URL_STRING: JSON.stringify(baseUrlOutraPagina()),
+				PAGE_TITLE: 'VueGenerator - OUTRA'
 			}
 		},
-		404: {}
+		404: {
+			template_vars: {
+				PAGE_TITLE: 'VueGenerator - 404'
+			}
+		}
 	}
 };
