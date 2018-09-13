@@ -36,11 +36,12 @@ function fnRenderEnv(envName, envConfig, partials) {
 	};
 	function renderPage(pageName, callback) {
 		var pageConfig = envConfig.pages[pageName];
+		if (!pageConfig) throw new Error('Config not found for page '+pageName);
 		var template = pageConfig.template || pageName+'.mustache';
 		var output = pageConfig.output || pageName+'.html';
 		var vars = envConfig.template_vars;
 		var pvars = pageConfig.template_vars;
-		pvars = pvars ? extend.merge({}, pvars, vars) : vars;
+		pvars = pvars ? extend.merge({}, vars, pvars) : vars;
 		var outputDir = path.join(__dirname, '..');
 		template = path.join(__dirname, './template/pages', template);
 

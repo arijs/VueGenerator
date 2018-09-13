@@ -1,5 +1,8 @@
 	<script>
 		(function() {
+			function initScope(meta) {
+				return {BaseUrl: baseUrl, compMap: {}, meta: meta, scopes: scopes};
+			}
 			var baseUrl = {{& BASE_URL_STRING }};
 			var scopes = {
 {{# SCOPES_JSON }}
@@ -7,7 +10,7 @@
 {{/ SCOPES_JSON }}
 			};
 {{#SCOPES}}
-			this.{{JS_GLOBAL}} = { BaseUrl: baseUrl, __scopes: scopes, compMap: {} };
+			this.{{JS_GLOBAL}} = initScope(scopes.{{NAME}});
 {{/SCOPES}}
 		})();
 	</script>

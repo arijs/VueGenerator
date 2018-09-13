@@ -5,44 +5,45 @@ var App = this._app$;
 var VComp = this._vcomp$;
 var Utils = vars.Utils;
 
-var appLoader = Utils.fnPrefixLoader({
-	prefix: 'app--',
-	loader: Utils.componentDynamic,
-	getUrl: function(match) {
-		return vars.BaseUrl + 'app/comp/' + match.href;
-	},
-	setJs: function(match, callback) {
-		App.compMap[match.path](function(err, js) {
-			match.js = js;
-			callback(err);
-		});
-	}
-});
+function getScopePrefixLoader(scope) {
+	var meta = scope.meta;
+	return Utils.fnPrefixLoader({
+		prefix: meta.PREFIX+'--',
+		loader: Utils.componentDynamic,
+		getUrl: meta.COMP_URL
+			? function(match) {
+				return meta.COMP_URL + match.href;
+			}
+			: function(match) {
+				return vars.BaseUrl + meta.COMP_PATH_PREFIX + match.href;
+			},
+		setJs: function(match, callback) {
+			scope.compMap[match.path](function(err, js) {
+				match.js = js;
+				callback(err);
+			});
+		}
+	});
+}
 
-var vcompLoader = Utils.fnPrefixLoader({
-	prefix: 'vcomp--',
-	loader: Utils.componentDynamic,
-	getUrl: function(match) {
-		return 'https://unpkg.com/@arijs/frontend@0.1.0/vcomp/' + match.href;
-		// return vars.BaseUrl + 'vcomp/' + match.href;
-	},
-	setJs: function(match, callback) {
-		VComp.compMap[match.path](function(err, js) {
-			match.js = js;
-			callback(err);
-		});
-	}
-});
+var appLoader = getScopePrefixLoader(App);
+var vcompLoader = getScopePrefixLoader(VComp);
 
 var loadManager = Utils.fnLoadManager({
 	prefixLoaders: [appLoader, vcompLoader]
 });
-
-Vue.mixin({
-	_lazyLoadComponent: Utils.vueDynamicComponent({
-		getLoader: loadManager.getLoader
-	})
+var vueLazyLoad = Utils.vueDynamicComponent({
+	getLoader: loadManager.getLoader
 });
+
+Vue.mixin({ _lazyLoadComponent: vueLazyLoad });
+
+vars.compLoader = {
+	App: appLoader,
+	VComp: vcompLoader,
+	manager: loadManager,
+	vueLazyLoad: vueLazyLoad
+};
 
 // Vue.component('masked-input', vueTextMask.default);
 
@@ -55,7 +56,7 @@ Vue.component('vnode', {
 
 var strPojo = String({});
 
-Vue.options._lazyLoadComponent('app--root')(
+vueLazyLoad('app--root')(
 	function(appRoot) {
 		appRoot.store = App.store;
 		var AppRoot = Vue.component('app--root', appRoot);
@@ -70,9 +71,9 @@ Vue.options._lazyLoadComponent('app--root')(
 		}
 		App.$rootError = new Vue({
 			el: '#mount',
-			template: '<div class="app--component-error">'
+			template: '<div class="app--component-error"><pre>'
 				+ Utils.htmlEntitiesEncode(strErr)
-				+ '</div>'
+				+ '</pre></div>'
 		});
 	}
 );
