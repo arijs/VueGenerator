@@ -40,6 +40,7 @@ module.exports = {
 		PAGE_TITLE: 'VueGenerator - NONE',
 		PAGE_DESCRIPTION: '',
 		BASE_URL_STRING: JSON.stringify(baseUrl()),
+		FAVICON_URL: { addBaseUrl: 'favicon.ico' },
 		HEAD_STYLES: [
 			{ href: { addBaseUrl: 'css/font.css' } },
 			{ href: { addBaseUrl: 'vendor/css/reset.css' } },
