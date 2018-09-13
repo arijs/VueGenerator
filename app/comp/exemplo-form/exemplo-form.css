@@ -1,0 +1,19 @@
+.app--exemplo-form {
+}
+.app--exemplo-form .page-width {
+	margin: 0 auto;
+	width: 960px;
+}
+
+@media (orientation:portrait) {
+	.app--exemplo-form {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--exemplo-form {
+	}
+	.app--exemplo-form .page-width {
+		width: 95%;
+	}
+}

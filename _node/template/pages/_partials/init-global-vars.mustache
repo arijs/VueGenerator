@@ -12,5 +12,8 @@
 {{#SCOPES}}
 			this.{{JS_GLOBAL}} = initScope(scopes.{{NAME}});
 {{/SCOPES}}
+{{#SCOPES_SET}}
+			this.{{& NAME}} = {{#VALUE}}{{& json_stringify}};{{/VALUE}}{{^VALUE}}this.{{& NAME}};{{/VALUE}}
+{{/SCOPES_SET}}
 		})();
 	</script>

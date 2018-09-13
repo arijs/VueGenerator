@@ -1,8 +1,9 @@
 (function() {
 	'use strict';
-	var vars = window.{{JS_GLOBAL}};
+	var vars = window._var$;
+	var {{NAME}} = window.{{JS_GLOBAL}};
 	var Utils = vars.Utils;
-	vars.compMap[{{& COMP_PATH}}] = function(callback) {
+	{{NAME}}.compMap[{{& COMP_PATH}}] = function(callback) {
 		callback(null, comp);
 	};
 	var comp = {

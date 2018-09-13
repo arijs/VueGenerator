@@ -2,12 +2,13 @@
 
 var vars = this._var$;
 var App = this._app$;
+var VComp = this._vcomp$;
 var Utils = vars.Utils;
 
 var strPojo = String({});
 
-var appRootId = 'app--root';
-vars.compLoader.manager(appRootId, function(err, compOptions) {
+var appExemploFormId = 'app--exemplo-form';
+vars.compLoader.manager(appExemploFormId, function(err, compOptions) {
 	var Comp, comp;
 	if (err) {
 		var strErr = String(err);
@@ -15,21 +16,21 @@ vars.compLoader.manager(appRootId, function(err, compOptions) {
 			strErr = JSON.stringify(err);
 		}
 		Comp = Vue.extend({
-			template: '<div class="'+appRootId+'--component-error"><pre>'
+			template: '<div class="'+appExemploFormId+'--component-error"><pre>'
 				+ Utils.htmlEntitiesEncode(strErr)
 				+ '</pre></div>'
 		});
 		comp = new Comp();
 		comp.$mount('#mount');
-		App.$rootError = comp;
+		App.$exemploFormError = comp;
 		return;
 	}
 	compOptions.store = App.store;
-	Comp = Vue.component(appRootId, compOptions);
-	//vars.compLoader.vueLazyLoad.register(appRootId, Comp); não é necessário
+	Comp = Vue.component(appExemploFormId, compOptions);
+	//vars.compLoader.vueLazyLoad.register(appExemploFormId, Comp); não é necessário
 	comp = new Comp();
 	comp.$mount('#mount');
-	App.$root = comp;
+	App.$exemploForm = comp;
 });
 
 // App.store.dispatch('loadGetLogin');

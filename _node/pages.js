@@ -88,12 +88,11 @@ function fnRenderEnv(envName, envConfig, partials) {
 				}
 				return callback(new Error('Erro ao carregar os templates de componente: '+enames.join()));
 			}
-			var ctx = {
-				JS_GLOBAL: scope.JS_GLOBAL,
+			var ctx = extend.merge({}, scope, {
 				COMP_PATH: JSON.stringify(String(componentPath.slice(1).join('/'))),
 				COMP_TAG_ROOT: tagRoot || 'div',
 				COMP_CSS_CLASS: componentPath.join('--')
-			};
+			});
 			var state = { html: false, js: false, css: false, errors: [] };
 			var done = all(state, function(state) {
 				if (state.errors.length) {
