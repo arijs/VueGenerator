@@ -1,6 +1,7 @@
 var scopes = {
 	App: { JS_GLOBAL: '_app$', PREFIX: 'app', COMP_PATH_PREFIX: 'app/comp/', NAME: 'App' },
-	VComp: { JS_GLOBAL: '_vcomp$', PREFIX: 'vcomp', COMP_URL: 'https://unpkg.com/@arijs/frontend@0.1.2/vcomp/', NAME: 'VComp' },
+	VComp: { JS_GLOBAL: '_vcomp$', PREFIX: 'vcomp', COMP_URL: 'https://unpkg.com/@arijs/frontend@0.1.3/vcomp/', NAME: 'VComp' },
+	// VComp: { JS_GLOBAL: '_vcomp$', PREFIX: 'vcomp', COMP_PATH_PREFIX: 'vendor/vcomp/', NAME: 'VComp' },
 	Global: { JS_GLOBAL: '_var$', NAME: 'Global' }
 };
 var scopesJson = [
@@ -56,15 +57,15 @@ module.exports = {
 			{ href: { addBaseUrl: 'css/mobile.css' }, media: '(max-width: 1024px)' }
 		],
 		FOOT_SCRIPTS_LIBS: [
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.2/utils/javascript.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/javascript.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/javascript.js' } }, // use o local para testar alterações
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.2/utils/loaders.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/loaders.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/loaders.js' } }, // ou enquanto o unpkg não reflete a última versão
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.2/utils/form.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/form.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/form.js' } },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.2/utils/string.js' },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.2/utils/animation.js' },
-			{ src: 'https://unpkg.com/@arijs/vue@2.5.17-beta0.0/dist/vue.js'},
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/string.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/animation.js' },
+			{ src: 'https://unpkg.com/@arijs/vue@2.5.17-beta1.0/dist/vue.js'},
 			// { src: { addBaseUrl: 'vendor/js/vue.js' } },
 			{ src: 'https://unpkg.com/vuex@3.0.1/dist/vuex.min.js' },
 			{ src: 'https://unpkg.com/vuebar@0.0.18/vuebar.js' }

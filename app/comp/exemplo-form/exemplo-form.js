@@ -10,10 +10,12 @@
 			return { erro: 'Nome inválido' };
 		}
 	}
-	App.compMap["exemplo-form"] = function(callback) {
+	App.compMap["exemplo-form"] = function(callback, template, match) {
+		comp.template = template;
 		callback(null, comp);
 	};
 	var comp = {
+		template: null,
 		data: function() {
 			return {
 				campoNome: {

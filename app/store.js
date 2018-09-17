@@ -134,8 +134,9 @@
 	var loadManager = Utils.fnLoadManager({
 		prefixLoaders: [appLoader, vcompLoader]
 	});
-	var vueLazyLoad = Utils.vueDynamicComponent({
-		getLoader: loadManager.getLoader
+	var vueLazyLoad = Utils.vueLoadAsyncComponent({
+		getLoader: loadManager.getLoader,
+		registerInto: Vue
 	});
 
 	vars.compLoader = {
@@ -145,8 +146,8 @@
 		vueLazyLoad: vueLazyLoad
 	};
 
-	// Vue.mixin({ _lazyLoadComponent: vueLazyLoad });
-	Vue.prototype._lazyLoadComponent = vueLazyLoad;
+	Vue.mixin({ getComponent: vueLazyLoad });
+	// Vue.prototype._lazyLoadComponent = vueLazyLoad;
 
 	// Vue.component('masked-input', vueTextMask.default);
 

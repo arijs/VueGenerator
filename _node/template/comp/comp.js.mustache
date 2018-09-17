@@ -3,10 +3,12 @@
 	var vars = window._var$;
 	var {{NAME}} = window.{{JS_GLOBAL}};
 	var Utils = vars.Utils;
-	{{NAME}}.compMap[{{& COMP_PATH}}] = function(callback) {
+	{{NAME}}.compMap[{{& COMP_PATH}}] = function(callback, template, match) {
+		comp.template = template;
 		callback(null, comp);
 	};
 	var comp = {
+		template: null
 		/*
 		props: {
 			propA: {
