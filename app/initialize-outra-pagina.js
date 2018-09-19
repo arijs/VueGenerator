@@ -4,6 +4,7 @@ var vars = this._var$;
 var App = this._app$;
 var VComp = this._vcomp$;
 var Utils = vars.Utils;
+var BaseComponent = vars.BaseComponent;
 
 var strPojo = String({});
 
@@ -15,7 +16,7 @@ vars.compLoader.manager(appExemploFormId, function(err, compOptions) {
 		if (strErr === strPojo) {
 			strErr = JSON.stringify(err);
 		}
-		Comp = Vue.extend({
+		Comp = BaseComponent.extend({
 			template: '<div class="'+appExemploFormId+'--component-error"><pre>'
 				+ Utils.htmlEntitiesEncode(strErr)
 				+ '</pre></div>'
@@ -26,7 +27,7 @@ vars.compLoader.manager(appExemploFormId, function(err, compOptions) {
 		return;
 	}
 	compOptions.store = App.store;
-	Comp = Vue.component(appExemploFormId, compOptions);
+	Comp = BaseComponent.component(appExemploFormId, compOptions);
 	//vars.compLoader.vueLazyLoad.register(appExemploFormId, Comp); não é necessário
 	comp = new Comp();
 	comp.$mount('#mount');

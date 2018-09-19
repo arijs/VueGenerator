@@ -57,14 +57,14 @@ module.exports = {
 			{ href: { addBaseUrl: 'css/mobile.css' }, media: '(max-width: 1024px)' }
 		],
 		FOOT_SCRIPTS_LIBS: [
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/javascript.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.4/utils/javascript.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/javascript.js' } }, // use o local para testar alterações
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/loaders.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.4/utils/loaders.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/loaders.js' } }, // ou enquanto o unpkg não reflete a última versão
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/form.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.4/utils/form.js' },
 			// { src: { addBaseUrl: 'vendor/js/utils/form.js' } },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/string.js' },
-			{ src: 'https://unpkg.com/@arijs/frontend@0.1.3/utils/animation.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.4/utils/string.js' },
+			{ src: 'https://unpkg.com/@arijs/frontend@0.1.4/utils/animation.js' },
 			{ src: 'https://unpkg.com/@arijs/vue@2.5.17-beta1.0/dist/vue.js'},
 			// { src: { addBaseUrl: 'vendor/js/vue.js' } },
 			{ src: 'https://unpkg.com/vuex@3.0.1/dist/vuex.min.js' },
