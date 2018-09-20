@@ -1,4 +1,3 @@
-
 var hop = Object.prototype.hasOwnProperty;
 var slice = Array.prototype.slice;
 
@@ -17,14 +16,16 @@ function extendCustom(method, target) {
 
 function fnExtendCustom(method) {
 	return function extend() {
-		return extendCustom.apply(this, [method].concat(slice.call(arguments)))
-	}
+		return extendCustom.apply(this, [method].concat(slice.call(arguments)));
+	};
 }
 
 function fnPropertyExtend(subExtend) {
 	propertyExtend.setSubExtend = setSubExtend;
 	return propertyExtend;
-	function setSubExtend(se) { subExtend = se; }
+	function setSubExtend(se) {
+		subExtend = se;
+	}
 	function propertyExtend(key, target, source) {
 		var sk = source[key];
 		var tk = target[key];
@@ -45,15 +46,35 @@ function propertyOverwrite(key, target, source) {
 }
 function propertyNewOnly(key, target, source) {
 	if (hop.call(target, key)) {
-		throw new Error('Objeto já contem uma propriedade '+key+': '+String(target[key]).substr(0, 32));
+		throw new Error(
+			'Objeto já contem uma propriedade ' +
+				key +
+				': ' +
+				String(target[key]).substr(0, 32)
+		);
 	}
 	target[key] = source[key];
 }
-var propertyObjectModify = fnPropertyExtend(function(key, target, source, propertyObjectModify) {
+var propertyObjectModify = fnPropertyExtend(function(
+	key,
+	target,
+	source,
+	propertyObjectModify
+) {
 	target[key] = extendCustom(propertyObjectModify, target[key], source[key]);
 });
-var propertyObjectCreate = fnPropertyExtend(function(key, target, source, propertyObjectCreate) {
-	target[key] = extendCustom(propertyObjectCreate, {}, target[key], source[key]);
+var propertyObjectCreate = fnPropertyExtend(function(
+	key,
+	target,
+	source,
+	propertyObjectCreate
+) {
+	target[key] = extendCustom(
+		propertyObjectCreate,
+		{},
+		target[key],
+		source[key]
+	);
 });
 
 var extend = fnExtendCustom(propertyOverwrite);

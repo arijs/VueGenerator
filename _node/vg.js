@@ -12,7 +12,7 @@ var http = require('http'),
 	pages = require('./pages'),
 	argv = minimist(process.argv.slice(2), { default: { server: true } }),
 	env = argv.env || argv.e || 'local',
-	envConfig = require('./config/'+env),
+	envConfig = require('./config/' + env),
 	localport = argv.port || argv.p || 80,
 	dfp = dirFiles.plugins,
 	typeMap = {
@@ -34,7 +34,7 @@ var http = require('http'),
 	},
 	renderPage;
 
-console.log('> using env '+env);
+console.log('> using env ' + env);
 
 loadPartials(function(err, partials) {
 	if (err) throw err;
@@ -43,14 +43,14 @@ loadPartials(function(err, partials) {
 	var aPage = argv.page; // "p" é usado para a porta do servidor local
 	if (aPage) {
 		renderPage.page(aPage, function(err, template, output, pageName, envName) {
-			console.log('> page '+pageName+' rendered at file '+output);
+			console.log('> page ' + pageName + ' rendered at file ' + output);
 		});
 	} else {
 		renderPage.allPages(function(state) {
 			var done = state.done;
 			for (var i = 0, ii = done.length; i < ii; i++) {
 				var p = done[i];
-				console.log('> page '+p.page+' rendered at file '+p.output);
+				console.log('> page ' + p.page + ' rendered at file ' + p.output);
 				if (p.error) console.error(p.error);
 			}
 		});
@@ -58,55 +58,55 @@ loadPartials(function(err, partials) {
 
 	var cPath = argv.component || argv.c;
 	if (cPath) {
-		renderPage.createComponent(cPath, argv.tag || argv.t, function(err, result) {
+		renderPage.createComponent(cPath, argv.tag || argv.t, function(
+			err,
+			result
+		) {
 			if (err) {
-				console.error('Error creating component '+cPath);
+				console.error('Error creating component ' + cPath);
 				throw err;
 			}
-			console.log('> created component '+cPath);
+			console.log('> created component ' + cPath);
 		});
 	}
 });
 
-function getEnvs(cb) {
-
-}
+function getEnvs(cb) {}
 
 function startLocalServer() {
-
-	http.createServer(function(req, res) {
-		var file = {
-			path: '.' + req.url,
-			ext: path.extname(req.url),
-			type: undefined
-		};
-		file.type = typeMap[file.ext.replace(/^\./,'')];
-		if (!file.type) {
-			file.type = typeMap.html;
-			file.path = file.path.replace(/\/$/, '') + '/index.html';
-		}
-		fs.readFile(file.path, function(error, content) {
-			if (error) {
-				console.log(error.code + ': ' + error.path);
-				if (error.code == 'ENOENT') {
-					fs.readFile('./404.html', function(error, content) {
-						res.writeHead(200, { 'Content-Type': file.type });
-						res.end(content, 'utf-8');
-					});
-				} else {
-					res.writeHead(500);
-					res.end();
-				}
-			} else {
-				res.writeHead(200, { 'Content-Type': file.type });
-				res.end(content, 'utf-8');
+	http
+		.createServer(function(req, res) {
+			var file = {
+				path: '.' + req.url,
+				ext: path.extname(req.url),
+				type: undefined
+			};
+			file.type = typeMap[file.ext.replace(/^\./, '')];
+			if (!file.type) {
+				file.type = typeMap.html;
+				file.path = file.path.replace(/\/$/, '') + '/index.html';
 			}
+			fs.readFile(file.path, function(error, content) {
+				if (error) {
+					console.log(error.code + ': ' + error.path);
+					if (error.code == 'ENOENT') {
+						fs.readFile('./404.html', function(error, content) {
+							res.writeHead(200, { 'Content-Type': file.type });
+							res.end(content, 'utf-8');
+						});
+					} else {
+						res.writeHead(500);
+						res.end();
+					}
+				} else {
+					res.writeHead(200, { 'Content-Type': file.type });
+					res.end(content, 'utf-8');
+				}
+			});
+		})
+		.listen(localport, function() {
+			console.log('> Server running on port ' + localport);
 		});
-
-	}).listen(localport, function() {
-		console.log('> Server running on port '+localport);
-	});
-
 }
 
 var downloadFile = function(file_url, save_dir, cb) {
@@ -115,20 +115,20 @@ var downloadFile = function(file_url, save_dir, cb) {
 	if (!fs.existsSync(file_path)) {
 		var file = fs.createWriteStream(file_path);
 		var curl = spawn('curl', ['-L', file_url]);
-		curl.stdout.on('data', function(data) { file.write(data); });
+		curl.stdout.on('data', function(data) {
+			file.write(data);
+		});
 		curl.stdout.on('end', function(data) {
 			file.end();
 			console.log(file_name + ' downloaded to ' + save_dir);
-			if (cb)
-				cb();
+			if (cb) cb();
 		});
 		curl.on('exit', function(code) {
 			if (code != 0) {
 				console.error('Failed: ' + code);
 			}
 		});
-	} else if (cb)
-		cb();
+	} else if (cb) cb();
 };
 
 // downloadFile('https://cdn.jsdelivr.net/npm/vue/dist/vue.js');
@@ -143,8 +143,7 @@ function renderMustache() {
 			html = fs.readFileSync('./template/pages/index.mustache', 'utf8');
 		html = mustache.to_html(header + html + footer, JSON.parse(json));
 		fs.writeFile('./pages/index.html', html, function(err) {
-			if (err)
-				return console.log(err);
+			if (err) return console.log(err);
 		});
 	}
 }
@@ -153,7 +152,7 @@ function renderWebfont() {
 		webfont({
 			files: './**/*.ttf',
 			fontName: 'webfonts'
-		}).then(result => {
+		}).then(function(result) {
 			console.log(result);
 		});
 	}

@@ -4,9 +4,7 @@ var config = require('./default');
 config = extend.merge({}, config);
 
 var fsa = config.template_vars.FOOT_SCRIPTS_APP;
-fsa = [
-	{ src: { addBaseUrl: 'app/env/local.js' } }
-].concat(fsa || []);
+fsa = [{ src: { addBaseUrl: 'app/env/local.js' } }].concat(fsa || []);
 config.template_vars.FOOT_SCRIPTS_APP = fsa;
 
 module.exports = config;

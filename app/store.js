@@ -9,7 +9,7 @@
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	var query = Utils.parseQuery(location.search);
 	var state = {
-		baseUrl: (vars.BaseUrl || ''),
+		baseUrl: vars.BaseUrl || '',
 		query: query
 	};
 	var getters = {};
@@ -112,11 +112,11 @@
 		aplicarCampoValidacao: function(state, payload) {
 			var campo = payload.campo;
 			var v = payload.validacao;
-			campo.falta = v && v.falta || false;
-			campo.erro = v && v.erro || null;
-			campo.erro = !payload.ocultaErro && v && v.erro || null;
-			campo.falta = !payload.ocultaErro && v && v.falta || false;
-			campo.valido = !payload.ocultaValido && !v || (!v.erro && !v.falta);
+			campo.falta = (v && v.falta) || false;
+			campo.erro = (v && v.erro) || null;
+			campo.erro = (!payload.ocultaErro && v && v.erro) || null;
+			campo.falta = (!payload.ocultaErro && v && v.falta) || false;
+			campo.valido = (!payload.ocultaValido && !v) || (!v.erro && !v.falta);
 		}
 	};
 
@@ -153,9 +153,8 @@
 
 	BaseComponent.component('vnode', {
 		functional: true,
-		render: function(h, context){
+		render: function(h, context) {
 			return context.props.node;
 		}
 	});
-
 })();

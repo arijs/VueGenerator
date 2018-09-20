@@ -36,9 +36,9 @@ function fnRenderEnv(envName, envConfig, partials) {
 	};
 	function renderPage(pageName, callback) {
 		var pageConfig = envConfig.pages[pageName];
-		if (!pageConfig) throw new Error('Config not found for page '+pageName);
-		var template = pageConfig.template || pageName+'.mustache';
-		var output = pageConfig.output || pageName+'.html';
+		if (!pageConfig) throw new Error('Config not found for page ' + pageName);
+		var template = pageConfig.template || pageName + '.mustache';
+		var output = pageConfig.output || pageName + '.html';
 		var vars = envConfig.template_vars;
 		var pvars = pageConfig.template_vars;
 		pvars = pvars ? extend.merge({}, vars, pvars) : vars;
@@ -53,9 +53,13 @@ function fnRenderEnv(envName, envConfig, partials) {
 		componentPath = openDir.splitDirs(componentPath);
 		var pathFs = componentPath.join('/');
 		if (componentPath.length < 2) {
-			return callback(new Error('Caminho inválido para criar componente: '+JSON.stringify(pathFs)));
+			return callback(
+				new Error(
+					'Caminho inválido para criar componente: ' + JSON.stringify(pathFs)
+				)
+			);
 		}
-		var pathFile = componentPath[componentPath.length-1];
+		var pathFile = componentPath[componentPath.length - 1];
 		var scopeMap = envConfig.scopes;
 		var scope;
 		for (var k in scopeMap) {
@@ -70,11 +74,21 @@ function fnRenderEnv(envName, envConfig, partials) {
 			}
 		}
 		if (!scope) {
-			return callback(new Error('Escopo não encontrado para criar o componente '+JSON.stringify(pathFs)));
+			return callback(
+				new Error(
+					'Escopo não encontrado para criar o componente ' +
+						JSON.stringify(pathFs)
+				)
+			);
 		}
 		var compPathPrefix = scope.COMP_PATH_PREFIX;
 		if (!compPathPrefix) {
-			return callback(new Error('Escopo não contém um caminho para criar o componente '+JSON.stringify(pathFs)));
+			return callback(
+				new Error(
+					'Escopo não contém um caminho para criar o componente ' +
+						JSON.stringify(pathFs)
+				)
+			);
 		}
 		compPathPrefix = openDir.splitDirs(compPathPrefix);
 		loadComponentTemplates(function(result) {
@@ -86,7 +100,11 @@ function fnRenderEnv(envName, envConfig, partials) {
 					console.error(err);
 					enames.push(err.name);
 				}
-				return callback(new Error('Erro ao carregar os templates de componente: '+enames.join()));
+				return callback(
+					new Error(
+						'Erro ao carregar os templates de componente: ' + enames.join()
+					)
+				);
 			}
 			var ctx = extend.merge({}, scope, {
 				COMP_PATH: JSON.stringify(String(componentPath.slice(1).join('/'))),
@@ -94,17 +112,21 @@ function fnRenderEnv(envName, envConfig, partials) {
 				COMP_CSS_CLASS: componentPath.join('--')
 			});
 			var state = { html: false, js: false, css: false, errors: [] };
-			var done = all(state, function(state) {
-				if (state.errors.length) {
-					callback(state.errors, state);
-				} else {
-					callback(null, state);
+			var done = all(
+				state,
+				function(state) {
+					if (state.errors.length) {
+						callback(state.errors, state);
+					} else {
+						callback(null, state);
+					}
+				},
+				function(ref, state) {
+					state[ref.name] = ref;
+					if (ref.error) state.errors.push(ref);
+					return state.html && state.js && state.css ? state : null;
 				}
-			}, function(ref, state) {
-				state[ref.name] = ref;
-				if (ref.error) state.errors.push(ref);
-				return (state.html && state.js && state.css) ? state : null;
-			});
+			);
 			var tpHtml = result.html.content;
 			var tpJs = result.js.content;
 			var tpCss = result.css.content;
@@ -117,18 +139,36 @@ function fnRenderEnv(envName, envConfig, partials) {
 			// console.log(': outputPath', outputPath);
 			openDir.array(outputRoot, outputDir, function(err) {
 				if (err) return callback(err);
-				renderComponentTemplate(outputPath+'.html', tpHtml, ctx, partials, done(function(state, args) {
-					// console.log(': html', outputPath+'.html', tpHtml);
-					return { name: 'html', error: args[0] };
-				}));
-				renderComponentTemplate(outputPath+'.js', tpJs, ctx, partials, done(function(state, args) {
-					// console.log(': js', outputPath+'.js', tpJs);
-					return { name: 'js', error: args[0] };
-				}));
-				renderComponentTemplate(outputPath+'.css', tpCss, ctx, partials, done(function(state, args) {
-					// console.log(': css', outputPath+'.css', tpCss);
-					return { name: 'css', error: args[0] };
-				}));
+				renderComponentTemplate(
+					outputPath + '.html',
+					tpHtml,
+					ctx,
+					partials,
+					done(function(state, args) {
+						// console.log(': html', outputPath+'.html', tpHtml);
+						return { name: 'html', error: args[0] };
+					})
+				);
+				renderComponentTemplate(
+					outputPath + '.js',
+					tpJs,
+					ctx,
+					partials,
+					done(function(state, args) {
+						// console.log(': js', outputPath+'.js', tpJs);
+						return { name: 'js', error: args[0] };
+					})
+				);
+				renderComponentTemplate(
+					outputPath + '.css',
+					tpCss,
+					ctx,
+					partials,
+					done(function(state, args) {
+						// console.log(': css', outputPath+'.css', tpCss);
+						return { name: 'css', error: args[0] };
+					})
+				);
 			});
 		});
 	}
@@ -153,13 +193,16 @@ function fnRenderEnv(envName, envConfig, partials) {
 						output: null
 					};
 					state.pages.push(ref);
-					renderPage(k, done(function(state, args) {
-						ref.error = args[0];
-						ref.template = args[1];
-						ref.output = args[2];
-						if (args[0]) state.errors.push(ref);
-						return ref;
-					}));
+					renderPage(
+						k,
+						done(function(state, args) {
+							ref.error = args[0];
+							ref.template = args[1];
+							ref.output = args[2];
+							if (args[0]) state.errors.push(ref);
+							return ref;
+						})
+					);
 				})();
 			}
 		}

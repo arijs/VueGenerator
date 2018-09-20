@@ -10,7 +10,7 @@
 			return { erro: 'Nome inválido' };
 		}
 	}
-	App.compMap["exemplo-form"] = function(callback, template, match) {
+	App.compMap['exemplo-form'] = function(callback, template, match) {
 		comp.template = template;
 		callback(null, comp);
 	};
@@ -25,16 +25,13 @@
 					erro: null,
 					falta: false,
 					valido: false,
-					valida: [
-						Utils.valida.opcional,
-						validaNome
-					]
+					valida: [Utils.valida.opcional, validaNome]
 				}
-			}
+			};
 		},
 		computed: {
 			greeting: function() {
-				return 'Hello '+(this.campoNome.valor || 'World')+'!';
+				return 'Hello ' + (this.campoNome.valor || 'World') + '!';
 			}
 		},
 		methods: {

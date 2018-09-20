@@ -17,7 +17,7 @@ var dfpQueueDir = dfp.queueDir();
 var dfpReadDir = dfp.readDir();
 var dfpQueueDirFiles = dfp.queueDirFiles();
 var dfpErrorFileType = fnErrorFileType(function(file) {
-	return 'item is not a dir or file: '+path.join(file.dir.sub, file.name);
+	return 'item is not a dir or file: ' + path.join(file.dir.sub, file.name);
 });
 var reExtMustache = /^([\w.-]+)\.mustache$/i;
 var dfpProcessFile = {
@@ -27,22 +27,30 @@ var dfpProcessFile = {
 		if (m) {
 			var result = this.result;
 			var sub = file.dir.sub;
-			sub && (sub = sub.replace(/\W/g,'_').toUpperCase().concat('_'));
-			var name = sub+m[1].replace(/\W/g,'_').toLowerCase();
+			sub &&
+				(sub = sub
+					.replace(/\W/g, '_')
+					.toUpperCase()
+					.concat('_'));
+			var name = sub + m[1].replace(/\W/g, '_').toLowerCase();
 			// console.log(file);
-			fs.readFile(path.join(file.dir.root, file.dir.sub, file.name), 'utf8', function(err, data) {
-				if (err) {
-					callback(err);
-				} else {
-					result[name] = data;
-					callback();
+			fs.readFile(
+				path.join(file.dir.root, file.dir.sub, file.name),
+				'utf8',
+				function(err, data) {
+					if (err) {
+						callback(err);
+					} else {
+						result[name] = data;
+						callback();
+					}
 				}
-			})
+			);
 		} else {
 			callback();
 		}
 	}
-}
+};
 var dfpAfterStat = {
 	name: 'afterStat',
 	pluginTimeIgnore: true,
@@ -62,21 +70,20 @@ var dfpAfterStat = {
 };
 
 function loadPartials(cb) {
-	var initialPlugins = [
-		dfpStat,
-		dfpAfterStat
-	];
+	var initialPlugins = [dfpStat, dfpAfterStat];
 
 	dirFiles({
 		//,path: node_path.join(file.fullpath, 'static'),
 		path: [path.join(__dirname, './template/pages/_partials')],
 		result: {},
 		callback: cb,
-		processPlugins: [{
-			beforeFile: function() {
-				this.plugins = initialPlugins.slice();
+		processPlugins: [
+			{
+				beforeFile: function() {
+					this.plugins = initialPlugins.slice();
+				}
 			}
-		}]
+		]
 	});
 }
 

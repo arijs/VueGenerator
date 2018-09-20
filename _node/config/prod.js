@@ -2,7 +2,7 @@ var extend = require('../extend');
 var config = require('./default');
 
 var baseUrl = function(url) {
-	return '@Url.Content("~/'+(url || '')+'")';
+	return '@Url.Content("~/' + (url || '') + '")';
 };
 
 config = extend.merge({}, config, {
@@ -12,8 +12,8 @@ config = extend.merge({}, config, {
 		addBaseUrl_src: config.fnPrintBaseUrl('src', baseUrl),
 		addBaseUrl_this: config.fnPrintBaseUrl(false, baseUrl),
 		BYTE_ORDER_MARK: '\ufeff',
-		BASE_URL_STRING: '"'+baseUrl('')+'"'
-	},
+		BASE_URL_STRING: '"' + baseUrl('') + '"'
+	}
 });
 extend(config.pages, {
 	index: {
@@ -28,9 +28,7 @@ extend(config.pages, {
 });
 
 var fsa = config.template_vars.FOOT_SCRIPTS_APP;
-fsa = [
-	{ src: { addBaseUrl: 'app/env/prod.js' } }
-].concat(fsa || []);
+fsa = [{ src: { addBaseUrl: 'app/env/prod.js' } }].concat(fsa || []);
 config.template_vars.FOOT_SCRIPTS_APP = fsa;
 
 module.exports = config;

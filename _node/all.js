@@ -1,4 +1,3 @@
-
 module.exports = function all(state, finish, reduce, add) {
 	return item;
 	function item(ref) {
