@@ -1,0 +1,88 @@
+.app--pages--login {
+}
+.app--pages--login .bloco-login{
+	margin: 0 auto;
+	width:400px;
+	background:#fff;
+	border-radius:4px;
+	padding: 40px 0 0 0;
+	margin-top:10%;
+	border: solid 1px #e5e5e5;
+}
+.app--pages--login .logo-login{
+	margin: 0 auto;
+	width: 90px;
+	height: 90px;
+	padding: 5px;
+	text-align: center;
+	background: #fff;
+	border: solid 1px #e5e5e5;
+	border-radius: 4px;
+	box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.2);
+}
+.app--pages--login .bloco-login .btEntrar{
+	text-transform: uppercase;
+	border:none;
+	background:#4e266f;
+	color:#fff;
+	padding: 10px 60px 10px 60px;
+	border-radius: 4px;
+}
+.app--pages--login .bloco-login .btEntrar:hover{
+	background:#774d99;
+	cursor: pointer;
+}
+.app--pages--login .subbloco-login{
+	margin:0 auto;
+	width:300px;
+	padding: 10px;
+	text-align: center;
+}
+.app--pages--login .subbloco-login .campo-label{
+	color: #989898;
+}
+.app--pages--login .subbloco-login .campo-usuario,
+.app--pages--login .subbloco-login .campo-senha{
+	border-radius: 4px;
+	border:solid 1px #e5e5e5;
+	width: 95%;
+	height:20px;
+	padding:10px;
+	margin-bottom:20px;
+	margin-top: 10px;
+	color:#989898;
+}
+.app--pages--login .subbloco-login .campo-border {
+	margin-bottom: 20px;
+}
+.app--pages--login .subbloco-login label{
+	color:#989898;
+	float:left;
+}
+.app--pages--login .subbloco-login .error-submit {
+	text-align: center;
+	color: #d0021b;
+}
+.app--pages--login .subbloco-login a{
+	text-decoration: none;
+	color: #4e266f;
+	line-height: 30px;
+}
+.app--pages--login .subbloco-login a:hover{
+  color: #774d99;
+}
+.app--pages--login .subbloco-login p{
+	color: #f00;
+	margin-top: 20px;
+	display: none;
+}
+
+@media (orientation:portrait) {
+	.app--pages--login {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--pages--login {
+	}
+}

@@ -1,0 +1,15 @@
+<div class="app--modal--esqueci-a-senha">
+	<app--modal--base>
+		<h1>Recupere sua senha</h1>
+		<form>
+			<vcomp--form-campo2--texto
+				v-bind:campo="campoEmail"
+				v-on:valor="onCampoValor"
+				v-on:blur="onCampoBlur"
+			></vcomp--form-campo2--texto>
+			<input type="button" v-on:click="clickFechar" value="CANCELAR" />
+			<input type="submit" value="ENVIAR" />
+		</form>
+		<p>* Iremos lhe enviar um e-mail para você resetar sua senha</p>
+	</app--modal--base>
+</div>

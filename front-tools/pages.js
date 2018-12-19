@@ -7,19 +7,54 @@ var openDir = require('./open-dir');
 var loadComponentTemplates = require('./load-component-templates');
 var hop = Object.prototype.hasOwnProperty;
 
-function renderTemplate(template, outputRoot, output, vars, partials, cb) {
-	fs.readFile(template, 'utf8', function(err, source) {
-		if (err) return cb(err);
+function normalizePageOpts(pageOpts, env) {
+	var envName = env.name;
+	var envConfig = env.config;
+	var poType = typeof pageOpts;
+	var pageName;
+	if ('string' === poType) {
+		pageName = pageOpts;
+		pageOpts = {name: pageOpts};
+	} else if ('object' !== poType) {
+		throw new Error('Page options must be an object or string, got '+poType);
+	} else {
+		pageName = pageOpts.name;
+	}
+	if (!pageName) throw new Error('Page name not informed to render');
+	pageOpts.envName = envName;
+	var pageConfig = envConfig.pages[pageName];
+	if (!pageConfig) throw new Error('Config not found for page ' + pageName);
+	pageOpts.config = pageConfig;
+	var templateName = pageConfig.template || pageName + '.mustache';
+	var templatePath = path.join(__dirname, './template/pages', templateName);
+	pageOpts.templateName = templateName;
+	pageOpts.templatePath = templatePath;
+	var envVars = pageOpts.envVars = envConfig.template_vars;
+	var pageVars = pageOpts.pageVars = pageConfig.template_vars;
+	var customVars = pageOpts.customVars;
+	var allVars = envVars ? extend.merge({}, envVars) : {};
+	pageVars && extend.merge(allVars, pageVars);
+	customVars && extend.merge(allVars, customVars);
+	pageOpts.allVars = allVars;
+	return pageOpts;
+}
+
+function renderTemplateString(pageOpts, partials, cb) {
+	fs.readFile(pageOpts.templatePath, 'utf8', function(err, source) {
+		if (err) return cb(err, null, source);
+		var vars = pageOpts.allVars;
 		var html = mustache.render(source, vars, partials);
-		// console.log(html);
-		var outputDir = openDir.splitDirs(output);
-		var outputFile = outputDir.pop();
-		openDir.array(outputRoot, outputDir, function(err) {
-			if (err) return cb(err);
-			output = path.join(outputRoot, output);
-			fs.writeFile(output, html, 'utf8', cb);
-		});
-		// process.exit();
+		return cb(null, html, source);
+	});
+}
+
+function saveCompiledTemplate(outputRoot, output, html, cb) {
+	var outputDir = openDir.splitDirs(output);
+	var outputFile = outputDir.pop();
+	openDir.array(outputRoot, outputDir, function(err) {
+		if (err) return cb(err);
+		output = path.join(outputRoot, output);
+		fs.writeFile(output, html, 'utf8', cb);
 	});
 }
 
@@ -28,26 +63,66 @@ function renderComponentTemplate(path, template, ctx, partials, callback) {
 	fs.writeFile(path, template, 'utf8', callback);
 }
 
-function fnRenderEnv(envName, envConfig, partials) {
+function fnRenderEnv(env, partials) {
 	return {
+		pageString: renderPageString,
 		page: renderPage,
 		allPages: renderAllPages,
 		createComponent: createComponent
 	};
-	function renderPage(pageName, callback) {
-		var pageConfig = envConfig.pages[pageName];
-		if (!pageConfig) throw new Error('Config not found for page ' + pageName);
-		var template = pageConfig.template || pageName + '.mustache';
-		var output = pageConfig.output || pageName + '.html';
-		var vars = envConfig.template_vars;
-		var pvars = pageConfig.template_vars;
-		pvars = pvars ? extend.merge({}, vars, pvars) : vars;
-		var outputDir = path.join(__dirname, '..');
-		template = path.join(__dirname, './template/pages', template);
-
-		renderTemplate(template, outputDir, output, pvars, partials, function(err) {
-			callback(err, template, output, pageName, envName);
+	function renderPageString(pageOpts, callback) {
+		pageOpts = normalizePageOpts(pageOpts, env);
+		renderTemplateString(pageOpts, partials, function(err, html, source) {
+			return callback(err, html, pageOpts, source);
 		});
+	}
+	function renderPage(pageOpts, callback) {
+		pageOpts = normalizePageOpts(pageOpts, env);
+		renderTemplateString(pageOpts, partials, function(err, html, source) {
+			var outputDir = env.config.output_dir;
+			var output = pageOpts.config.output || pageOpts.name + '.html';
+			if (err) return callback(err, pageOpts, outputDir, output, html, source);
+			saveCompiledTemplate(outputDir, output, html, function(err) {
+				return callback(err, pageOpts, outputDir, output, html, source);
+			});
+		});
+	}
+	function renderAllPages(callback) {
+		var state = {
+			pages: [],
+			done: [],
+			errors: []
+		};
+		var done = all(state, callback, function(ref, state) {
+			if (ref) state.done.push(ref);
+			if (state.done.length === state.pages.length) return state;
+		});
+		var envConfigPages = env.config.pages;
+		for (var pageName in envConfigPages) {
+			if (hop.call(envConfigPages, pageName)) {
+				(function() {
+					var ref = {
+						page: pageName,
+						env: env.name,
+						error: null,
+						template: null,
+						output: null
+					};
+					state.pages.push(ref);
+					renderPage(
+						pageName,
+						done(function(state, args) {
+							ref.error = args[0];
+							ref.template = args[1].templateName;
+							ref.output = args[3];
+							if (args[0]) state.errors.push(ref);
+							return ref;
+						})
+					);
+				})();
+			}
+		}
+		done()(); // para forçar a verificação caso não haja nenhuma página
 	}
 	function createComponent(componentPath, tagRoot, callback) {
 		componentPath = openDir.splitDirs(componentPath);
@@ -60,7 +135,7 @@ function fnRenderEnv(envName, envConfig, partials) {
 			);
 		}
 		var pathFile = componentPath[componentPath.length - 1];
-		var scopeMap = envConfig.scopes;
+		var scopeMap = env.config.scopes;
 		var scope;
 		for (var k in scopeMap) {
 			if (hop.call(scopeMap, k)) {
@@ -130,7 +205,7 @@ function fnRenderEnv(envName, envConfig, partials) {
 			var tpHtml = result.html.content;
 			var tpJs = result.js.content;
 			var tpCss = result.css.content;
-			var outputRoot = path.join(__dirname, '..');
+			var outputRoot = env.config.output_dir;
 			var outputDir = compPathPrefix.concat(componentPath.slice(1));
 			var outputPath = path.join(outputRoot, outputDir.join('/'), pathFile);
 			// console.log(': outputRoot', outputRoot);
@@ -172,45 +247,12 @@ function fnRenderEnv(envName, envConfig, partials) {
 			});
 		});
 	}
-	function renderAllPages(callback) {
-		var state = {
-			pages: [],
-			done: [],
-			errors: []
-		};
-		var done = all(state, callback, function(ref, state) {
-			if (ref) state.done.push(ref);
-			if (state.done.length === state.pages.length) return state;
-		});
-		for (var k in envConfig.pages) {
-			if (hop.call(envConfig.pages, k)) {
-				(function() {
-					var ref = {
-						page: k,
-						env: envName,
-						error: null,
-						template: null,
-						output: null
-					};
-					state.pages.push(ref);
-					renderPage(
-						k,
-						done(function(state, args) {
-							ref.error = args[0];
-							ref.template = args[1];
-							ref.output = args[2];
-							if (args[0]) state.errors.push(ref);
-							return ref;
-						})
-					);
-				})();
-			}
-		}
-		done()(); // para forçar a verificação caso não haja nenhuma página
-	}
 }
 
 module.exports = {
-	renderTemplate: renderTemplate,
-	fnRenderEnv: fnRenderEnv
+	renderTemplateString: renderTemplateString,
+	fnRenderEnv: fnRenderEnv,
+	normalizePageOpts: normalizePageOpts,
+	saveCompiledTemplate: saveCompiledTemplate,
+	renderComponentTemplate: renderComponentTemplate
 };

@@ -1,56 +1,44 @@
-var http = require('http'),
-	fs = require('fs'),
-	path = require('path'),
-	url = require('url'),
-	spawn = require('child_process').spawn,
-	webfont = require('webfont').default,
-	mustache = require('mustache'),
-	compressor = require('node-minify'),
-	dirFiles = require('dir-files'),
-	minimist = require('minimist'),
-	loadPartials = require('./load-partials'),
-	pages = require('./pages'),
-	argv = minimist(process.argv.slice(2), { default: { server: true } }),
-	env = argv.env || argv.e || 'local',
-	envConfig = require('./config/' + env),
-	localport = argv.port || argv.p || 80,
-	dfp = dirFiles.plugins,
-	typeMap = {
-		html: 'text/html',
-		js: 'text/javascript',
-		mjs: 'text/javascript',
-		css: 'text/css',
-		ico: 'image/x-icon',
-		png: 'image/png',
-		gif: 'image/gif',
-		jpg: 'image/jpeg',
-		svg: 'image/svg+xml',
-		json: 'application/json',
-		ttf: 'application/x-font-ttf',
-		woff: 'application/font-woff',
-		woff2: 'application/font-woff2',
-		eot: 'application/vnd.ms-fontobject',
-		otf: 'application/x-font-opentype'
-	},
-	renderPage;
+var fs = require('fs');
+var path = require('path');
+var spawn = require('child_process').spawn;
+var webfont = require('webfont').default;
+var compressor = require('node-minify');
+// var dirFiles = require('dir-files');
+var minimist = require('minimist');
+var loadPartials = require('./load-partials');
+var pages = require('./pages');
+var startLocalServer = require('./server/index');
+var argv = minimist(process.argv.slice(2), { default: { server: true } });
 
-console.log('> using env ' + env);
+var localport = argv.port || argv.p || 80;
+// var dfp = dirFiles.plugins;
+var envName = argv.env || argv.e || 'local';
+var envConfig = require('./config/' + envName);
+var env = {
+	name: envName,
+	config: envConfig,
+	renderPage: null,
+	port: localport
+};
+
+console.log('> using env ' + envName);
 
 loadPartials(function(err, partials) {
 	if (err) throw err;
 
-	renderPage = pages.fnRenderEnv(env, envConfig, partials);
+	env.renderPage = pages.fnRenderEnv(env, partials);
 	var aPage = argv.page; // "p" é usado para a porta do servidor local
 	if (aPage) {
-		renderPage.page(aPage, function(err, template, output, pageName, envName) {
-			console.log('> page ' + pageName + ' rendered at file ' + output);
+		env.renderPage.page(aPage, function(error, pageOpts, outputDir, output) {
+			console.log('> page ' + pageOpts.name + ' read '+pageOpts.templateName+' write ' + output);
+			if (error) console.error(error);
 		});
 	} else {
-		renderPage.allPages(function(state) {
+		env.renderPage.allPages(function(state) {
 			var done = state.done;
 			for (var i = 0, ii = done.length; i < ii; i++) {
 				var p = done[i];
-				console.log('> page ' + p.page + ' rendered at file ' + p.output);
+				console.log('> page ' + p.page + ' read '+p.template+' write ' + p.output);
 				if (p.error) console.error(p.error);
 			}
 		});
@@ -58,10 +46,7 @@ loadPartials(function(err, partials) {
 
 	var cPath = argv.component || argv.c;
 	if (cPath) {
-		renderPage.createComponent(cPath, argv.tag || argv.t, function(
-			err,
-			result
-		) {
+		env.renderPage.createComponent(cPath, argv.tag || argv.t, function(err) {
 			if (err) {
 				console.error('Error creating component ' + cPath);
 				throw err;
@@ -70,44 +55,6 @@ loadPartials(function(err, partials) {
 		});
 	}
 });
-
-function getEnvs(cb) {}
-
-function startLocalServer() {
-	http
-		.createServer(function(req, res) {
-			var file = {
-				path: '.' + req.url,
-				ext: path.extname(req.url),
-				type: undefined
-			};
-			file.type = typeMap[file.ext.replace(/^\./, '')];
-			if (!file.type) {
-				file.type = typeMap.html;
-				file.path = file.path.replace(/\/$/, '') + '/index.html';
-			}
-			fs.readFile(file.path, function(error, content) {
-				if (error) {
-					console.log(error.code + ': ' + error.path);
-					if (error.code == 'ENOENT') {
-						fs.readFile('./404.html', function(error, content) {
-							res.writeHead(200, { 'Content-Type': file.type });
-							res.end(content, 'utf-8');
-						});
-					} else {
-						res.writeHead(500);
-						res.end();
-					}
-				} else {
-					res.writeHead(200, { 'Content-Type': file.type });
-					res.end(content, 'utf-8');
-				}
-			});
-		})
-		.listen(localport, function() {
-			console.log('> Server running on port ' + localport);
-		});
-}
 
 var downloadFile = function(file_url, save_dir, cb) {
 	var file_name = path.basename(file_url);
@@ -135,18 +82,6 @@ var downloadFile = function(file_url, save_dir, cb) {
 // downloadFile('https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js');
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js');
 // downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.min.js');
-function renderMustache() {
-	if (mustache) {
-		var json = fs.readFileSync('./env/index/prod.json', 'utf8'),
-			header = fs.readFileSync('./template/pages/_header.mustache', 'utf8'),
-			footer = fs.readFileSync('./template/pages/_footer.mustache', 'utf8'),
-			html = fs.readFileSync('./template/pages/index.mustache', 'utf8');
-		html = mustache.to_html(header + html + footer, JSON.parse(json));
-		fs.writeFile('./pages/index.html', html, function(err) {
-			if (err) return console.log(err);
-		});
-	}
-}
 function renderWebfont() {
 	if (webfont && !webfont) {
 		webfont({
@@ -182,4 +117,4 @@ function compressVendorCss() {
 	}
 }
 
-argv['server'] && startLocalServer();
+argv['server'] && startLocalServer(env);

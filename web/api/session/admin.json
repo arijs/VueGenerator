@@ -1,0 +1,17 @@
+{  
+	"id":"21",
+	"isadmin":true,
+	"agencia":"8897",
+	"categoria":"tecnologia",
+	"cnpj":"99999999000191",
+	"cpf":"99999999808",
+	"codigodobanco":"341",
+	"contacorrente":"13450",
+	"digitoverificadorconta":"0",
+	"enviaremail":true,
+	"nome":"Christopher Pike",
+	"companyName":"United Federation of Planets",
+	"telefone":"11955550001",
+	"email":"chris.pike@ufp.com"
+ }
+ 

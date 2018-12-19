@@ -4,8 +4,8 @@
   "description": "",
   "main": "vg.js",
   "scripts": {
-    "preinstall": "npm install --save mustache@latest node-minify@latest webfont@latest",
-    "start": "node vg.js",
+    "install-latest": "npm install --save mustache@latest node-minify@latest webfont@latest",
+    "start": "node front-tools/vg.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix \"app/**/*.js\" \"_node/**/*.js\""
   },
@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/arijs/VueGenerator#readme",
   "dependencies": {
-    "buble": "git+https://github.com/arijs/buble.git#export-rollup-create-config",
+    "buble": "git+https://github.com/Rich-Harris/buble.git",
+    "body": "^5.1.0",
     "dir-files": "^1.0.0-rc.14",
     "minimist": "^1.2.0",
     "mustache": "^2.3.2",

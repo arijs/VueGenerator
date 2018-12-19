@@ -1,0 +1,30 @@
+<div class="app--pages--login">
+	<div class="bloco-login">
+		<div class="logo-login">
+			<img v-bind:src="baseUrl + 'img/favicon.png'" />
+		</div>
+		<div class="subbloco-login">
+		<form ref="form" v-bind:method="formMethod" v-bind:action="formAction" v-on:submit.prevent="submitLogin">
+			<input type="hidden" v-if="!serverLocal" name="$_POST" value="/api/login" />
+			<vcomp--form-campo2--texto
+				v-bind:campo="campoUsuario"
+				v-on:valor="onCampoValor"
+				v-on:blur="onCampoBlur"
+			></vcomp--form-campo2--texto>
+			<vcomp--form-campo2--texto
+				v-bind:campo="campoSenha"
+				v-on:valor="onCampoValor"
+				v-on:blur="onCampoBlur"
+			></vcomp--form-campo2--texto>
+			<div class="error-submit" v-if="erroMensagem" v-text="erroMensagem"></div>
+			<input type="submit" class="btEntrar" value="Entrar"><br/>
+			<a href="javascript:;" v-on:click="modalEsqueci = true">Esqueceu a senha?</a><br/>
+			<router-link to="/cadastro">Não tenho usuário</router-link><br/>
+		</form>
+		</div>
+	</div><!--Fim bloco-login-->
+	<app--modal--esqueci-a-senha
+		v-show="modalEsqueci"
+		v-on:fechar="modalEsqueci = false"
+	></app--modal--esqueci-a-senha>
+</div>

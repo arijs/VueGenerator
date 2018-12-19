@@ -1,0 +1,58 @@
+.app--modal--esqueci-a-senha {
+}
+.app--modal--esqueci-a-senha h1{
+	margin: 0.67em 0;
+	color:#4e266f;
+}
+.app--modal--esqueci-a-senha .campo-label {
+	font-weight: bold;
+	color:#989898;
+	text-align:left;
+}
+/* .app--modal--esqueci-a-senha input[type=text]{
+	border:solid 1px #e5e5e5;
+	border-radius: 4px;
+	padding: 8px;
+	width:500px;
+} */
+.app--modal--esqueci-a-senha input[type=button]{
+	border:1px solid #4e266f;
+	border-radius: 4px;
+	background: none;
+	color:#4e266f;
+	margin-right: 30px;
+	padding:10px 50px 10px 50px;
+	margin-top: 30px;
+}
+.app--modal--esqueci-a-senha input[type=button]:hover{
+	background: #4e266f;
+	cursor: pointer;
+	color:#fff;
+}
+.app--modal--esqueci-a-senha input[type=submit]{
+	border:none;
+	border-radius: 4px;
+	background: #4e266f;
+	color:#fff;
+	padding:11px 65px 11px 65px;
+	margin-top: 30px;
+}
+.app--modal--esqueci-a-senha input[type=submit]:hover{
+	background: #774d99;
+	cursor: pointer;
+	color:#fff;
+}
+.app--modal--esqueci-a-senha p{
+	color: #a5a3a3;
+	margin-top: 45px;
+}
+
+@media (orientation:portrait) {
+	.app--modal--esqueci-a-senha {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--modal--esqueci-a-senha {
+	}
+}

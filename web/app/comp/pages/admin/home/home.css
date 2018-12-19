@@ -1,0 +1,12 @@
+.app--pages--admin--home {
+}
+
+@media (orientation:portrait) {
+	.app--pages--admin--home {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--pages--admin--home {
+	}
+}

@@ -13,12 +13,10 @@
 	<title>VueGenerator - OUTRA</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
-	<link rel="stylesheet" href="../../css/font.css" />
-	<link rel="stylesheet" href="../../vendor/css/reset.css" />
-	<link rel="stylesheet" href="../../vendor/css/vuebar.css" />
-	<link rel="stylesheet" href="../../css/desktop.css" />
-	<link rel="stylesheet" href="../../css/mobile.css" media="(max-width: 1024px)" />
+	<link rel="shortcut icon" type="image&#x2F;png"  sizes="496x496" href="../../img/favicon-496.png">
+	<link rel="shortcut icon" type="image&#x2F;png"  sizes="80x80" href="../../img/favicon.png">
+	<link rel="shortcut icon" type="image&#x2F;x-icon"  href="../../img/favicon.ico">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
 	<script>
 		(function() {
 			function initScope(meta) {
@@ -27,7 +25,7 @@
 			var baseUrl = "../../";
 			var scopes = {
 				"App":{"JS_GLOBAL":"_app$","PREFIX":"app","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
-				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.3/vcomp/","NAME":"VComp"},
+				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.5/vcomp/","NAME":"VComp"},
 				"Global":{"JS_GLOBAL":"_var$","NAME":"Global"}
 			};
 			this._app$ = initScope(scopes.App);
@@ -39,17 +37,19 @@
 </head>
 <body>
 	<div id="mount"><!--outra_pagina.html--></div>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.4/utils/javascript.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.4/utils/loaders.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.4/utils/form.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.4/utils/string.js"></script>
-	<script src="https://unpkg.com/@arijs/frontend@0.1.4/utils/animation.js"></script>
-	<script src="https://unpkg.com/@arijs/vue@2.5.17-beta1.0/dist/vue.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.5/utils/javascript.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.5/utils/loaders.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.5/utils/form.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.5/utils/string.js"></script>
+	<script src="https://unpkg.com/@arijs/frontend@0.1.5/utils/animation.js"></script>
+	<script src="https://unpkg.com/@arijs/vue@2.5.20/dist/vue.js"></script>
 	<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
-	<script src="https://unpkg.com/vuebar@0.0.18/vuebar.js"></script>
+	<script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.min.js"></script>
+	<script src="https://unpkg.com/vue-text-mask@6.1.2/dist/vueTextMask.js"></script>
 	<script src="../../app/env/local.js"></script>
 	<script src="../../app/services.js"></script>
 	<script src="../../app/store.js"></script>
+	<script src="../../app/router.js"></script>
 	<script src="../../app/initialize-outra-pagina.js"></script>
 </body>
 </html>
