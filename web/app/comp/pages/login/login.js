@@ -48,6 +48,9 @@ var comp = {
 		serverLocal: function() {
 			return this.$store.getters.serverLocal;
 		},
+		routerModeHash: function() {
+			return App.routerMode === 'hash';
+		},
 		formCampos: function() {
 			return {
 				username: this.campoUsuario,
@@ -55,12 +58,12 @@ var comp = {
 			};
 		},
 		formMethod: function() {
-			return this.$store.getters.serverLocal ? 'POST' : 'GET';
+			return this.routerModeHash ? 'GET' : 'POST';
 		},
 		formAction: function() {
-			return this.$store.getters.serverLocal
-				? this.routerBaseUrl + '/api/login'
-				: this.routerBaseUrl || '.';
+			return this.routerModeHash
+				? this.routerBaseUrl || '.'
+				: this.routerBaseUrl + '/api-login';
 		}
 	},
 	methods: {

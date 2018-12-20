@@ -5,7 +5,7 @@
 		</div>
 		<div class="subbloco-login">
 		<form ref="form" v-bind:method="formMethod" v-bind:action="formAction" v-on:submit.prevent="submitLogin">
-			<input type="hidden" v-if="!serverLocal" name="$_POST" value="/api/login" />
+			<input type="hidden" v-if="routerModeHash" name="$_POST" value="/api/login" />
 			<vcomp--form-campo2--texto
 				v-bind:campo="campoUsuario"
 				v-on:valor="onCampoValor"

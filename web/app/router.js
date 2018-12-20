@@ -32,10 +32,11 @@
 			children: [
 				{ path: '*', redirect: '/' }
 			]
-		}
+		},
+		{ path: '/api-*', redirect: '/' }
 	];
 	var router = new VueRouter({
-		mode: App.store.getters.serverLocal ? 'history' : 'hash',
+		mode: App.routerMode || 'history',
 		base: App.routerBaseUrl || '/',
 		routes: routes
 	});

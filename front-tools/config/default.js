@@ -24,12 +24,12 @@ var scopesJson = [
 	'"Global":' + JSON.stringify(scopes.Global)
 ];
 var baseUrl = function(url) {
-	return '' + (url || ''); // relative
-	// return '/' + (url || ''); // absolute
+	// return '' + (url || ''); // relative
+	return '/' + (url || ''); // absolute
 };
 var baseUrlOutraPagina = function(url) {
-	return '../../' + (url || ''); // relative
-	// return '/' + (url || ''); // absolute
+	// return '../../' + (url || ''); // relative
+	return '/' + (url || ''); // absolute
 };
 var hop = Object.prototype.hasOwnProperty;
 
@@ -128,8 +128,8 @@ module.exports = {
 			}
 		},
 		mobile: {
-			template: null, // usar como padrão o nome da chave ("index" neste caso)
-			// output: 'index.html', // como padrão, o nome da chave + ".html" ("index.html")
+			template: null, // usar como padrão o nome da chave ("mobile" neste caso)
+			// output: 'index.html', // como padrão, o nome da chave + ".html" ("mobile.html")
 			template_vars: {
 				SCOPES_SET: BASE_SCOPES_SET.concat([
 					{
@@ -160,9 +160,9 @@ module.exports = {
 				addBaseUrl_src: fnPrintBaseUrl('src', baseUrlOutraPagina),
 				addBaseUrl_url: fnPrintBaseUrl('url', baseUrlOutraPagina),
 				addBaseUrl_this: fnPrintBaseUrl(false, baseUrlOutraPagina),
-				BASE_URL_STRING: JSON.stringify(baseUrlOutraPagina()),
 				COMP_ROOT: 'app/exemplo-form',
 				PAGE_TITLE: 'VueGenerator - OUTRA',
+				BASE_URL_STRING: JSON.stringify(baseUrlOutraPagina()),
 				SCOPES_SET: [
 					{
 						NAME: scopes.App.JS_GLOBAL + '.compInit',

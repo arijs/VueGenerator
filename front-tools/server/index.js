@@ -27,7 +27,7 @@ var reFileError = /^ENOENT$|^ENOTDIR$/;
 var reExtHtml = /^$|^\.html$/i;
 
 var mapCustomHandler = {
-	'/api/login': {
+	'/api-login': {
 		'POST': apiLoginPost
 	}
 };
