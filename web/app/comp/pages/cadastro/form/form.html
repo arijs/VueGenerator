@@ -1,0 +1,204 @@
+<div class="app--pages--cadastro--form">
+	<div class="boxform">
+		<form role="form" action="javascript:;">
+			<!--fieldset-->
+			<div class="formcad">
+				<div class="row">
+					<div class="formcad-item formcad-itemmedium">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoCNPJ"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+
+					<div class="formcad-item formcad-itemmedium-dt">
+						<vcomp--form-campo2--date-picker
+							v-bind:campo="campoDataDia"
+							v-bind:monthNames="monthNames"
+							v-bind:weekDaysHeader="weekDaysHeader"
+							v-on:clickDay="onCampoClickDay"
+							v-on:changeMonth="onCampoChangeMonth"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--date-picker>
+					</div>
+
+					<div class="formcad-item formcad-itemmedium-dt">
+						<vcomp--form-campo2--date-picker
+							v-bind:campo="campoDataPeriodo"
+							v-bind:monthNames="monthNames"
+							v-bind:weekDaysHeader="weekDaysHeader"
+							v-on:clickDay="onCampoClickDay"
+							v-on:changeMonth="onCampoChangeMonth"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--date-picker>
+					</div>
+
+					<div class="formcad-item formcad-itemlarge">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoEmpresa"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+						
+					<!-- <div class="formcad-item formcad-itemlarge">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoNomeFantasia"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div> -->
+				</div>
+
+				<div class="row">
+					<div class="formcad-item formcad-itemmedium">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoSUC"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div> 
+					
+					<div class="formcad-item formcad-itemsmall">
+						<vcomp--form-campo2--select
+							v-bind:campo="campoAndar"
+							v-on:selecionado="onCampoSelecionado"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--select>
+					</div>
+					
+					<div class="formcad-item formcad-iteminter">
+						<vcomp--form-campo2--select
+							v-bind:campo="campoCategoria"
+							v-on:selecionado="onCampoSelecionado"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--select>
+					</div>
+					
+					<div class="formcad-item formcad-itemlarge">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoResponsavel"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+				</div>
+
+				<div class="row1">
+					<div class="formcad-item formcad-itemmedium">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoTelefone"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>   
+
+					<div class="formcad-item formcad-itemmedium">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoEmail"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+					<div class="formcad-item formcad-itemmedium">
+						<vcomp--form-campo2--select
+							v-bind:campo="campoEnviarEmail"
+							v-on:selecionado="onCampoSelecionado"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--select>
+					</div>
+				</div>
+				<div class="row10">
+					<!-- Campos disable -->
+					<div class="formcad-item formcad-itemmedium campo-disable">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoDtRecebimento"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+					<div class="formcad-item formcad-itemmedium campo-disable">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoAntecipacao"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+					<div class="formcad-item formcad-itemmedium campo-disable">
+						<vcomp--form-campo2--texto
+							v-bind:campo="campoTaxa"
+							v-on:valor="onCampoValor"
+							v-on:blur="onCampoBlur"
+						></vcomp--form-campo2--texto>
+					</div>
+					<!-- Fim dos campos disable -->
+				</div>
+			</div>
+			<!--/fieldset-->
+			<br>
+			<hr>
+			<div class="dadosbanc">
+				Dados Bancários
+			</div><!--dadosbanc-->
+			<div class="row2">
+				<div class="formcad-item formcad-itemmedium">
+					<vcomp--form-campo2--select
+						v-bind:campo="campoContaBanco"
+						v-on:selecionado="onCampoSelecionado"
+						v-on:blur="onCampoBlur"
+					></vcomp--form-campo2--select>
+				</div>
+				<div class="formcad-item formcad-itemag"> 
+					<vcomp--form-campo2--texto
+						v-bind:campo="campoContaAgencia"
+						v-on:valor="onCampoValor"
+						v-on:blur="onCampoBlur"
+					></vcomp--form-campo2--texto>
+				</div>
+				<div class="formcad-item formcad-itemcc">
+					<vcomp--form-campo2--texto
+						v-bind:campo="campoContaNumero"
+						v-on:valor="onCampoValor"
+						v-on:blur="onCampoBlur"
+					></vcomp--form-campo2--texto>
+				</div>
+				<div class="formcad-item formcad-itemdv">
+					<vcomp--form-campo2--texto
+						v-bind:campo="campoDV"
+						v-on:valor="onCampoValor"
+						v-on:blur="onCampoBlur"
+					></vcomp--form-campo2--texto>	
+				</div> 
+				<div class="formcad-item formcad-itemcb" v-bind:class="{'formcad-missing': campoUpload.falta, 'formcad-error': campoUpload.erro}">
+					<label>Comprovante Bancário: *</label>
+					<input type="file" id="div14" ref="fileUpload" name="Comprovante-Bancario" v-on:change="onChangeFileUpload">
+					<label for="div14" id="labeldiv4" style="margin-top:10px;">
+						<template v-if="campoUpload.file">{{campoUpload.file.name}}</template>
+						<template v-else>Anexar comprovante bancário</template>
+					</label>
+					<label v-if="campoUpload.erro" v-text="campoUpload.erro" class="formcad-item-errormessage"></label>
+				</div>
+			</div>
+
+			<div class="checktermo">
+				<vcomp--form-campo2--checkbox
+					v-bind:campo="campoAceito"
+					v-bind:filterClick="filterClickAceito"
+					v-on:check="onCampoCheck"
+					v-on:blur="onCampoBlur"
+				>
+					Eu declaro que li e aceito os
+					<button class="clicktermo" ref="btAbrirTermos" v-on:click="clickTermos">
+						<span class="termos">Termos e Condições de Uso</span>
+					</button>
+				</vcomp--form-campo2--checkbox>
+			</div>
+			<div class="row3">
+				<div class="mensagemErro" v-if="erroMensagem" v-text="erroMensagem"></div>
+				<span class="botaocdr botaocdr-sending" v-show="enviandoCadastro">Cadastrando usuário...</span>
+				<button type="button" class="botaocdr" v-show="!enviandoCadastro" v-on:click="clickCadastrar">Cadastrar usuário</button>
+			</div>
+		</form>
+	</div><!--boxform-->
+</div>

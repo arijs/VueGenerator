@@ -1,0 +1,20 @@
+<div class="app--pages--cadastro">
+	<app--modal--termos-de-uso
+		v-show="modalTermos"
+		v-on:fechar="modalTermos = false"
+		v-on:aceitar="termosAceitar"
+	></app--modal--termos-de-uso>
+	<div class="cadastro-usuario">
+		CADASTRO USUÁRIO
+	</div><!--cadastro-usuario-->
+	<template v-if="efetuado">
+		<app--pages--cadastro--efetuado></app--pages--cadastro--efetuado>
+	</template>
+	<template v-else>
+		<app--pages--cadastro--form
+			ref="form"
+			v-on:cadastrar="efetuado = true"
+			v-on:termos="modalTermos = true"
+		></app--pages--cadastro--form>
+	</template>
+</div>

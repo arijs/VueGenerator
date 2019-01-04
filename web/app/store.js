@@ -74,6 +74,25 @@
 		userCompanyName: function(state) {
 			var sData = state.session.data;
 			return sData && sData.companyName;
+		},
+		monthNames: function() {
+			return [
+				'Janeiro',
+				'Fevereiro',
+				'Março',
+				'Abril',
+				'Maio',
+				'Junho',
+				'Julho',
+				'Agosto',
+				'Setembro',
+				'Outubro',
+				'Novembro',
+				'Dezembro'
+			];
+		},
+		weekDaysHeader: function() {
+			return ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 		}
 	};
 	var actions = {

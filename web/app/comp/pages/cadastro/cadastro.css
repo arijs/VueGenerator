@@ -1,0 +1,20 @@
+.app--pages--cadastro {
+}
+
+.app--pages--cadastro .cadastro-usuario {
+	margin-top: 30px;
+	font-size: 22px;
+	color: #774d99;
+	font-weight: bold;  
+	text-align: center;
+}
+
+@media (orientation:portrait) {
+	.app--pages--cadastro {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--pages--cadastro {
+	}
+}

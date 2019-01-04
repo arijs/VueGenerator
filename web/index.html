@@ -23,7 +23,7 @@
 			function initScope(meta) {
 				return {BaseUrl: baseUrl, compMap: {}, meta: meta, scopes: scopes};
 			}
-			var baseUrl = "/";
+			var baseUrl = "";
 			var scopes = {
 				"App":{"JS_GLOBAL":"_app$","PREFIX":"app","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
 				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.6/vcomp/","NAME":"VComp"},
@@ -34,6 +34,7 @@
 			this._var$ = initScope(scopes.Global);
 			this._app$.compInit = [{"MOUNT":"#mount","ID":"app/root","SAVE":"$root"}];
 			this._app$.device = "desktop";
+			this._app$.routerMode = "hash";
 		})();
 	</script>
 </head>

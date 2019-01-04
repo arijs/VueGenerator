@@ -13,16 +13,16 @@
 	<title>VueGenerator - OUTRA</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image&#x2F;png"  sizes="496x496" href="/img/favicon-496.png">
-	<link rel="shortcut icon" type="image&#x2F;png"  sizes="80x80" href="/img/favicon.png">
-	<link rel="shortcut icon" type="image&#x2F;x-icon"  href="/img/favicon.ico">
+	<link rel="shortcut icon" type="image&#x2F;png"  sizes="496x496" href="../../img/favicon-496.png">
+	<link rel="shortcut icon" type="image&#x2F;png"  sizes="80x80" href="../../img/favicon.png">
+	<link rel="shortcut icon" type="image&#x2F;x-icon"  href="../../img/favicon.ico">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
 	<script>
 		(function() {
 			function initScope(meta) {
 				return {BaseUrl: baseUrl, compMap: {}, meta: meta, scopes: scopes};
 			}
-			var baseUrl = "/";
+			var baseUrl = "../../";
 			var scopes = {
 				"App":{"JS_GLOBAL":"_app$","PREFIX":"app","COMP_PATH_PREFIX":"app/comp/","NAME":"App"},
 				"VComp":{"JS_GLOBAL":"_vcomp$","PREFIX":"vcomp","COMP_URL":"https://unpkg.com/@arijs/frontend@0.1.6/vcomp/","NAME":"VComp"},
@@ -32,6 +32,7 @@
 			this._vcomp$ = initScope(scopes.VComp);
 			this._var$ = initScope(scopes.Global);
 			this._app$.compInit = [{"MOUNT":"#mount","ID":"app/exemplo-form","SAVE":"$root"}];
+			this._app$.routerMode = "hash";
 		})();
 	</script>
 </head>
@@ -47,10 +48,10 @@
 	<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
 	<script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.min.js"></script>
 	<script src="https://unpkg.com/vue-text-mask@6.1.2/dist/vueTextMask.js"></script>
-	<script src="/app/env/local.js"></script>
-	<script src="/app/services.js"></script>
-	<script src="/app/store.js"></script>
-	<script src="/app/router.js"></script>
-	<script src="/app/initialize-outra-pagina.js"></script>
+	<script src="../../app/env/local.js"></script>
+	<script src="../../app/services.js"></script>
+	<script src="../../app/store.js"></script>
+	<script src="../../app/router.js"></script>
+	<script src="../../app/initialize-outra-pagina.js"></script>
 </body>
 </html>

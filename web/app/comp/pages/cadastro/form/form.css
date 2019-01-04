@@ -1,0 +1,254 @@
+.app--pages--cadastro--form {
+}
+
+.app--pages--cadastro--form .boxform {
+	background: #FFFFFF;
+	margin: auto;
+	margin-top: 30px;
+	width: 1200px;
+	border: 1px solid #d8d5d5;
+	margin-bottom:40px;
+	padding-bottom: 40px;
+}
+
+.app--pages--cadastro--form .row {
+	justify-content: space-between;
+	display: flex;
+	width: 95%;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.app--pages--cadastro--form .row1 {
+	justify-content: space-between;
+	display: flex;
+	width: 75%;
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
+.app--pages--cadastro--form .row2 {
+	justify-content: space-between;
+	display: flex;
+	width: 92%;
+	margin-left: 30px;
+	margin-top: 20px;
+	white-space: nowrap;
+}
+
+.app--pages--cadastro--form .row3 {
+	margin-top: 22px;
+	margin-left: 515px;
+}
+
+.app--pages--cadastro--form .boxdadosbanc {
+	background: #FFFFFF;
+	margin: auto;
+	margin-top: 0px;
+	width: 1200px;
+	height: 250px;
+	border: 1px solid #d8d5d5;
+}
+
+.app--pages--cadastro--form .formcad-item {
+	position: relative;
+	height: 60px;
+	padding-top: 5px;
+	font-size: 14px;
+	color: #717171;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	white-space: normal;
+}
+
+.app--pages--cadastro--form .formcad-missing label,
+.app--pages--cadastro--form .formcad-error label {
+	color: #d0021b;
+}
+
+.app--pages--cadastro--form .formcad-itemmedium {
+	width: 260px;
+}
+.app--pages--cadastro--form .formcad-itemmedium-dt {
+	width: 160px;
+}
+.app--pages--cadastro--form .mensagemErro{
+	color: #d0021b;
+	position: absolute;
+	left: 0px;
+	text-align: center;
+	width: 100%;
+}
+
+.app--pages--cadastro--form .formcad-itemlarge {
+	width: 380px;
+}
+
+.app--pages--cadastro--form .formcad-itemsmall {
+	width: 86px;
+}
+
+.app--pages--cadastro--form .formcad-iteminter {
+	width: 240px;
+}
+
+.app--pages--cadastro--form .formcad-itemag {
+	width: 160px;
+}
+
+.app--pages--cadastro--form .formcad-itemcc {
+	width: 200px;
+}
+
+.app--pages--cadastro--form .formcad-itemdv {
+	width: 80px;
+}
+
+.app--pages--cadastro--form .formcad-itemcb {
+	width: 220px;
+}
+
+.app--pages--cadastro--form .vcomp-fc2-date-picker .campo-lista {
+    position: absolute;
+    right: 50%;
+    margin: 0 -10em;
+    padding-bottom: 0;
+    min-width: 20em;
+    max-height: 20em;
+}
+.app--pages--cadastro--form .vcomp--calendario .cal-month-change {
+	background-image: url(../../../../../img/arrow.svg);
+}
+
+.app--pages--cadastro--form .dadosbanc {
+	font-size: 18px;
+	color: #774d99;
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
+.app--pages--cadastro--form .checktermo {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 14px;
+	color: #717171;
+}
+.app--pages--cadastro--form #div14{
+	background:none;
+	border:none;
+	display:none;
+}
+
+.app--pages--cadastro--form .formcad-item-errormessage {
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+	white-space: normal;
+	color: #d0021b;
+}
+
+.app--pages--cadastro--form #labeldiv4{
+	color:#774d99;
+	text-decoration: underline;
+}
+
+.app--pages--cadastro--form #div15{
+	display:none;
+}
+
+.app--pages--cadastro--form #labeldiv15{
+	border-radius: 30%;
+	padding-right: 4px;
+	background:#fbfbfb;
+	border:solid 1px #e5e5e5;
+	font-size:11px;
+	margin-right:5px;
+}
+
+.app--pages--cadastro--form #div15:checked ~ #labeldiv15 {
+	background:#774d99;
+}
+
+.app--pages--cadastro--form .termos {
+	color: #774d99;
+	font-weight: bold;
+}
+.app--pages--cadastro--form .clicktermo {
+	border: none;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+
+.app--pages--cadastro--form a:link 
+{ 
+	text-decoration: none;
+} 
+
+.app--pages--cadastro--form .botaocdr {
+	display: inline-block;
+	width: 160px;
+	height: 35px;
+	line-height: 33px;
+	border: 1px solid #774d99;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #774d99;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 0 #666;
+	cursor:pointer;  
+	margin-top: 45px;
+}
+.app--pages--cadastro--form .botaocdr-sending {
+	background-color: #af92c7;
+	text-shadow: none;
+	border-color: #af92c7;
+	font-weight: normal;
+}
+
+.app--pages--cadastro--form  #div6{
+	background-position: 215px center;  /*Posição da imagem do background*/
+	padding:5px;
+}
+.app--pages--cadastro--form #div10{
+	background-position: 235px center;  /*Posição da imagem do background*/
+	padding:5px;
+}
+.app--pages--cadastro--form #div5{
+	background-position: 62px center;  /*Posição da imagem do background*/
+	padding:5px;
+}
+
+.app--pages--cadastro--form .campo-disable .vcomp-fc2-base .campo-controle {
+	background: #ebebeb;
+	color: #717171;
+	font-weight: bold;
+}
+.app--pages--cadastro--form .row10 {
+	display: flex;
+	width: 50%;
+	margin-left: 30px;
+	margin-top: 30px;
+	justify-content: space-between;
+}
+.app--pages--cadastro--form .row10 .vcomp-fc2-base {
+	margin-right: 20px;
+}
+
+.app--pages--cadastro--form .campos-disable{
+	width: 100%;
+	/* display: none; */
+}
+
+@media (orientation:portrait) {
+	.app--pages--cadastro--form {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--pages--cadastro--form {
+	}
+}
