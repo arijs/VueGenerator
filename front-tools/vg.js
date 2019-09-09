@@ -1,8 +1,5 @@
 var fs = require('fs');
 var path = require('path');
-var spawn = require('child_process').spawn;
-var webfont = require('webfont').default;
-var compressor;// = require('node-minify');
 // var dirFiles = require('dir-files');
 var minimist = require('minimist');
 var loadPartials = require('./load-partials');
@@ -55,66 +52,5 @@ loadPartials(function(err, partials) {
 		});
 	}
 });
-
-var downloadFile = function(file_url, save_dir, cb) {
-	var file_name = path.basename(file_url);
-	var file_path = save_dir + file_name;
-	if (!fs.existsSync(file_path)) {
-		var file = fs.createWriteStream(file_path);
-		var curl = spawn('curl', ['-L', file_url]);
-		curl.stdout.on('data', function(data) {
-			file.write(data);
-		});
-		curl.stdout.on('end', function(data) {
-			file.end();
-			console.log(file_name + ' downloaded to ' + save_dir);
-			if (cb) cb();
-		});
-		curl.on('exit', function(code) {
-			if (code != 0) {
-				console.error('Failed: ' + code);
-			}
-		});
-	} else if (cb) cb();
-};
-
-// downloadFile('https://cdn.jsdelivr.net/npm/vue/dist/vue.js');
-// downloadFile('https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js');
-// downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js');
-// downloadFile('https://cdn.jsdelivr.net/npm/vuex/dist/vuex.min.js');
-function renderWebfont() {
-	if (webfont && !webfont) {
-		webfont({
-			files: './**/*.ttf',
-			fontName: 'webfonts'
-		}).then(function(result) {
-			console.log(result);
-		});
-	}
-}
-function compressVendorJs() {
-	if (compressor) {
-		compressor.minify({
-			compressor: 'uglify-es',
-			input: './vendor/js/*.js',
-			output: './vendor/bundle/vendor.min.js',
-			callback: function(err, min) {
-				console.log('MINIFIED JS');
-			}
-		});
-	}
-}
-function compressVendorCss() {
-	if (compressor) {
-		compressor.minify({
-			compressor: 'crass',
-			input: './vendor/css/*.css',
-			output: './vendor/bundle/vendor.min.css',
-			callback: function(err, min) {
-				console.log('MINIFIED CSS');
-			}
-		});
-	}
-}
 
 argv['server'] && startLocalServer(env);

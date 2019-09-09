@@ -3,6 +3,12 @@
 var Utils;
 vars.Utils = Utils = vars.Utils || {};
 
+
+function domain(fromStart, fromLength, fromPos, toStart, toLength) {
+	return (fromPos - fromStart) * toLength / fromLength + toStart;
+	// this.domain(0, 100, 50, -1, 2) === 0
+	// this.domain(-1, 2, 0, 0, 100) === 50
+}
 function rotateX(x) {
 	x *= Math.PI;
 	var cosX = Math.cos(x);
@@ -33,6 +39,13 @@ function rotateZ(z) {
 		,    0,     0, 1
 		]);
 }
+function translate(x, y, z) {
+	return (
+		[ 1, 0, x || 0
+		, 0, 1, y || 0
+		, 0, 0, z || 1
+		]);
+}
 function applyMatrix(m, v) {
 	return (
 		[ m[0]*v[0] + m[1]*v[1] + m[2]*v[2]
@@ -46,6 +59,9 @@ function applyMatrices(list, v) {
 		v = applyMatrix(list[i], v);
 	}
 	return v;
+}
+function applyMatrixContext(ct, m) {
+	ct.transform(m[0], m[3], m[1], m[4], m[2], m[5]);
 }
 
 function multiplyMatrix(m1, m2) {
@@ -404,30 +420,30 @@ function cutLineYAxis(p0, p1) {
 	};
 }
 
-function getPlane(vv, transformVector) {
-	var origin = transformVector(vv[0]);
-	var vx = transformVector(vv[1]);
-	var vy = transformVector(vv[2]);
-	return (
-		[ vx[0], vx[1]
-		, vy[0], vy[1]
-		, origin[0], origin[1]
-		]);
+function getPlane(vv, mlist) {
+	var vx = applyMatrices(mlist, vv[0]);
+	var vy = applyMatrices(mlist, vv[1]);
+	var origin = applyMatrices(mlist, vv[2]);
+	return [
+		vx[0], vy[0], origin[0],
+		vx[1], vy[1], origin[1],
+		0, 0, 1
+	];
 }
 
-function getPlanePoints(vv, transformVector) {
-	var origin = vv[0];
-	var vx = subtractVector(vv[1], origin);
-	var vy = subtractVector(vv[2], origin);
-	return getPlane([origin, vx, vy], transformVector);
+function getPlanePoints(vv, mlist) {
+	var origin = vv[2];
+	var vx = subtractVector(vv[0], origin);
+	var vy = subtractVector(vv[1], origin);
+	return getPlane([origin, vx, vy], mlist);
 }
 
-function withPlane(ct, vv, transformVector, callback) {
-	return withTransform(ct, getPlane(vv, transformVector), callback);
+function withPlane(ct, vv, mlist, callback) {
+	return withTransform(ct, getPlane(vv, mlist), callback);
 }
 
-function withPoints(ct, vv, transformVector, callback) {
-	return withTransform(ct, getPlanePoints(vv, transformVector), callback);
+function withPoints(ct, vv, mlist, callback) {
+	return withTransform(ct, getPlanePoints(vv, mlist), callback);
 }
 
 function withTransform(ct, pxy, callback) {
@@ -444,9 +460,9 @@ function line(ct, start, end) {
 	ct.stroke();
 }
 
-function line3d(ct, transformVector, start, end) {
-	start = transformVector(start);
-	end   = transformVector(end  );
+function line3d(ct, mlist, start, end) {
+	start = applyMatrices(mlist, start);
+	end   = applyMatrices(mlist, end  );
 	line(ct, start, end);
 }
 
@@ -526,9 +542,11 @@ function fnFill(ct, path, color) {
 }
 
 Utils.geometry = {
+	domain: domain,
 	rotateX: rotateX,
 	rotateY: rotateY,
 	rotateZ: rotateZ,
+	translate: translate,
 	applyMatrix: applyMatrix,
 	applyMatrices: applyMatrices,
 	multiplyMatrix: multiplyMatrix,
@@ -556,6 +574,7 @@ Utils.canvas = {
 	withPlane: withPlane,
 	withPoints: withPoints,
 	withTransform: withTransform,
+	applyMatrixContext: applyMatrixContext,
 	line: line,
 	line3d: line3d,
 	fill: fill,

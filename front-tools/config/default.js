@@ -76,7 +76,7 @@ module.exports = {
 		SCOPES_JSON: scopesJson,
 		SCOPES_SET: BASE_SCOPES_SET,
 		PAGE_LANG: 'pt-br',
-		PAGE_TITLE: 'Local.e',
+		PAGE_TITLE: 'VueGenerator - NONE',
 		PAGE_DESCRIPTION: '',
 		BASE_URL_STRING: JSON.stringify(baseUrl()),
 		PAGE_VIEWPORT: null,
@@ -155,6 +155,7 @@ module.exports = {
 						VALUE: { __json: '/mobile.html' }
 					}
 				]),
+				PAGE_TITLE: 'VueGenerator - MOBILE',
 				PAGE_VIEWPORT: 'width=600',
 				HEAD_STYLES: BASE_STYLES.concat([
 					// { href: { addBaseUrl: 'css/mobile.css' } }
@@ -191,7 +192,7 @@ module.exports = {
 		},
 		404: {
 			template_vars: {
-				PAGE_TITLE: 'Página não encontrada // S2 - PIR - Potencial de Integridade Resiliente'
+				PAGE_TITLE: 'Página não encontrada'
 			}
 		}
 	}

@@ -115,7 +115,6 @@ var comp = {
 		}
 	},
 	mounted: function() {
-		var self = this;
 		document.documentElement.addEventListener('click', this.documentClick, false);
 	},
 	beforeDestroy: function() {

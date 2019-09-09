@@ -19,11 +19,12 @@
 				<span ref="valueBefore">
 					<slot name="value-before"></slot>
 				</span>
+				<!-- não colocar 'name" no input por causa do Autofill do Chrome -->
 				<input
 					ref="input"
 					class="campo-controle"
+					autocomplete="new-password"
 					v-bind:type="campo.tipo"
-					v-bind:name="campo.nome"
 					v-bind:value="campo.valor"
 					v-bind:placeholder="focused ? campo.placeholder : ''"
 					v-bind:disabled="campo.disabled"

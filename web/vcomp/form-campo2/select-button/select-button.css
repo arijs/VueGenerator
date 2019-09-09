@@ -1,0 +1,21 @@
+.vcomp-fc2-select-button {
+}
+.vcomp-fc2-select-button .btn-group-justified {
+	display: flex;
+	justify-content: space-between;
+}
+.vcomp-fc2-select-button .btn-group-justified > .btn {
+	flex: 1;
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+@media (orientation:portrait) {
+	.vcomp-fc2-select-button {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp-fc2-select-button {
+	}
+}

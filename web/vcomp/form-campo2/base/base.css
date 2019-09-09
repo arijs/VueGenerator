@@ -82,6 +82,20 @@
 .vcomp-fc2-base .campo-detail {
 	display: inline-block;
 }
+.vcomp-fc2-base .campo-controle {
+	display: block;
+	width: 100%;
+	font-family: Lato, sans-serif;
+	font-size: 1em;
+	font-weight: normal;
+	color: #222;
+}
+.vcomp-fc2-base .campo-hover-dtcell {
+	display: none;
+}
+.vcomp-fc2-base:hover .campo-hover-dtcell {
+	display: table-cell;
+}
 .vcomp-fc2-base.campo-nolabel .campo-label {
 	display: none;
 }
@@ -97,14 +111,6 @@
 .vcomp-fc2-base.campo-focused .campo-detail,
 .vcomp-fc2-base.campo-filled .campo-detail {
 	display: none;
-}
-.vcomp-fc2-base .campo-controle {
-	display: block;
-	width: 100%;
-	font-family: Lato, sans-serif;
-	font-size: 1em;
-	font-weight: normal;
-	color: #222;
 }
 .vcomp-fc2-base.campo-disabled .campo-controle {
 	background: #ebebeb;
@@ -127,4 +133,3 @@
 	background: url(../../../img/campo-invalido.svg) no-repeat center center;
 	background-size: contain;
 }
-

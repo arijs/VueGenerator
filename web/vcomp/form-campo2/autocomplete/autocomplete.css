@@ -20,6 +20,9 @@
 .vcomp-fc2-autocomplete .campo-border {
 	z-index: 4;
 }
+.vcomp-fc2-autocomplete.campo-opened .campo-border {
+	z-index: 5;
+}
 
 /* .vcomp-fc2-autocomplete.campo-focused .campo-label {
 	top: 0.98rem;

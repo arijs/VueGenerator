@@ -323,6 +323,17 @@ function hora_hh_mm(campo) {
 	}
 }
 
+function datePicker(campo) {
+	var i = campo.dataInicial;
+	var f = campo.dataFinal;
+	if (!(
+		i instanceof Date && !isNaN(+i) &&
+		f instanceof Date && !isNaN(+f)
+	)) {
+		return { falta: true };
+	}
+}
+
 function timePicker(campo) {
 	var h = campo.hora;
 	var m = campo.minuto;
@@ -403,6 +414,7 @@ return {
 	cep: cep,
 	data_dd_mm_yyyy: data_dd_mm_yyyy,
 	hora_hh_mm: hora_hh_mm,
+	datePicker: datePicker,
 	timePicker: timePicker,
 	numero: numero,
 	decimal: decimal,

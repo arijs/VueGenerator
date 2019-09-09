@@ -152,6 +152,7 @@ Utils.deferred = function(ref) {
 	var obj = {
 		ref: ref,
 		then: then,
+		nevermind: nevermind,
 		done: done,
 		clear: clear
 	};
@@ -163,6 +164,16 @@ Utils.deferred = function(ref) {
 			listeners.push(fn);
 		}
 		return obj;
+	}
+	function nevermind(fn) {
+		var i = 0, c = listeners.length;
+		for (;i<c;i++) {
+			if (listeners[i] === fn) {
+				listeners.splice(i, 1);
+				return i;
+			}
+		}
+		return -1;
 	}
 	function clear() {
 		listeners = [];
