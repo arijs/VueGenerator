@@ -1,0 +1,12 @@
+.app--modal2--relogin {
+}
+
+@media (orientation:portrait) {
+	.app--modal2--relogin {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--modal2--relogin {
+	}
+}

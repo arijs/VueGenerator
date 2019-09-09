@@ -1,0 +1,28 @@
+<div class="vcomp--form-campo--texto-multilinha vcomp-fc-multilinha vcomp-fc-base"
+	v-bind:class="cssClass"
+	v-on:click="campoClick"
+>
+	<div class="campo-border">
+		<div class="campo-label">
+			<span class="campo-name" v-text="campo.rotulo"></span>
+			<span class="campo-detail" v-text="campo.detalhe"></span>
+		</div>
+		<div class="campo-validation" v-text="campo.erro"></div>
+		<div class="campo-value">
+			<textarea
+				ref="input"
+				v-bind:name="campo.nome"
+				v-bind:value="campo.valor"
+				v-bind:rows="campo.rows"
+				v-bind:placeholder="campo.placeholder"
+				v-bind:disabled="campo.disabled"
+				v-bind:readonly="campo.readonly"
+				v-bind:required="campo.ariaRequired"
+				v-bind:aria-required="campo.ariaRequired ? 'true' : ''"
+				v-on:focus="onFocus"
+				v-on:blur="onBlur"
+				v-on:input="onInput"
+			></textarea>
+		</div>
+	</div>
+</div>

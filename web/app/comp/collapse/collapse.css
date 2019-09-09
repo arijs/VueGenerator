@@ -1,0 +1,15 @@
+.app--collapse {
+}
+.app--collapse .collapse-body {
+	overflow: hidden;
+}
+
+@media (orientation:portrait) {
+	.app--collapse {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--collapse {
+	}
+}

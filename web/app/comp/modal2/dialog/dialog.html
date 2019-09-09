@@ -1,0 +1,19 @@
+<div class="app--modal2--dialog">
+    <app--modal2--base
+        ref="modalBase"
+        modalSize="sm"
+        v-bind:title="title"
+        v-on:click-close="clickClose"
+        v-on:close="modalClose"
+    >
+        <div class="modal-body with-padding">
+            <slot>
+                <div v-html="message"></div>
+            </slot>
+        </div>
+
+        <div class="modal-footer">
+            <button v-for="b in buttons" class="btn" v-bind:class="b.btnClass" v-text="b.text" v-on:click="clickButton(b)"></button>
+        </div>
+    </app--modal2--base>
+</div>

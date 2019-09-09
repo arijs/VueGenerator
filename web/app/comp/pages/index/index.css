@@ -1,0 +1,12 @@
+.app--home {
+}
+
+@media (orientation:portrait) {
+	.app--home {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--home {
+	}
+}

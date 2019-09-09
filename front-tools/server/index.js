@@ -15,6 +15,7 @@ var typeMap = {
 	jpg: 'image/jpeg',
 	svg: 'image/svg+xml',
 	json: 'application/json',
+	txt: 'text/plain; charset=UTF-8',
 	ttf: 'application/x-font-ttf',
 	woff: 'application/font-woff',
 	woff2: 'application/font-woff2',
@@ -27,7 +28,7 @@ var reFileError = /^ENOENT$|^ENOTDIR$/;
 var reExtHtml = /^$|^\.html$/i;
 
 var mapCustomHandler = {
-	'/api-login': {
+	'/api/login': {
 		'POST': apiLoginPost
 	}
 };
@@ -47,7 +48,7 @@ function startLocalServer(env) {
 		};
 		var matchRequest = String(file.path).match(rePathRequest);
 		if (!matchRequest) {
-			res.writeHead(500, { 'Content-Type': 'text/plain; charset=UTF-8' });
+			res.writeHead(500, { 'Content-Type': typeMap.txt });
 			res.end('Could not parse request url\n');
 			return;
 		}

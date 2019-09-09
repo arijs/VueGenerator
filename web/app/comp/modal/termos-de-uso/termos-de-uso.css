@@ -1,0 +1,205 @@
+.app--modal--termos-de-uso {
+}
+
+.app--modal--termos-de-uso .app--modal--base .modal-container {
+	width: 927px;
+	height: 413px;
+	border-radius: 4px;
+	box-shadow: 0px 3px 7px       rgba(0,0,0,0.16);
+	background-color: #ffffff;
+	margin: 0 auto;
+	text-align: center;
+	z-index:20;
+	margin-top:10%;
+	padding:20px;
+}
+
+.app--modal--termos-de-uso .close {
+	height: 32px;
+	width: 32px;
+	border-radius: 15px;
+	font-family: sans-serif;
+	font-size: 32px;
+	line-height: 32px;
+	vertical-align: middle;
+	text-align: center;
+	color: #774d99;
+	cursor: pointer;
+	float: right;
+}
+
+.app--modal--termos-de-uso .Titulo {
+	font-size: 18px;
+	color: #774d99;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.app--modal--termos-de-uso .txttermos {
+	width: 830px;
+	height: 240px;
+	margin-left: 20px;
+	margin-top: 10px;
+	font-size: 14px;
+	color: #717171;
+	text-align: left;
+	overflow: auto;
+	
+  }
+  
+  .app--modal--termos-de-uso .boxtermos {
+	width: 860px;
+	height: 250px;
+	margin-top: 20px;
+	margin-left: 20px;
+	background-color: #ffffff;
+	border: 1px solid #e5e5e5;
+  }
+  
+  .app--modal--termos-de-uso ::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+  }
+   
+  .app--modal--termos-de-uso ::-webkit-scrollbar-button:start:decrement,
+  .app--modal--termos-de-uso ::-webkit-scrollbar-button:end:increment  {
+	display: none;
+  }
+   
+  .app--modal--termos-de-uso ::-webkit-scrollbar-track-piece  {
+	background-color: #e8e8e8;
+	-webkit-border-radius: 3px;
+  }
+   
+  .app--modal--termos-de-uso ::-webkit-scrollbar-thumb:vertical {
+	background-color: #a5a5a5;
+	-webkit-border-radius: 3px;
+  }
+  
+  .app--modal--termos-de-uso .botaoprinter {
+	 width: 160px;
+	 height: 35px;
+	 padding: 4px 11px;
+	 border: 1px solid #774d99;
+	 -moz-border-radius: 4px;
+	 -webkit-border-radius: 4px;
+	 border-radius: 4px;
+	 background-color: #FFFFFF;
+	 font-size: 14px;
+	 /*font-weight: bold;*/
+	 color: #774d99;
+	 text-align: center;
+	 /*text-shadow: 0 1px 0 #666;*/
+	 cursor:pointer;
+	 margin-top:30px;
+   }
+  
+   .app--modal--termos-de-uso .botaoaceitar {
+	 width: 160px;
+	 height: 35px;
+	 padding: 10px 60px 10px 60px;
+	 border: 1px solid #FFFFFF;
+	 -moz-border-radius: 4px;
+	 -webkit-border-radius: 4px;
+	 border-radius: 4px;
+	 background-color: #774d99;
+	 font-size: 14px;
+	 color: #FFFFFF;
+	 text-align: center;
+	 cursor:pointer;
+	 margin-top:30px;
+   }
+   /* .app--modal--termos-de-uso #alert-cadastro-loja{
+	   display:none;
+	   width:200px;
+	   height:auto;
+	   background:#fff;
+	   padding:20px;
+	   position:fixed;
+	   top:400px;
+	   left:40%;
+	   border:solid 1px #a5a5a5;
+   } */
+   .app--modal--termos-de-uso .row4 {
+	  justify-content: space-between;
+	  display: flex;
+	  width: 50%;
+	  margin-left: 30px;
+	  margin-top: 30px;
+  }
+  /* .formcad-itemstatic {
+	  font-size: 14px;
+	  color: #717171;
+	  font-weight: bold;
+	  display: flex;
+	  flex-direction: column;
+	  
+  } */
+  /* .formcad-itemstatic input {
+	  width: 180px;
+	  height: 35px;
+	  border-radius: 4px;
+	  background-color: #ebebeb;
+	  border: 1px solid #e5e5e5;
+	  margin-top: 5px;
+	  font-size: 14px;
+	  color: #717171;
+	  font-weight: bold;
+	  margin-right:20px;
+  } */
+  .app--modal--termos-de-uso input{
+	  padding:0px 10px 0 10px;
+  }
+  .app--modal--termos-de-uso .clicktermo {
+	  border: none;
+	  background: #FFFFFF;
+	}
+
+.root-mobile .app--modal--termos-de-uso .app--modal--base .modal-container {
+	padding:5px;
+	width: 90%;
+	height: 630px;
+	margin-top: 70px;
+}
+.root-mobile .app--modal--termos-de-uso .close {
+	font-weight: bold;
+	font-size: 18pt;
+}
+.root-mobile .app--modal--termos-de-uso .txttermos {
+	width: 95%;
+	line-height: 20px;
+	height:450px;
+	margin-top: 3px;
+	padding-right: 20px;
+	font-size: 12pt;
+	word-wrap: break-word;
+	white-space: pre-line;
+	box-sizing: border-box;
+	}
+	.root-mobile .app--modal--termos-de-uso .boxtermos {
+		width: 95%;
+		height:450px;
+		margin-top: 10px;
+		}
+		.root-mobile .app--modal--termos-de-uso .Titulo {
+			margin-top: 40px;
+			margin-bottom: 30px;
+			font-weight: bold;
+			font-size: 15pt;
+			}
+			.app--modal--termos-de-uso .botaoaceitar {
+				margin-top:20px;
+				}
+				.app--modal--termos-de-uso .botaoprinter {
+					margin-top:20px;
+					}
+
+@media (orientation:portrait) {
+	.app--modal--termos-de-uso {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--modal--termos-de-uso {
+	}
+}

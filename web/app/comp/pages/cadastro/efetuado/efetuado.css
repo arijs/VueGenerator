@@ -1,0 +1,12 @@
+.app--pages--cadastro--efetuado {
+}
+
+@media (orientation:portrait) {
+	.app--pages--cadastro--efetuado {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--pages--cadastro--efetuado {
+	}
+}

@@ -1,0 +1,148 @@
+<div class="app--header">
+
+	<!-- Navbar -->
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<img v-bind:src="baseUrl+'img/logo.png'" alt="Local.e" />
+				<div>Local.e</div>
+			</a>
+			<template v-if="isLogged">
+				<a href="javascript:;" class="sidebar-toggle" v-on:click="toggleSidebarNarrow"><i class="icon-paragraph-justify2"></i></a>
+				<button type="button" class="navbar-toggle" v-on:click="toggleNavbar">
+					<span class="sr-only">Toggle navbar</span>
+					<i class="icon-grid3"></i>
+				</button>
+				<button type="button" class="navbar-toggle offcanvas" v-on:click="toggleSidebarOffcanvas">
+					<span class="sr-only">Toggle navigation</span>
+					<i class="icon-paragraph-justify2"></i>
+				</button>
+			</template>
+		</div>
+
+		<app--collapse
+			v-if="isLogged"
+			classBody="navbar-collapse"
+			v-bind:open="navbarOpen"
+		>
+		<ul class="nav navbar-nav navbar-right" id="navbar-icons">
+
+			<li class="dropdown">
+				<a ref="messagesButton" class="dropdown-toggle" data-toggle="dropdown" v-on:click="clickMessages">
+					<i class="icon-paragraph-justify2"></i>
+					<span class="label label-default">6</span>
+				</a>
+				<div ref="messagesPanel" v-show="messagesOpen" class="popup dropdown-menu dropdown-menu-right">
+					<div class="popup-header">
+						<a href="#" class="pull-left"><i class="icon-spinner7"></i></a>
+						<span>Messages</span>
+						<a href="#" class="pull-right"><i class="icon-new-tab"></i></a>
+					</div>
+					<ul class="popup-messages">
+						<li class="unread">
+							<a href="#">
+								<img src="http://placehold.it/300" alt="" class="user-face">
+								<strong>Eugene Kopyov <i class="icon-attachment2"></i></strong>
+								<span>Aliquam interdum convallis massa...</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="http://placehold.it/300" alt="" class="user-face">
+								<strong>Jason Goldsmith <i class="icon-attachment2"></i></strong>
+								<span>Aliquam interdum convallis massa...</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="http://placehold.it/300" alt="" class="user-face">
+								<strong>Angel Novator</strong>
+								<span>Aliquam interdum convallis massa...</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="http://placehold.it/300" alt="" class="user-face">
+								<strong>Monica Bloomberg</strong>
+								<span>Aliquam interdum convallis massa...</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="http://placehold.it/300" alt="" class="user-face">
+								<strong>Patrick Winsleur</strong>
+								<span>Aliquam interdum convallis massa...</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+
+			<li class="dropdown">
+				<a ref="tasksButton" data-toggle="dropdown" class="dropdown-toggle" v-on:click="clickTasks">
+					<i class="icon-grid"></i>
+				</a>
+				<div ref="tasksPanel" v-show="tasksOpen" class="popup dropdown-menu dropdown-menu-right">
+					<div class="popup-header">
+						<a href="#" class="pull-left"><i class="icon-spinner7"></i></a>
+						<span>Tasks list</span>
+						<a href="#" class="pull-right"><i class="icon-new-tab"></i></a>
+					</div>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Description</th>
+								<th>Category</th>
+								<th class="text-center">Priority</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span class="status status-success item-before"></span> <a href="#">Frontpage fixes</a></td>
+								<td><span class="text-smaller text-semibold">Bugs</span></td>
+								<td class="text-center"><span class="label label-success">87%</span></td>
+							</tr>
+							<tr>
+								<td><span class="status status-danger item-before"></span> <a href="#">CSS compilation</a></td>
+								<td><span class="text-smaller text-semibold">Bugs</span></td>
+								<td class="text-center"><span class="label label-danger">18%</span></td>
+							</tr>
+							<tr>
+								<td><span class="status status-info item-before"></span> <a href="#">Responsive layout changes</a></td>
+								<td><span class="text-smaller text-semibold">Layout</span></td>
+								<td class="text-center"><span class="label label-info">52%</span></td>
+							</tr>
+							<tr>
+								<td><span class="status status-success item-before"></span> <a href="#">Add categories filter</a></td>
+								<td><span class="text-smaller text-semibold">Content</span></td>
+								<td class="text-center"><span class="label label-success">100%</span></td>
+							</tr>
+							<tr>
+								<td><span class="status status-success item-before"></span> <a href="#">Media grid padding issue</a></td>
+								<td><span class="text-smaller text-semibold">Bugs</span></td>
+								<td class="text-center"><span class="label label-success">100%</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+
+			<li class="user dropdown">
+				<a ref="userMenuButton" class="dropdown-toggle" data-toggle="dropdown" v-on:click="clickUserMenu">
+					<img v-bind:src="baseUrl + 'images/icon-user.svg'">
+					<span>{{sessionUser.nome}}</span>
+					<i class="caret"></i>
+				</a>
+				<ul ref="userMenuPanel" v-show="userMenuOpen" class="dropdown-menu dropdown-menu-right icons-right">
+					<li><a href="javascript:;"><i class="icon-user"></i> Perfil</a></li>
+					<li><a href="javascript:;"><i class="icon-bubble4"></i> Mensagens</a></li>
+					<li><a href="javascript:;"><i class="icon-cog"></i> Ajustes</a></li>
+					<li><a href="javascript:;" class="logoutPir" v-on:click="clickLogout"><i class="icon-exit"></i> Sair</a></li>
+				</ul>
+			</li>
+		</ul>
+		</app--collapse>
+	</div>
+	<!-- /navbar -->
+	
+</div>

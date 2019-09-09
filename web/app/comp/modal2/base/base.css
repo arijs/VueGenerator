@@ -1,0 +1,15 @@
+.app--modal2--base {
+}
+.app--modal2--base .modal {
+	display: block;
+}
+
+@media (orientation:portrait) {
+	.app--modal2--base {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--modal2--base {
+	}
+}

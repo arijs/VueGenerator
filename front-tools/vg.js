@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var webfont = require('webfont').default;
-var compressor = require('node-minify');
+var compressor;// = require('node-minify');
 // var dirFiles = require('dir-files');
 var minimist = require('minimist');
 var loadPartials = require('./load-partials');
@@ -10,9 +10,9 @@ var pages = require('./pages');
 var startLocalServer = require('./server/index');
 var argv = minimist(process.argv.slice(2), { default: { server: true } });
 
-var localport = argv.port || argv.p || 80;
+var localport = argv.port || argv.p || 8082;
 // var dfp = dirFiles.plugins;
-var envName = argv.env || argv.e || 'local';
+var envName = argv.env || argv.e || 'homolog';
 var envConfig = require('./config/' + envName);
 var env = {
 	name: envName,
@@ -33,7 +33,7 @@ loadPartials(function(err, partials) {
 			console.log('> page ' + pageOpts.name + ' read '+pageOpts.templateName+' write ' + output);
 			if (error) console.error(error);
 		});
-	} else {
+	} else if (argv.pages !== false) {
 		env.renderPage.allPages(function(state) {
 			var done = state.done;
 			for (var i = 0, ii = done.length; i < ii; i++) {

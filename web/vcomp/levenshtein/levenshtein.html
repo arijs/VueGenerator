@@ -1,0 +1,42 @@
+<div class="vcomp--levenshtein">
+	<div class="lv-input">
+		<vcomp--form-campo2--texto
+			v-bind:campo="campoTextoA"
+			v-on:valor="onCampoValor"
+			v-on:blur="onCampoBlur"
+		></vcomp--form-campo2--texto>
+		<vcomp--form-campo2--texto
+			v-bind:campo="campoTextoB"
+			v-on:valor="onCampoValor"
+			v-on:blur="onCampoBlur"
+		></vcomp--form-campo2--texto>
+		<ul class="opts">
+			<li><input type="radio" name="mode" value="all" v-model="mode" /> Todos</li>
+			<li><input type="radio" name="mode" value="raw" v-model="mode" /> Original</li>
+			<li><input type="radio" name="mode" value="ver" v-model="mode" /> Vertical</li>
+			<li><input type="radio" name="mode" value="hor" v-model="mode" /> Horizontal</li>
+			<li><input type="radio" name="mode" value="dia" v-model="mode" /> Diagonal</li>
+		</ul>
+	</div>
+	<div class="lv-output" v-bind:class="['mode-'+mode]">
+		<table>
+			<tr>
+				<th v-text="lvInv"></th>
+				<th v-for="cb in charsB" v-text="cb"></th>
+			</tr>
+			<tr v-for="(ca, ia) in charsA">
+				<th v-text="ca"></th>
+				<td v-for="(cb, ib) in charsB">
+					<div>
+						<span class="quad quad-dia" v-text="getDia(ia, ib)"></span>
+						<span class="quad quad-ver" v-text="getVer(ia, ib)"></span>
+					</div>
+					<div>
+						<span class="quad quad-hor" v-text="getHor(ia, ib)"></span>
+						<span class="quad quad-raw" v-text="getRaw(ia, ib)"></span>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

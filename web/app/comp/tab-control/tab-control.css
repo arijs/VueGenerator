@@ -1,0 +1,12 @@
+.app--tab-control {
+}
+
+@media (orientation:portrait) {
+	.app--tab-control {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--tab-control {
+	}
+}

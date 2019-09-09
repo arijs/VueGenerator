@@ -1,0 +1,21 @@
+.vcomp-fc-checkbox {}
+.vcomp-fc-checkbox .campo-anchor {
+	text-decoration: none;
+	color: inherit;
+}
+.vcomp-fc-checkbox .campo-control {
+	display: inline-block;
+	width: 1.833333em;
+	height: 1.833333em;
+	margin-right: 0.625em;
+	vertical-align: middle;
+	border: 0.058333em solid #b8b8b8;
+}
+.vcomp-fc-checkbox.campo-checked .campo-control {
+	background: url(../../../img/icon-check-orange-2.svg) no-repeat 50% 50%;
+	background-size: 1.25em auto;
+}
+.vcomp-fc-checkbox .campo-label {
+	display: inline-block;
+	vertical-align: middle;
+}

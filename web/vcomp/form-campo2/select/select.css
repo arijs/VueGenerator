@@ -1,0 +1,57 @@
+@import '../base/base.css';
+
+.vcomp-fc2-select {
+	position: relative;
+	height: 100%;
+	cursor: pointer;
+}
+.vcomp-fc2-select .campo-border {
+	position: relative;
+	width: 100%;
+	background: #fafafa;
+	z-index: 4;
+}
+.vcomp-fc2-select.campo-opened .campo-border {
+	z-index: 5;
+}
+.vcomp-fc2-select .campo-anchor {
+	display: block;
+	color: #4d4d4d;
+	text-decoration: none;
+}
+.vcomp-fc2-select.campo-focused .campo-anchor {
+	/* outline: none; */
+}
+.vcomp-fc2-select .campo-arrow {
+	position: absolute;
+	right: 0.7em;
+	top: 0.7em;
+	width: 1em;
+	height: 1em;
+	line-height: 1.15em;
+}
+.vcomp-fc2-select .campo-arrow svg {
+	width: 100%;
+	height: auto;
+}
+.vcomp-fc2-select .campo-lista {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0.7em;
+	max-height: 15em;
+	background: #fafafa;
+	overflow-y: auto;
+}
+.vcomp-fc2-select .campo-lista a {
+	display: block;
+	padding: 0.3em 0.95em 0.3em 1.25em;
+	font-size: 1em;
+	color: #222;
+	text-decoration: none;
+}
+.vcomp-fc2-select .campo-lista a:hover {
+	color: #f8562c;
+	background: #f0f0f0;
+}
+
+

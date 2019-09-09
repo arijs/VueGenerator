@@ -1,0 +1,13 @@
+@import '../base/base.css';
+
+.vcomp-fc2-texto-multilinha {}
+
+.vcomp-fc2-base.vcomp-fc2-texto-multilinha .campo-wrap-border {
+	height: auto;
+	min-height: 36px;
+}
+.vcomp-fc2-base.vcomp-fc2-texto-multilinha .campo-controle {
+	height: 174px;
+	min-height: 34px;
+	resize: vertical;
+}

@@ -1,0 +1,57 @@
+.vcomp--form-campo2--time-picker {
+}
+.vcomp-fc2-time-picker.campo-opened .campo-border {
+	height: 100%;
+	border-radius: 4px 4px 0 0;
+	overflow: visible;
+	z-index: auto !important;
+}
+.vcomp-fc2-time-picker.campo-opened .campo-value {
+	z-index: 7;
+	position: relative;
+	height: 36px;
+	border-radius: 4px 4px 0 0;
+	overflow: hidden;
+}
+.vcomp-fc2-time-picker.campo-opened .campo-arrow {
+	z-index: 7;
+}
+.vcomp-fc2-time-picker .campo-lista {
+	position: absolute;
+	left: 50%;
+	right: auto;
+	padding-bottom: 0;
+	min-width: 20em;
+	max-height: none !important;
+	transform: translate(-50%, 0px);
+	z-index: 6;
+}
+.vcomp-fc2-time-picker .campo-lista .campo-border {
+	padding: 8px 10px;
+}
+.vcomp-fc2-time-picker .campo-lista-left {
+	left: 0%;
+	right: auto;
+	transform: none;
+}
+.vcomp-fc2-time-picker .campo-lista-left .campo-border {
+	border-top-left-radius: 0;
+}
+.vcomp-fc2-time-picker .campo-lista-right {
+	left: auto;
+	right: 0%;
+	transform: none;
+}
+.vcomp-fc2-time-picker .campo-lista-right .campo-border {
+	border-top-right-radius: 0;
+}
+
+@media (orientation:portrait) {
+	.vcomp--form-campo2--time-picker {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp--form-campo2--time-picker {
+	}
+}

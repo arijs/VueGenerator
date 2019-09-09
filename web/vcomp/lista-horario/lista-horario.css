@@ -1,0 +1,21 @@
+.vcomp--lista-horario {
+}
+.vcomp--lista-horario .btn-group-justified {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0 0.25em;
+}
+.vcomp--lista-horario .btn-group-justified > .btn {
+	padding: 1px;
+	width: 100%;
+}
+
+@media (orientation:portrait) {
+	.vcomp--lista-horario {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp--lista-horario {
+	}
+}

@@ -1,25 +1,3 @@
-<div class="app--pages--index">
-	<template v-if="loading">
-		<p>Carregando...</p>
-	</template>
-	<template v-if="!loading && error">
-		<p><strong>Erro ao carregar a sessão do usuário</strong></p>
-		<p>Detalhes: {{errorText}}</p>
-		<!-- <p>Atualize a página para tentar novamente.</p> -->
-		<template v-if="redirectLoginSeconds >= 0">
-			<p>
-				Você será redirecionado para o login em
-				{{redirectLoginSeconds}}
-				segundo{{1 == redirectLoginSeconds ? '' : 's'}}...
-			</p>
-		</template>
-	</template>
-	<template v-if="!loading && !error && !data">
-		<p><strong>Erro ao carregar a sessão do usuário</strong></p>
-		<p>Sessão do usuário não encontrada</p>
-		<p>Atualize a página para tentar novamente.</p>
-	</template>
-	<template v-if="!loading && !error && data">
-		<p>Você será redirecionado em breve...</p>
-	</template>
+<div class="app--home">
+	<h1>Home</h1>
 </div>

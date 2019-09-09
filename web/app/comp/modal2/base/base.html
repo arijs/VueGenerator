@@ -1,0 +1,23 @@
+<div class="app--modal2--base">
+	<div class="modal fade" v-bind:class="[isIn ? 'in' : '']" tabindex="-1" role="dialog">
+		<div class="modal-dialog" v-bind:class="[modalSize ? 'modal-'+modalSize : '']">
+			<div class="modal-content">
+				<slot name="header">
+					<div class="modal-header">
+						<button type="button" class="close" aria-hidden="true" v-on:click="clickClose">&times;</button>
+						<h4 class="modal-title">
+							<i v-if="titleIconClass" v-bind:class="titleIconClass"></i>
+							{{ title }}
+						</h4>
+					</div>
+				</slot>
+				<slot>
+					<div class="modal-body with-padding">
+						<p>&nbsp;</p>
+					</div>
+				</slot>
+			</div>
+		</div>
+	</div>
+	<div class="modal-backdrop fade" v-bind:class="[isIn ? 'in' : '']"></div>
+</div>

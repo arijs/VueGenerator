@@ -1,8 +1,15 @@
 .app--root {
+	height: 100%;
 }
 .app--root .page-width {
 	margin: 0 auto;
 	width: 960px;
+}
+.app--root .page-container {
+	height: calc(100% - 73px);
+}
+.app--root .page-content {
+	height: 100%;
 }
 
 @media (orientation:portrait) {

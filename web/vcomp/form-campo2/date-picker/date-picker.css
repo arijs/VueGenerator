@@ -1,0 +1,32 @@
+@import '../select/select.css';
+
+.vcomp--form-campo2--date-picker {
+}
+.vcomp-fc2-date-picker .campo-lista {
+	position: absolute;
+	right: 50%;
+	margin: 0 -10em;
+	padding-bottom: 0;
+	min-width: 20em;
+	max-height: 20em;
+}
+.vcomp-fc2-date-picker .campo-lista-left {
+	position: absolute;
+	right: 100%;
+	margin: 0 -20em 0 0;
+}
+.vcomp-fc2-date-picker .campo-lista-right {
+	position: absolute;
+	right: 0%;
+	margin: 0 0 0 -20em;
+}
+
+@media (orientation:portrait) {
+	.vcomp--form-campo2--date-picker {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp--form-campo2--date-picker {
+	}
+}

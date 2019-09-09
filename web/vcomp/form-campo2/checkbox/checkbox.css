@@ -1,0 +1,38 @@
+.vcomp-fc2-checkbox {}
+.vcomp-fc2-checkbox .campo-anchor {
+	text-decoration: none;
+	color: inherit;
+}
+.vcomp-fc2-checkbox .campo-controle-checkbox {
+	display: inline-block;
+	width: 0.7em;
+	height: 0.7em;
+	margin-right: 0.75em;
+	padding: 0.2em;
+	vertical-align: middle;
+	border: 0.075em solid #b8b8b8;
+	border-radius: 0.3em;
+	box-sizing: content-box;
+}
+.vcomp-fc2-checkbox.campo-missing .campo-controle-checkbox,
+.vcomp-fc2-checkbox.campo-error .campo-controle-checkbox {
+	border-color: #d0021b;
+}
+.vcomp-fc2-checkbox.campo-checked .campo-controle-checkbox::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: #4e266f;
+	border-radius: 0.2em;
+	/* background: url(../../img/icon-check-orange-2.svg) no-repeat 50% 50%;
+	background-size: 1.25em auto; */
+}
+.vcomp-fc2-checkbox.campo-checked.campo-missing .campo-controle-checkbox,
+.vcomp-fc2-checkbox.campo-checked.campo-error .campo-controle-checkbox {
+	background: #d0021b;
+}
+.vcomp-fc2-checkbox .campo-label {
+	display: inline-block;
+	vertical-align: middle;
+}

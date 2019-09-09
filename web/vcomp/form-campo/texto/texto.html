@@ -1,0 +1,52 @@
+<div class="vcomp--form-campo--texto vcomp-fc-texto vcomp-fc-base"
+	v-bind:class="cssClass"
+	v-on:click="campoClick"
+>
+	<div class="campo-border">
+		<div class="campo-label">
+			<span class="campo-name" v-text="campo.rotulo"></span>
+			<span class="campo-detail" v-text="campo.detalhe"></span>
+		</div>
+		<div class="campo-value">
+			<template v-if="campo.mask && maskReady">
+				<masked-input
+					ref="inputMask"
+					v-bind:type="campo.tipo"
+					v-bind:name="campo.nome"
+					v-bind:value="campo.valor"
+					v-bind:placeholder="campo.placeholder"
+					v-bind:disabled="campo.disabled"
+					v-bind:readonly="campo.readonly"
+					v-bind:ariaRequired="campo.ariaRequired"
+					v-bind:mask="campo.mask.mask"
+					v-bind:guide="campo.mask.guide"
+					v-bind:pipe="campo.mask.pipe"
+					v-bind:placeholderChar="campo.mask.placeholder"
+					v-bind:showMask="campo.mask.showMask"
+					v-on:focus="onFocus"
+					v-on:blur="onBlur"
+					v-on:input="onInput"
+					v-on:animationstart="onAnimationStart"
+				></masked-input>
+			</template>
+			<template v-else>
+				<input
+					ref="input"
+					v-bind:type="campo.tipo"
+					v-bind:name="campo.nome"
+					v-bind:value="campo.valor"
+					v-bind:placeholder="campo.placeholder"
+					v-bind:disabled="campo.disabled"
+					v-bind:readonly="campo.readonly"
+					v-bind:required="campo.ariaRequired"
+					v-bind:aria-required="campo.ariaRequired ? 'true' : ''"
+					v-on:focus="onFocus"
+					v-on:blur="onBlur"
+					v-on:input="onInput"
+					v-on:animationstart="onAnimationStart"
+				/>
+			</template>
+		</div>
+		<div class="campo-validation" v-text="campo.erro"></div>
+	</div>
+</div>

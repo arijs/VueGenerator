@@ -1,0 +1,41 @@
+.vcomp--levenshtein {
+}
+.vcomp--levenshtein th {
+	text-align: center;
+	vertical-align: middle;
+}
+.vcomp--levenshtein .quad {
+	display: inline-block;
+	width: 1.5em;
+	text-align: center;
+	opacity: 0;
+}
+.vcomp--levenshtein .quad-dia {
+	background: #ffd;
+}
+.vcomp--levenshtein .quad-ver {
+	background: #dfd;
+}
+.vcomp--levenshtein .quad-hor {
+	background: #fdd;
+}
+.vcomp--levenshtein .quad-raw {
+	background: #ddd;
+}
+.vcomp--levenshtein .mode-all .quad,
+.vcomp--levenshtein .mode-raw .quad-raw,
+.vcomp--levenshtein .mode-ver .quad-ver,
+.vcomp--levenshtein .mode-hor .quad-hor,
+.vcomp--levenshtein .mode-dia .quad-dia {
+	opacity: 1;
+}
+
+@media (orientation:portrait) {
+	.vcomp--levenshtein {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp--levenshtein {
+	}
+}

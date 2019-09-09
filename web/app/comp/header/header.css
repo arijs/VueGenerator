@@ -1,0 +1,39 @@
+.app--header {
+	height: 73px;
+}
+.app--header .navbar-header {
+	min-height: 73px;
+}
+.app--header .dropdown-menu {
+	display: initial;
+}
+.app--header .navbar-nav {
+	position: relative;
+	left: auto;
+	top: auto;
+	right: auto;
+	bottom: auto;
+}
+.app--header .navbar-collapse {
+	border: none;
+}
+
+@media (min-width: 992px) {
+	.app--header .navbar-collapse {
+		height: auto !important;
+		overflow: visible !important;
+	}
+}
+
+@media (max-width: 991px) {
+}
+
+@media (orientation:portrait) {
+	.app--header {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--header {
+	}
+}

@@ -1,0 +1,63 @@
+<div class="vcomp--form-campo2--autocomplete vcomp-fc2-autocomplete vcomp-fc2-base"
+	v-bind:class="cssClass"
+	v-on:click="campoClick"
+>
+	<div class="campo-label">
+		<span class="campo-name">
+			<slot name="label-name">{{campo.rotulo}}</slot>
+		</span><!-- não remover este comentário
+		--><span class="campo-detail">
+			<slot name="label-detail">{{campo.detalhe}}</slot>
+		</span><!--
+		--><div class="campo-validation">
+			<slot name="label-error">{{campo.erro}}</slot>
+		</div>
+	</div>
+	<div class="campo-wrap-border">
+		<div class="campo-border">
+			<div class="campo-value" v-bind:class="classValue">
+				<span ref="valueBefore">
+					<slot name="value-before"></slot>
+				</span>
+				<input
+					ref="input"
+					class="campo-controle"
+					v-bind:type="campo.tipo"
+					v-bind:name="campo.nome"
+					v-bind:value="campo.valor"
+					v-bind:placeholder="focused ? campo.placeholder : ''"
+					v-bind:disabled="campo.disabled"
+					v-bind:readonly="campo.readonly"
+					v-bind:required="campo.ariaRequired"
+					v-bind:maxlength="campo.maxlength"
+					v-bind:aria-required="campo.ariaRequired ? 'true' : ''"
+					v-on:focus="onFocus"
+					v-on:blur="triggerBlur"
+					v-on:input="onInput"
+					v-on:keydown="onTextKeyDown"
+					v-on:keyup="onTextKeyUp"
+					v-on:animationstart="onAnimationStart"
+				/>
+				<span ref="valueAfter">
+					<slot name="value-after"></slot>
+				</span>
+			</div>
+			<div class="campo-validation" v-text="campo.erro"></div>
+			<div class="campo-lista" role="listbox" ref="lista" v-show="focused && searchOpcoes.length">
+				<a v-for="(opcao, index) in searchOpcoes"
+					ref="opcao"
+					v-bind:class="{'campo-opcao-focada': searchSelected == index}"
+					v-bind:aria-label="campo.ariaLabelOption || 'opção'"
+					role="option"
+					href="javascript:;"
+					tabindex="-1"
+					v-text="opcao.texto"
+					v-bind:title="opcao.title || opcao.texto"
+					v-on:keydown.space="pressSpaceOpcao(opcao, $event)"
+					v-on:click="opcaoClick(opcao)"
+					v-on:mouseenter="searchSelected = index"
+				></a><!--v-on:focus="emitFocus"-->
+			</div>
+		</div>
+	</div>
+</div>

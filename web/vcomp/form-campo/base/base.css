@@ -1,0 +1,115 @@
+.vcomp-fc-base {
+	position: relative;
+	font-size: 1em;
+}
+.vcomp-fc-base * {
+	font-size: inherit;
+}
+.vcomp-fc-base .campo-border {
+	position: relative;
+	/*height: 65px;*/
+	height: 4.229166em;
+	border: 0.058333em solid #b8b8b8;
+	/*border-radius: 4px;*/
+}
+.vcomp-fc-base.campo-filled .campo-border {
+	/*border-color: #000;*/
+	z-index: 1;
+}
+.vcomp-fc-base.campo-missing .campo-border,
+.vcomp-fc-base.campo-error .campo-border {
+	border-color: #d0021b;
+	z-index: 2;
+}
+.vcomp-fc-base.campo-focused .campo-border {
+	border-color: #f8562c;
+	/*z-index: 3;*/
+}
+.vcomp-fc-base .campo-anchor {
+	text-decoration: none;
+	color: inherit;
+}
+.vcomp-fc-base .campo-label {
+	position: absolute;
+	left: 1.283333em;
+	top: 1.5em;
+	font-size: 1.05em;
+	line-height: 1em;
+	color: #777;
+	transition: 0.5s top, 0.5s font-size;
+}
+.vcomp-fc-base.campo-missing .campo-label {
+	color: #d0021b;
+}
+/*.recam--form-campo--base.campo-focused .campo-label,*/
+.vcomp-fc-base.campo-filled .campo-label {
+	left: 1.571429em;
+	top: 1em;
+	font-size: 0.816666em;
+	color: #f8562c;
+}
+.vcomp-fc-base.campo-focused .campo-label {
+	/*color: #4d4d4d;*/
+}
+.vcomp-fc-base.campo-filled.campo-valid .campo-label::after {
+	content: '';
+	display: inline-block;
+	width: 0.933333em;
+	height: 0.933333em;
+	margin: 0 0 0.116666em 0.466666em;
+	vertical-align: middle;
+	background: url(../../../img/campo-valido.svg) no-repeat center center;
+	background-size: contain;
+}
+.vcomp-fc-base .campo-name {
+	display: inline-block;
+	font-size: inherit;
+}
+.vcomp-fc-base .campo-detail {
+	display: inline-block;
+	font-size: inherit;
+}
+.vcomp-fc-base.campo-focused .campo-detail,
+.vcomp-fc-base.campo-filled .campo-detail {
+	/*display: none;*/
+}
+.vcomp-fc-base .campo-value {
+	/*padding: 30px 16px 4px 22px;*/
+	padding: 1.925em 0.933333em 0 1.283333em;
+	/*height: 63px;*/
+}
+.vcomp-fc-base .campo-value input,
+.vcomp-fc-base .campo-value textarea,
+.vcomp-fc-base .campo-value .pseudo-input {
+	display: block;
+	width: 100%;
+	border: none;
+	padding: 0;
+	/*font-family: sans-serif;*/
+	font-family: 'Simplon';
+	font-weight: 400;
+	/*font-size: 20px;*/
+	font-size: 1.166666em;
+	color: #222;
+	background: transparent;
+	outline: none;
+}
+.vcomp-fc-base.campo-error .campo-validation {
+	position: absolute;
+	right: 0.933333em;
+	top: 1.541666em;
+	font-size: 0.875em;
+	line-height: 1em;
+	color: #d0021b;
+}
+.vcomp-fc-base.campo-error .campo-validation::after {
+	content: '';
+	display: inline-block;
+	width: 0.933333em;
+	height: 0.933333em;
+	margin: 0 0 0.116666em 0.466666em;
+	vertical-align: middle;
+	background: url(../../../img/campo-invalido.svg) no-repeat center center;
+	background-size: contain;
+}
+

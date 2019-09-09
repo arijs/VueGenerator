@@ -1,0 +1,49 @@
+<div class="vcomp--form-campo--select-button vcomp-fc-select-button vcomp-fc-base"
+	v-bind:class="cssClass"
+>
+	<div class="campo-group-label" v-bind:style="{ width: 100 * (campo.pesoRotulo || 0) + '%' }">
+		<div class="campo-border">
+			<div class="campo-label" v-bind:id="htmlId">
+				<span class="campo-group-name-box">
+					<span class="campo-group-name" v-text="campo.rotulo"></span>
+				</span>
+				<span class="campo-group-detail-box" v-if="campo.detalhe">
+					<span class="campo-group-detail" v-text="campo.detalhe"></span>
+				</span>
+			</div>
+			<div class="campo-value">
+				<div class="pseudo-input" v-text="selecionadoTexto"></div>
+			</div>
+			<div class="campo-validation" v-text="campo.erro"></div>
+		</div>
+	</div>
+	<div class="campo-group-list" role="radiogroup" v-bind:style="{ width: 100 * (1 - (campo.pesoRotulo || 0)) + '%' }" v-bind:aria-labelledby="htmlId">
+		<div class="campo-group-item" v-for="opcao in campo.opcoes" v-bind:class="{
+			'opcao-selected':opcao === campo.selecionado,
+			'opcao-filled':opcao.valor
+		}" v-bind:style="{ width: 100 * (opcao.peso || 1) / pesoTotal + '%' }">
+			<div class="campo-border">
+				<a href="javascript:;"
+					class="campo-anchor"
+					role="radio"
+					v-bind:title="opcao.title"
+					v-bind:aria-checked="opcao === campo.selecionado"
+					aria-haspopup="listbox"
+					v-on:focus="emitFocusOpcao(opcao, $event)"
+					v-on:blur="emitBlurOpcao(opcao, $event)"
+					v-on:keydown.space="pressSpaceOpcao(opcao, $event)"
+					v-on:click="opcaoClick(opcao)">
+					<div class="campo-anchor-content">
+						<div class="campo-label">
+							<span class="campo-name" v-text="opcao.rotulo"></span>
+							<span class="campo-detail" v-text="opcao.detalhe"></span>
+						</div>
+						<div class="campo-value">
+							<div class="pseudo-input" v-text="opcao.valor"></div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

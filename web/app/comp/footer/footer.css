@@ -1,0 +1,15 @@
+.app--footer {
+}
+.app--footer.is-logged .footer {
+	position: static;
+}
+
+@media (orientation:portrait) {
+	.app--footer {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--footer {
+	}
+}

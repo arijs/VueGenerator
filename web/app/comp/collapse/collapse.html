@@ -1,0 +1,6 @@
+<div class="app--collapse">
+	<slot name="header"></slot>
+	<div class="collapse-body" v-bind:class="classBody" ref="body" v-bind:style="{height: heightComputed, overflow: 'auto' === heightComputed ? 'visible' : ''}">
+		<slot></slot>
+	</div>
+</div>

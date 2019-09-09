@@ -9,10 +9,14 @@
 	};
 	App.Env = Env;
 
+	function url(url) {
+		return vars.BaseUrl + url;
+	}
+
 	var mapSession = {
-		admin: vars.BaseUrl + 'api/session/admin.json',
-		user: vars.BaseUrl + 'api/session/user.json',
-		not_logged: vars.BaseUrl + 'api/session/not-logged.json'
+		admin: url('api/session/admin.json'),
+		user: url('api/session/user.json'),
+		not_logged: url('api/session/not-logged.json')
 	};
 	var defaultSession = mapSession.not_logged;
 
@@ -20,6 +24,18 @@
 		var url = App.sessionUrl;
 		opt.ajax = {
 			url: url && mapSession[url] || defaultSession
+		};
+		return opt;
+	};
+
+	Services.login = function(opt, params) {
+		opt.ajax = {
+			method: 'POST',
+			url: url('api/login'),
+			headers: [
+				{ name: 'Content-Type', value: 'application/json; charset=UTF-8' }
+			],
+			body: JSON.stringify(params)
 		};
 		return opt;
 	};

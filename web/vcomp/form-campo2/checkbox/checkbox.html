@@ -1,0 +1,16 @@
+<div class="vcomp--form-campo2--checkbox vcomp-fc2-checkbox"
+	v-bind:class="cssClass"
+>
+	<a href="javascript:;" ref="anchor" class="campo-anchor" v-on:focus="onFocus" v-on:blur="onBlur" v-on:click="campoClick">
+		<div class="campo-controle-checkbox"></div>
+		<div class="campo-label">
+			<slot>
+				<span class="campo-name" v-text="campo.rotulo"></span>
+				<span class="campo-detail" v-text="campo.detalhe"></span>
+			</slot>
+			<slot name="erro">
+				<div class="campo-validation" v-text="campo.erro"></div>
+			</slot>
+		</div>
+	</a>
+</div>

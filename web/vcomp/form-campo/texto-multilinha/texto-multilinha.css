@@ -1,0 +1,17 @@
+@import '../base/base.css';
+
+.vcomp-fc-multilinha {}
+.vcomp-fc-multilinha .campo-border {
+	height: auto;
+}
+.vcomp-fc-multilinha.campo-focused .campo-label {
+	top: 10px;
+	font-size: 12px;
+}
+.vcomp-fc-multilinha .campo-value {
+	padding: 30px 16px 4px 22px;
+  height: auto;
+}
+.vcomp-fc-multilinha .campo-value textarea {
+	resize: vertical;
+}

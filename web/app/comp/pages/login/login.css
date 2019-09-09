@@ -1,5 +1,9 @@
 .app--pages--login {
 }
+.app--pages--login .popup-header .header-icon {
+	width: 40px;
+	height: 40px;
+}
 .app--pages--login .bloco-login{
 	margin: 0 auto;
 	width:400px;

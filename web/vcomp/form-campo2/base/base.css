@@ -1,0 +1,130 @@
+.vcomp-fc2-base {
+	position: relative;
+	font-size: 1em;
+	text-align: left;
+}
+.vcomp-fc2-base * {
+	font-size: inherit;
+}
+.vcomp-fc2-base .campo-wrap-border {
+	position: relative;
+	margin-top: 5px;
+	height: 36px;
+}
+.vcomp-fc2-base .campo-border {
+	position: relative;
+	border:solid 1px #e5e5e5;
+	border-radius: 4px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.vcomp-fc2-base .campo-anchor {
+	text-decoration: none;
+	color: inherit;
+}
+.vcomp-fc2-base .campo-label {
+	text-align: left;
+}
+.vcomp-fc2-base .campo-value {
+	width: 100%;
+	/* height:42px; */
+	padding:0;
+	color:#989898;
+	background: #f8f8f8;
+}
+.vcomp-fc2-base .campo-controle {
+	padding: 7px;
+	height: 34px;
+	line-height: 20px;
+	background: #f8f8f8;
+	border: none;
+	box-sizing: border-box;
+}
+.vcomp-fc2-base .campo-value .input-group-btn > .btn,
+.vcomp-fc2-base .campo-value .input-group-btn > .btn-group {
+	margin: 0;
+	height: 34px;
+}
+.vcomp-fc2-base.campo-missing .campo-label,
+.vcomp-fc2-base.campo-error .campo-label {
+	color: #d0021b;
+}
+/*.vcomp-fc2-base.campo-focused .campo-label,*/
+.vcomp-fc2-base.campo-filled .campo-label {
+	/* color: #f8562c; */
+}
+.vcomp-fc2-base.campo-focused .campo-label {
+	/*color: #4d4d4d;*/
+}
+.vcomp-fc2-base.campo-opened .campo-border,
+.vcomp-fc2-base.campo-focused .campo-border {
+	border-color: #774d99;
+	/*color: #4d4d4d;*/
+}
+.vcomp-fc2-base.campo-missing .campo-border,
+.vcomp-fc2-base.campo-error .campo-border {
+	border-color: #d0021b;
+}
+
+/* .vcomp-fc2-base.campo-filled.campo-valid .campo-label::after {
+	content: '';
+	display: inline-block;
+	width: 0.95em;
+	height: 0.95em;
+	margin: 0 0 0 0.5em;
+	vertical-align: middle;
+	background: url(../../../img/campo-valido.svg) no-repeat center center;
+	background-size: contain;
+} */
+.vcomp-fc2-base .campo-name {
+	display: inline-block;
+}
+.vcomp-fc2-base .campo-detail {
+	display: inline-block;
+}
+.vcomp-fc2-base.campo-nolabel .campo-label {
+	display: none;
+}
+.vcomp-fc2-base.campo-nolabel .campo-wrap-border {
+	margin-top: 0;
+}
+.vcomp-fc2-base.campo-error .campo-name {
+	display: none;
+}
+.vcomp-fc2-base.campo-error .campo-detail {
+	display: none;
+}
+.vcomp-fc2-base.campo-focused .campo-detail,
+.vcomp-fc2-base.campo-filled .campo-detail {
+	display: none;
+}
+.vcomp-fc2-base .campo-controle {
+	display: block;
+	width: 100%;
+	font-family: Lato, sans-serif;
+	font-size: 1em;
+	font-weight: normal;
+	color: #222;
+}
+.vcomp-fc2-base.campo-disabled .campo-controle {
+	background: #ebebeb;
+	color: #717171;
+}
+.vcomp-fc2-base.campo-missing .campo-controle,
+.vcomp-fc2-base.campo-error .campo-controle {
+	color: #d0021b;
+}
+.vcomp-fc2-base.campo-error .campo-validation {
+	color: #d0021b;
+}
+.vcomp-fc2-base.campo-error .campo-validation::after {
+	content: '';
+	display: inline-block;
+	width: 0.95em;
+	height: 0.95em;
+	margin: 0 0 0 0.5em;
+	/* vertical-align: middle; */
+	background: url(../../../img/campo-invalido.svg) no-repeat center center;
+	background-size: contain;
+}
+

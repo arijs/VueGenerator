@@ -1,0 +1,47 @@
+<div class="vcomp--form-campo--autocomplete vcomp-fc-autocomplete vcomp-fc-base"
+	v-bind:class="cssClass"
+	v-on:click="campoClick"
+>
+	<div class="campo-border">
+		<div class="campo-label">
+			<span class="campo-name" v-text="campo.rotulo"></span>
+			<span class="campo-detail" v-text="campo.detalhe"></span>
+		</div>
+		<div class="campo-value">
+			<input
+				ref="input"
+				v-bind:type="campo.tipo"
+				v-bind:name="campo.nome"
+				v-bind:value="campo.valor"
+				v-bind:placeholder="focused ? campo.placeholder : ''"
+				v-bind:disabled="campo.disabled"
+				v-bind:readonly="campo.readonly"
+				v-bind:required="campo.ariaRequired"
+				v-bind:maxlength="campo.maxlength"
+				v-bind:aria-required="campo.ariaRequired ? 'true' : ''"
+				v-on:focus="onFocus"
+				v-on:blur="onBlur"
+				v-on:input="onInput"
+				v-on:keydown="onTextKeyDown"
+				v-on:keyup="onTextKeyUp"
+				v-on:animationstart="onAnimationStart"
+			/>
+		</div>
+		<div class="campo-validation" v-text="campo.erro"></div>
+		<div class="campo-lista" role="listbox" ref="lista" v-show="focused && searchOpcoes.length">
+			<a v-for="(opcao, index) in searchOpcoes"
+				ref="opcao"
+				v-bind:class="{'campo-opcao-focada': searchSelected == index}"
+				v-bind:aria-label="campo.ariaLabelOption || 'opção'"
+				role="option"
+				href="javascript:;"
+				v-text="opcao.texto"
+				v-bind:title="opcao.title || opcao.texto"
+				v-on:focus="emitFocus"
+				v-on:keydown.space="pressSpaceOpcao(opcao, $event)"
+				v-on:click="opcaoClick(opcao)"
+				v-on:mouseenter="searchSelected = index"
+			></a>
+		</div>
+	</div>
+</div>

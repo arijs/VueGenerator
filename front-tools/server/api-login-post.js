@@ -1,3 +1,5 @@
+var fs = require('fs');
+var path = require('path');
 var bodyAnyFormat = require('body/any');
 var hop = Object.prototype.hasOwnProperty;
 
@@ -11,12 +13,19 @@ function isLoginUser(body) {
 		body.username === 'user' &&
 		body.password === 'user';
 }
+function strObject(obj) {
+	var s = String(obj);
+	if (s === String({})) {
+		s = JSON.stringify(obj);
+	}
+	return s;
+}
 
 function apiLoginPost(req, res, ctx, env) {
 	return bodyAnyFormat(req, function(err, body) {
 		if (err) {
 			res.writeHead(400);
-			res.end(err);
+			res.end(strObject(err));
 			return;
 		}
 		var toBody = typeof body;
@@ -35,7 +44,19 @@ function apiLoginPost(req, res, ctx, env) {
 		var sessionUrl =
 			isLoginAdmin(body) ? 'admin' :
 			isLoginUser(body) ? 'user' :
-			'not_logged';
+			'not-logged';
+		var fpath = 'api/session/'+sessionUrl+'.json';
+		fpath = path.resolve(env.config.output_dir, fpath);
+		fs.readFile(fpath, function(err, content) {
+			if (err) {
+				res.writeHead(500);
+				res.end(String(error));
+			} else {
+				res.writeHead(200, { 'Content-Type': 'application/json; charset=UTF-8' });
+				res.end(content, 'utf-8');
+			}
+		});
+		return;
 		var pageName = ctx.isMobile ? 'mobile' : 'index';
 		var pvars = env.config.pages[pageName].template_vars || {};
 		env.renderPage.pageString({

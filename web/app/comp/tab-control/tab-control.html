@@ -1,0 +1,15 @@
+<div class="app--tab-control">
+	<div v-bind:class="classHeader">
+		<slot name="headerBefore"></slot>
+		<ul v-bind:class="classHeaderList">
+			<slot name="headerListBefore"></slot>
+			<template v-for="tab in tabs">
+				<vnode v-if="getHeader(tab)" v-bind:vnode="getHeader(tab)"></vnode>
+				<app--tab-button v-else v-bind:active="tab === tabActive" v-bind:title="tab.title" v-on:click="tabActive = tab"></app--tab-button>
+			</template>
+			<slot name="headerListAfter"></slot>
+		</ul>
+		<slot name="headerAfter"></slot>
+	</div>
+	<slot></slot>
+</div>

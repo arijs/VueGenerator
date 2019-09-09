@@ -1,0 +1,12 @@
+.app--tab-panel {
+}
+
+@media (orientation:portrait) {
+	.app--tab-panel {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--tab-panel {
+	}
+}

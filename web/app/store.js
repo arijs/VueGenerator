@@ -37,6 +37,164 @@
 			String('00'+date.getDate()).substr(-2)
 		].join('-');
 	};
+	Utils.formatTime = function(time) {
+		return [
+			String('00'+time[0]).substr(-2),
+			String('00'+time[1]).substr(-2)
+		].join(':');
+	};
+	Utils.sameDay = function(d1, d2) {
+		return d1.getDate() === d2.getDate() &&
+			d1.getMonth() === d2.getMonth() &&
+			d1.getFullYear() === d2.getFullYear();
+	};
+	Utils.selecionaOpcaoValor = function(campo, valor) {
+		campo.selecionado = Utils.forEach(campo.opcoes, null, function(o) {
+			if (o.valor === valor) {
+				this.result = o;
+				return this._break;
+			}
+		});
+	};
+	Utils.campoPreencheData = function(campo, date) {
+		date = new Date(date);
+		campo.valor = date.getTime() && date.getFullYear() >= 1900
+			// vamos assumir que não precisamos registrar datas antes de 1900
+			? Utils.formatDateUser(date)
+			: '';
+	};
+	Utils.campoDataFormataIso = function(campo) {
+		var valor = String(campo.valor || '').match(/\b(\d+)\/(\d+)\/(\d+)\b/i);
+		if (!valor) return;
+		var data = new Date(+valor[3], +valor[2] - 1, +valor[1], 12);
+		if (
+			data.getDate() !== +valor[1] ||
+			data.getMonth() !== (+valor[2] - 1) ||
+			data.getFullYear() !== +valor[3]
+		) return;
+		return data.toISOString();
+	};
+	Utils.diffDates = function(d1, d2, labels) {
+		var p = true;
+		var t1 = d1.getTime();
+		var t2 = d2.getTime();
+		var sp = Utils.string.singularPlural;
+		if (t2 < t1) {
+			p = t1;
+			t1 = t2;
+			t2 = p;
+			p = d1;
+			d1 = d2;
+			d2 = p;
+			p = false;
+		}
+		var td = t2 - t1;
+		var o1 = {
+			ms: d1.getMilliseconds(),
+			s: d1.getSeconds(),
+			m: d1.getMinutes(),
+			h: d1.getHours(),
+			d: d1.getDate(),
+			M: d1.getMonth(),
+			Mdays: 0,
+			y: d1.getFullYear()
+		};
+		o1.Mdays = new Date(o1.y, o1.M + 1 + 1, 0).getDate();
+		var o2 = {
+			ms: d2.getMilliseconds(),
+			s: d2.getSeconds(),
+			m: d2.getMinutes(),
+			h: d2.getHours(),
+			d: d2.getDate(),
+			M: d2.getMonth(),
+			Mdays: 0,
+			y: d2.getFullYear()
+		};
+		o2.Mdays = new Date(o2.y, o2.M + 1 + 1, 0).getDate();
+		var oafter = {
+			t: td,
+			o1: o1,
+			o2: o2,
+			after: p,
+			ms: o2.ms - o1.ms,
+			s: o2.s - o1.s,
+			m: o2.m - o1.m,
+			h: o2.h - o1.h,
+			d: o2.d - o1.d,
+			M: o2.M - o1.M,
+			y: o2.y - o1.y
+		};
+		var oac = {
+			after: p,
+			raw: oafter,
+			ms: oafter.ms,
+			s: oafter.s,
+			m: oafter.m,
+			h: oafter.h,
+			d: oafter.d,
+			M: oafter.M,
+			y: oafter.y
+		};
+		while (oac.ms < 0) {
+			oac.ms += 1000;
+			oac.s -= 1;
+		}
+		while (oac.s < 0) {
+			oac.s += 60;
+			oac.m -= 1;
+		}
+		while (oac.m < 0) {
+			oac.m += 60;
+			oac.h -= 1;
+		}
+		while (oac.h < 0) {
+			oac.h += 24;
+			oac.d -= 1;
+		}
+		while (oac.d < 0) {
+			oac.d += 30; // Aproximação
+			oac.M -= 1;
+		}
+		while (oac.M < 0) {
+			oac.M += 12;
+			oac.y -= 1;
+		}
+		var s = [];
+		if (oac.y != 0) s.push(oac.y + sp(Math.abs(oac.y), labels.ano));
+		if (oac.M != 0) s.push(oac.M + sp(Math.abs(oac.M), labels.mes));
+		if (oac.d != 0 || s.length == 0) s.push(oac.d + sp(Math.abs(oac.d), labels.dia));
+		oac.sd = s.join(' ');
+		oac.st = [
+			String('00'+oac.h).substr(-2),
+			String('00'+oac.m).substr(-2),
+			String('00'+oac.s).substr(-2),
+		].join(':');
+		return oac;
+	};
+	Utils.printDate = function(d) {
+		var dt = new Date(d);
+		return [
+			String('00'+dt.getDate()).substr(-2),
+			String('00'+(dt.getMonth()+1)).substr(-2),
+			String('0000'+dt.getFullYear()).substr(-4)
+		].join('/');
+	};
+	Utils.printElapsed = function(d) {
+		var dt = new Date(d);
+		var n = new Date();
+		var a = Utils.diffDates(n, dt, {
+			ano: [' ano', ' anos'],
+			mes: [' mes', ' meses'],
+			dia: [' dia', ' dias']
+		});
+		// console.log(a);
+		return a.sd + ' ' + a.st;
+	};
+	Utils.datePart = function(date) {
+		return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	};
+
+	App.storeSession = Utils.store.key('s2pir-session');
 
 	var query = Utils.parseQuery(location.search);
 	var state = {
@@ -45,6 +203,14 @@
 		routerBaseUrl: App.routerBaseUrl || '/',
 		mobile: /\bmobile\b/i.test(App.device || ''),
 		query: query,
+		sidebarNarrow: false,
+		sidebarOffcanvas: false,
+		Status: {
+			GRAVADO: {},
+			CRIADO: {},
+			ALTERADO: {},
+			REMOVIDO: {}
+		},
 		session: {
 			loading: false,
 			error: null,
@@ -56,24 +222,41 @@
 			// return false;
 			return /^localhost$|^127\.0\.0\.1$/i.test(window.location.hostname);
 		},
-		isAdmin: function(state) {
-			var sError = state.session.error;
-			var sData = state.session.data;
-			return !sError && sData && sData.isadmin;
-		},
-		isUser: function(state) {
-			var sError = state.session.error;
-			var sData = state.session.data;
-			return !sError && sData && !sData.isadmin;
-		},
+		// isAdmin: function(state) {
+		// 	var sError = state.session.error;
+		// 	var sData = state.session.data;
+		// 	var sUser = sData && sData.user;
+		// 	return !sError && sUser && sUser.isadmin;
+		// },
+		// isUser: function(state) {
+		// 	var sError = state.session.error;
+		// 	var sData = state.session.data;
+		// 	var sUser = sData && sData.user;
+		// 	return !sError && sUser && !sUser.isadmin;
+		// },
 		isLogged: function(state) {
 			var sError = state.session.error;
 			var sData = state.session.data;
-			return !sError && sData;
+			return !sError && sData && Boolean(sData.id && sData.token);
 		},
-		userCompanyName: function(state) {
-			var sData = state.session.data;
-			return sData && sData.companyName;
+		monthNames: function() {
+			return [
+				'Janeiro',
+				'Fevereiro',
+				'Março',
+				'Abril',
+				'Maio',
+				'Junho',
+				'Julho',
+				'Agosto',
+				'Setembro',
+				'Outubro',
+				'Novembro',
+				'Dezembro'
+			];
+		},
+		weekDaysHeader: function() {
+			return ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 		}
 	};
 	var actions = {
@@ -113,6 +296,41 @@
 				});
 			}
 			// this.campoValido[campo.nome] = valido;
+			return Promise.resolve(payload);
+		},
+		campoClickHora: function(context, payload) {
+			var campo = payload.campo;
+			var hora = payload.hora;
+			var validar = payload.validar;
+			context.commit('aplicarCampoHora', {
+				campo: campo,
+				hora: hora
+			});
+			if (validar !== false) {
+				return context.dispatch('validarCampo', {
+					campo: campo,
+					ocultaErro: validar ? validar.ocultaErro : true,
+					ocultaValido: validar ? validar.ocultaValido : false
+				});
+			}
+			// this.campoValido[campo.nome] = valido;
+			return Promise.resolve(payload);
+		},
+		campoClickMinuto: function(context, payload) {
+			var campo = payload.campo;
+			var minuto = payload.minuto;
+			var validar = payload.validar;
+			context.commit('aplicarCampoMinuto', {
+				campo: campo,
+				minuto: minuto
+			});
+			if (validar !== false) {
+				return context.dispatch('validarCampo', {
+					campo: campo,
+					ocultaErro: validar ? validar.ocultaErro : true,
+					ocultaValido: validar ? validar.ocultaValido : false
+				});
+			}
 			return Promise.resolve(payload);
 		},
 		campoCheck: function(context, payload) {
@@ -261,13 +479,92 @@
 				return result;
 			});
 		},
+		limparValidacaoForm: function(context, form) {
+			Utils.forEachProperty(form, function(campo) {
+				context.commit('aplicarCampoValidacao', {
+					campo: campo,
+					validacao: null
+				});
+			});
+			return Promise.resolve();
+		},
 		loadSession: function(context) {
-			App.Services.session(function(loading, error, data) {
+			App.Services.session(function(loading, resp) {
 				context.commit('serviceSession', {
 					loading: loading,
-					error: error,
-					data: data
+					error: resp && resp.err,
+					data: resp && resp.data
 				});
+			});
+		},
+		loadSessionStored: function(context) {
+			return new Promise(function(resolve, reject) {
+				var v = App.storeSession.get();
+				if (v && v.id && v.token && v.nome && v.email) {
+					context.commit('serviceSession', {
+						loading: false,
+						error: null,
+						data: v
+					});
+					resolve(v);
+				} else {
+					reject(v || 'user session not found');
+				}
+			});
+		},
+		loadLogin: function(context, params) {
+			return new Promise(function(resolve, reject) {
+				App.Services.login(function(loading, resp) {
+					if (loading) {
+					} else if (resp && resp.data && !resp.err) {
+						var data = resp.data.data;
+						data = {
+							apelido: data.apelido,
+							email: data.email,
+							id: data.id,
+							message: data.message,
+							nome: data.nome,
+							perfil: data.perfil,
+							token: data.token
+						};
+						context.commit('serviceSession', {
+							loading: false,
+							error: null,
+							data: data
+						});
+						App.storeSession.set(data);
+						resolve(resp);
+					} else {
+						reject(resp);
+					}
+				}, params);
+			});
+		},
+		loadLogout: function(context) {
+			return new Promise(function(resolve, reject) {
+				context.commit('serviceSession', {
+					loading: false,
+					error: null,
+					data: null
+				});
+				context.commit('setSidebarOffcanvas', false);
+				App.storeSession.remove();
+				setTimeout(function() {
+					App.router.push('/');
+					resolve();
+				}, 100);
+			});
+		},
+		loadRecuperarSenha: function(context, params) {
+			return new Promise(function(resolve, reject) {
+				App.Services.recuperarSenha(function(loading, resp) {
+					if (loading) {
+					} else if (resp && resp.data && !resp.err) {
+						resolve(resp);
+					} else {
+						reject(resp);
+					}
+				}, params);
 			});
 		}
 	};
@@ -277,6 +574,12 @@
 		},
 		aplicarCampoSelecionado: function(state, payload) {
 			payload.campo.selecionado = payload.selecionado;
+		},
+		aplicarCampoHora: function(state, payload) {
+			payload.campo.hora = payload.hora;
+		},
+		aplicarCampoMinuto: function(state, payload) {
+			payload.campo.minuto = payload.minuto;
 		},
 		aplicarCalendarDate: function(state, payload) {
 			payload.campo.dataInicial = payload.dataInicial;
@@ -314,7 +617,7 @@
 	});
 	App.store = store;
 
-	if (/^\/api\/login$/i.test(query.$_POST)) {
+	if ('/api/login' === query.$_POST) {
 		if (query.username === 'admin' && query.password === 'admin') {
 			App.sessionUrl = 'admin';
 		} else if (query.username === 'user' && query.password === 'user') {
@@ -323,7 +626,8 @@
 			App.sessionUrl = 'not_logged';
 		}
 	}
-	store.dispatch('loadSession');
+	// store.dispatch('loadSession');
+	store.dispatch('loadSessionStored');
 
 	var appLoader = Utils.getScopePrefixLoader(App);
 	var vcompLoader = Utils.getScopePrefixLoader(VComp);
@@ -334,14 +638,17 @@
 	var vueLazyLoad = Utils.vueLoadAsyncComponent({
 		getLoader: loadManager.getLoader
 	});
-	var BaseComponent = Vue.extend({
-		mixins: [{ getComponent: vueLazyLoad }],
+	var baseMixin = {
+		getComponent: vueLazyLoad,
 		components: {
 			'masked-input': vueTextMask.default
 		}
+	};
+	var BaseComponent = Vue.extend({
 	});
-	BaseComponent.options._base = BaseComponent;
-	vueLazyLoad.setRegisterInto(BaseComponent);
+	Vue.mixin(baseMixin);
+
+	vueLazyLoad.setRegisterInto(Vue);
 
 	vars.compLoader = {
 		App: appLoader,
@@ -351,10 +658,10 @@
 	};
 	vars.BaseComponent = BaseComponent;
 
-	BaseComponent.component('vnode', {
+	Vue.component('vnode', {
 		functional: true,
 		render: function(h, context) {
-			return context.props.node;
+			return context.props.vnode;
 		}
 	});
 })();

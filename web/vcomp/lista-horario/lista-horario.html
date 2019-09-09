@@ -1,0 +1,14 @@
+<div class="vcomp--lista-horario">
+	<div class="subtitle">Hora:</div>
+	<div class="tempo-lista tempo-hora">
+		<div v-for="hg in 4" class="btn-group btn-group-xs btn-group-justified pull-none">
+			<button v-for="h in 6" type="button" class="btn" v-bind:class="{'btn-default': hora !== getHora(hg, h), 'btn-info': hora === getHora(hg, h)}" v-on:click="clickHora(hg, h)" v-text="getHora(hg, h)"></button>
+		</div>
+	</div>
+	<div class="subtitle">Minutos:</div>
+	<div class="tempo-lista tempo-minuto">
+		<div v-for="mg in 2" class="btn-group btn-group-xs btn-group-justified pull-none">
+			<button v-for="m in 6" type="button" class="btn" v-bind:class="{'btn-default': minuto !== getMinuto(mg, m), 'btn-info': minuto === getMinuto(mg, m)}" v-on:click="clickMinuto(mg, m)" v-text="getMinuto(mg, m)"></button>
+		</div>
+	</div>
+</div>

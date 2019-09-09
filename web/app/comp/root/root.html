@@ -1,9 +1,27 @@
 <div class="app--root">
-	<p>Hello World!</p>
-	<p>
+	<p v-if="true">
+		Hello World! /
 		<router-link to="/login">Login</router-link> /
 		<router-link to="/admin">Admin</router-link> /
-		<router-link to="/user">User</router-link>
+		<router-link to="/user">Usuário</router-link> /
+		<router-link to="/cadastro">Cadastro</router-link>
 	</p>
-	<router-view></router-view>
+
+	<app--header></app--header>
+	<div class="page-container">
+		<div class="page-content">
+			<router-view></router-view>
+			<app--footer></app--footer>
+		</div>
+	</div>
+
+	<app--modal2--relogin
+		ref="modalRelogin"
+		v-if="relogin"
+		v-on:login="onRelogin"
+		v-on:click-close="$refs.modalRelogin.fadeOut();"
+		v-on:click-logout="onReloginClickLogout"
+		v-on:close="relogin = null;"
+	></app--modal2--relogin>
+
 </div>

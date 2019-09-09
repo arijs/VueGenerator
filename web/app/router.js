@@ -3,13 +3,29 @@
 	var vars = this._var$;
 
 	var component = vars.compLoader.vueLazyLoad;
+	var appComp = function(id) {
+		return component(String('app/'+id).replace(/\/+/g,'--'));
+		//()
+	};
 	var appPage = function(id) {
-		return component(String('app/pages/'+id).replace(/\/+/g,'--'));
-	}
+		return appComp('pages/'+id);
+	};
 	var routes = [
-		{ path: '/', component: appPage('index') },
+		{ path: '/', beforeEnter: (to, from, next) => {
+			if (App.store.getters.isLogged) {
+				next('/admin');
+			} else {
+				next('/login');
+			}
+		}},
+		// { path: '/admin', component: appComp('area-logada'),
+		// 	children: [
+		// 		{ path: '', component: appPage('admin') }
+		// 	]
+		// },
 		// { path: '/mobile.html', redirect: '/' },
 		{ path: '/login', component: appPage('login') },
+		{ path: '/esqueci-senha', component: appPage('esqueci-senha') },
 		{ path: '/admin', component: appPage('admin'),
 			children: [
 				{ path: '', redirect: 'home' },

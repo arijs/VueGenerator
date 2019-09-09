@@ -1,0 +1,195 @@
+.vcomp--calendario {
+	text-align: center;
+}
+.vcomp--calendario *,
+.vcomp--calendario ::before,
+.vcomp--calendario ::after {
+	box-sizing: border-box;
+}
+.vcomp--calendario .cal-header {
+	margin: 0 0 0.5em;
+	border: 0.1em solid #e3e3e3;
+	border-width: 0.1em 0;
+}
+.vcomp--calendario .cal-header .cal-week {
+	/* color: #b5b5b5; */
+	font-weight: bold;
+}
+.vcomp--calendario .cal-month {
+	position: relative;
+	height: 2.25em;
+	line-height: 2.25em;
+	/* color: #555; */
+}
+.vcomp--calendario .cal-month-change {
+	position: absolute;
+	top: 0;
+	width: 2.25em;
+	height: 2.25em;
+	/* background: url(../img/arrow.svg) no-repeat 50% 50%; */
+	cursor: pointer;
+}
+.vcomp--calendario .cal-month-change.prev {
+	left: 0;
+	/* transform: rotate(90deg); */
+	/* content: '\002190'; */
+}
+.vcomp--calendario .cal-month-change.next {
+	right: 0;
+	/* transform: rotate(-90deg); */
+	/* content: '\002192'; */
+}
+.vcomp--calendario .cal-week {
+	padding: 0.1em 0;
+}
+.vcomp--calendario .cal-week::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.vcomp--calendario .cal-day {
+	position: relative;
+	float: left;
+	width: 14.28%;
+	height: 2em;
+	line-height: 2em;
+}
+.vcomp--calendario .cal-day-text-before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 8%;
+	width: 84%;
+	height: 100%;
+}
+.vcomp--calendario .cal-day-text-after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 8%;
+	width: 84%;
+	height: 100%;
+}
+.vcomp--calendario .cal-day-text {
+	position: relative;
+	height: 100%;
+	z-index: 1;
+}
+.vcomp--calendario .cal-day-enabled {
+	cursor: pointer;
+}
+.vcomp--calendario .cal-day-during {
+	background-color: #e4dbeb;
+}
+.vcomp--calendario .cal-day-start,
+.vcomp--calendario .cal-day-end,
+.vcomp--calendario .cal-day-alone {
+	color: #fff;
+	background: none;
+}
+.vcomp--calendario .cal-day-start::before,
+.vcomp--calendario .cal-day-end::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 8%;
+    height: 100%;
+    background: #e4dbeb;
+}
+.vcomp--calendario .cal-day-start::before {
+    right: 0;
+}
+.vcomp--calendario .cal-day-end::before {
+	left: 0;
+}
+.vcomp--calendario .cal-day-alone::before {
+    display: none;
+}
+.vcomp--calendario .cal-day-today .cal-day-text-before {
+	border: 0.1em solid #e0a040;
+	border-radius: 0.4em;
+}
+.vcomp--calendario .cal-day-enabled:hover .cal-day-text-before {
+	border: 0.1em solid #774d99;
+	border-radius: 0.4em;
+}
+.vcomp--calendario .cal-day-start .cal-day-text-before,
+.vcomp--calendario .cal-day-end .cal-day-text-before,
+.vcomp--calendario .cal-day-alone .cal-day-text-before {
+    background: #774d99;
+}
+.vcomp--calendario .cal-day-start .cal-day-text-before {
+	border-radius: 0.4em 0 0 0.4em;
+}
+.vcomp--calendario .cal-day-end .cal-day-text-before {
+	border-radius: 0 0.4em 0.4em 0;
+}
+.vcomp--calendario .cal-day-alone .cal-day-text-before {
+	border-radius: 0.4em;
+}
+/*.vcomp--calendario .cal-day-enabled:hover .cal-day-text-before {
+	border: 0.1em solid #774d99;
+	border-radius: 0.4em;
+}
+.vcomp--calendario .cal-day-start:hover .cal-day-text-before,
+.vcomp--calendario .cal-day-end:hover .cal-day-text-before {
+	border: none;
+}*/
+.vcomp--calendario .cal-day-start:hover .cal-day-text-after,
+.vcomp--calendario .cal-day-end:hover .cal-day-text-after {
+	left: 8%;
+	width: 84%;
+	font-weight: bold;
+	color: #d32f2f;
+	background: #fff;
+	border: 0.1em solid #774d99;
+	border-radius: 0.4em;
+	z-index: 2;
+}
+.vcomp--calendario .cal-day-start:hover .cal-day-text-after::before,
+.vcomp--calendario .cal-day-end:hover .cal-day-text-after::before {
+	content: '\d7';
+	display: inline-block;
+	position: relative;
+	bottom: 0.17em;
+	line-height: 1em;
+	font-size: 2em;
+	vertical-align: middle;
+}
+
+/**/
+
+.vcomp--calendario .cal-month-name {
+	font-weight: bold;
+}
+.vcomp--calendario .cal-header {
+	margin: 0;
+	border: none;
+}
+.vcomp--calendario .cal-header .cal-week {
+	font-weight: normal;
+}
+.vcomp--calendario .cal-body {
+	border: 1px solid #e0e0e0;
+	border-width: 1px 0 0 1px;
+}
+.vcomp--calendario .cal-body .cal-day {
+	border: 1px solid #e0e0e0;
+	border-width: 0 1px 1px 0;
+}
+.vcomp--calendario .cal-body .cal-week {
+	padding: 0;
+}
+
+@media (orientation:portrait) {
+	.vcomp--calendario {
+	}
+}
+
+@media (max-width: 1024px) {
+	.vcomp--calendario {
+	}
+}

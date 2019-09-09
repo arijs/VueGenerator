@@ -1,0 +1,29 @@
+<div class="vcomp--calendario">
+	<div class="cal-header">
+		<div class="cal-month">
+			<div class="cal-month-change prev" v-on:click="changeMonth(-1)">
+				<slot name="month-prev"></slot>
+			</div>
+			<div class="cal-month-name">
+				<slot name="monthHeader">{{monthHeader}}</slot>
+			</div>
+			<div class="cal-month-change next" v-on:click="changeMonth(+1)">
+				<slot name="month-next"></slot>
+			</div>
+		</div>
+		<div class="cal-week">
+			<div class="cal-day" v-for="day in weekDaysHeader" v-text="day"></div>
+		</div>
+	</div>
+	<div class="cal-body">
+		<div class="cal-week" v-for="week in weeks">
+			<div v-bind:class="getDayClass(date, week)"
+				v-for="date in week"
+				v-on:click="clickDay(date)">
+				<div class="cal-day-text-before"></div>
+				<div class="cal-day-text">{{date ? date.getDate() : ''}}</div>
+				<div class="cal-day-text-after"></div>
+			</div>
+		</div>
+	</div>
+</div>

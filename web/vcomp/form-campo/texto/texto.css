@@ -1,0 +1,9 @@
+@import '../base/base.css';
+
+.vcomp-fc-texto {}
+.vcomp-fc-texto.campo-focused .campo-label {
+	left: 1.571429em;
+	top: 1em;
+	font-size: 0.816666em;
+}
+

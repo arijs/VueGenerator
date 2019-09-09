@@ -1,4 +1,5 @@
 <div class="app--pages--login">
+
 	<div class="bloco-login">
 		<div class="logo-login">
 			<img v-bind:src="baseUrl + 'img/favicon.png'" />
@@ -23,6 +24,7 @@
 		</form>
 		</div>
 	</div><!--Fim bloco-login-->
+
 	<app--modal--esqueci-a-senha
 		v-show="modalEsqueci"
 		v-on:fechar="modalEsqueci = false"

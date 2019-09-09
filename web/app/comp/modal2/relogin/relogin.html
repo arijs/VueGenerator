@@ -1,0 +1,44 @@
+<div class="app--modal2--relogin">
+	<app--modal2--base
+		ref="modalBase"
+		modalSize="sm"
+		title="Sessão expirada"
+		v-on:click-close="clickClose"
+		v-on:close="modalClose"
+	>
+		<form ref="form" v-bind:method="formMethod" v-bind:action="formAction" v-on:submit.prevent="submitLogin">
+			<div class="modal-body with-padding">
+				<input type="hidden" v-if="routerModeHash" name="$_POST" value="/api/login" />
+				<div class="alert alert-danger" v-if="erroMensagem" v-text="erroMensagem" style="margin-bottom: 10px;"></div>
+				<vcomp--form-campo2--texto
+					class="form-group has-feedback"
+					v-bind:campo="campoUsuario"
+					v-on:valor="onCampoValor"
+					v-on:blur="onCampoBlur"
+				>
+					<i slot="value-after" class="icon-users form-control-feedback"></i>
+				</vcomp--form-campo2--texto>
+				<vcomp--form-campo2--texto
+					class="form-group has-feedback"
+					v-bind:campo="campoSenha"
+					v-on:valor="onCampoValor"
+					v-on:blur="onCampoBlur"
+				>
+					<i slot="value-after" class="icon-lock form-control-feedback"></i>
+				</vcomp--form-campo2--texto>
+			</div>
+
+			<div class="modal-footer text-right">
+				<button type="button" class="btn btn-link" v-on:click="clickLogout">
+					<i class="icon-exit"></i>
+					Sair
+				</button>
+				<button type="submit" class="btn btn-primary" v-bind:disabled="sending">
+					<i class="icon-spinner7 spin" v-if="sending"></i>
+					<i class="icon-menu2" v-else></i>
+					Entrar
+				</button>
+			</div>
+		</form>
+	</app--modal2--base>
+</div>

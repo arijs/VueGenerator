@@ -1,0 +1,132 @@
+@import '../base/base.css';
+
+.vcomp-fc-select-button {}
+.vcomp-fc-select-button::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.vcomp-fc-select-button .campo-group-label {
+	float: left;
+	position: relative;
+	/*overflow: hidden;*/
+}
+.vcomp-fc-select-button .campo-group-label .campo-border {
+	border-color: transparent;
+}
+.vcomp-fc-select-button .campo-group-label .campo-label {
+	top: 1.25em;
+}
+.vcomp-fc-select-button .campo-group-label .campo-value {
+	display: none;
+}
+.vcomp-fc-select-button .campo-group-detail-box {
+	position: relative;
+}
+.vcomp-fc-select-button .campo-group-detail-box::before {
+	content: '';
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+	margin-left: 0.25em;
+	vertical-align: middle;
+	background: url(../../../img/ico-duvida.svg) no-repeat 50% 50%;
+	background-size: contain;
+}
+.vcomp-fc-select-button .campo-group-detail {
+	display: none;
+	position: absolute;
+	left: 15%;
+	bottom: 2.083333em;
+	width: 18.75em;
+	padding: 0.625em 1.041666em;
+	line-height: 1.3em;
+	background: #ffffff;
+	border: 0.058333em solid #d0d0d0;
+	box-shadow: 0 0.208333em 0.833333em 0 rgba(0,0,0,0.25);
+	transform: translateX(-15%);
+	z-index: 2;
+}
+.vcomp-fc-select-button .campo-group-detail-box:hover .campo-group-detail {
+	display: block;
+}
+.vcomp-fc-select-button .campo-group-detail::before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 15%;
+	bottom: -0.583333em;
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	border-top: 0.625em solid #d0d0d0;
+}
+.vcomp-fc-select-button .campo-group-detail::after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 15%;
+	bottom: -0.525em;
+	border-left: 0.5em solid transparent;
+	border-right: 0.5em solid transparent;
+	border-top: 0.625em solid #ffffff;
+}
+.vcomp-fc-select-button .campo-group-label,
+.vcomp-fc-select-button .campo-group-item {
+	height: 4.229166em;
+}
+.vcomp-fc-select-button .campo-group-list {
+	float: left;
+}
+.vcomp-fc-select-button .campo-group-list::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.vcomp-fc-select-button .campo-group-list .campo-group-item {
+	float: left;
+	position: relative;
+}
+.vcomp-fc-select-button .campo-border {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: -0.058333em;
+}
+.vcomp-fc-select-button .campo-group-item a {
+	display: block;
+	height: 100%;
+}
+.vcomp-fc-select-button .campo-group-item:last-child .campo-border {
+	right: 0;
+}
+.vcomp-fc-select-button .campo-group-item.opcao-selected {
+	z-index: 1;
+}
+.vcomp-fc-select-button .campo-group-item.opcao-selected .campo-border {
+	border-color: #f8562c;
+}
+.vcomp-fc-select-button .campo-group-item.opcao-selected .campo-anchor-content {
+	position: relative;
+	top: 0.058333em;
+	font-weight: 500;
+}
+.vcomp-fc-select-button .campo-group-item.opcao-filled .campo-label {
+	top: 0.816666em;
+	font-size: 0.816666em;
+}
+.vcomp-fc-select-button .campo-group-item .campo-label,
+.vcomp-fc-select-button .campo-group-item .campo-value {
+	position: static;
+	padding: 0;
+}
+.vcomp-fc-select-button .campo-group-item .campo-anchor {
+	line-height: 3.9375em;
+	text-align: center;
+}
+.vcomp-fc-select-button .campo-group-item .campo-anchor-content {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1em;
+	text-align: left;
+}
+

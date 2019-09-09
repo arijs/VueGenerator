@@ -1,0 +1,12 @@
+.app--modal2--dialog {
+}
+
+@media (orientation:portrait) {
+	.app--modal2--dialog {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--modal2--dialog {
+	}
+}

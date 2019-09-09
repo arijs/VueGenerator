@@ -1,0 +1,59 @@
+@import '../base/base.css';
+
+.vcomp-fc-autocomplete {
+	position: relative;
+	height: 65px;
+	height: 5.075rem;
+	cursor: pointer;
+}
+
+.vcomp-fc-autocomplete .campo-border {
+	position: absolute;
+	width: 100%;
+	min-height: 5.075rem;
+	height: auto;
+	/*min-height: 64px;*/
+	background: #fff;
+	z-index: 1;
+}
+
+.vcomp-fc-autocomplete .campo-border {
+	z-index: 4;
+}
+
+.vcomp-fc-autocomplete.campo-focused .campo-label {
+	top: 0.98rem;
+	font-size: 0.98rem;
+}
+
+.vcomp-fc-autocomplete .campo-arrow {
+	position: absolute;
+	right: 1.68rem;
+	top: 2rem;
+	height: 1.4rem;
+}
+
+.vcomp-fc-autocomplete .campo-lista {
+	width: 100%;
+	width: calc(100% - 0.07rem);
+	position: static;
+	list-style: none;
+	margin: 0 0 0 0.07rem;
+	padding: 0.84rem 0 0.84rem 0;
+	/*max-height: 256px;*/
+	max-height: 20rem;
+	background-color: #fff;
+	overflow-y: auto;
+}
+
+.vcomp-fc-autocomplete .campo-lista a {
+	display: block;
+	padding: 0.35rem 1.12rem 0.35rem 1.54rem;
+	color: #000;
+	text-decoration: none;
+}
+
+.vcomp-fc-autocomplete .campo-lista .campo-opcao-focada {
+	color: #f8562c;
+	background: #f0f0f0;
+}

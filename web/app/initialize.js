@@ -24,15 +24,16 @@
 			comp = new Comp();
 			comp.$mount('#mount');
 			App.$rootError = comp;
+			App.defer.$root.done(err, null);
 			return;
 		}
 		compOptions.store = App.store;
 		compOptions.router = App.router;
 		Comp = BaseComponent.component(appRootId, compOptions);
-		//vars.compLoader.vueLazyLoad.register(appRootId, Comp); não é necessário
 		comp = new Comp();
 		comp.$mount('#mount');
 		App.$root = comp;
+		App.defer.$root.done(null, comp);
 	});
 
 	// App.store.dispatch('loadGetLogin');

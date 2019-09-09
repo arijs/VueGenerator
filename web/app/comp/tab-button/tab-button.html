@@ -1,0 +1,11 @@
+<li class="app--tab-button" v-bind:class="{active:active}">
+	<slot name="before"></slot>
+	<a href="javascript:;" v-on:click="onClick">
+		<slot name="prepend"></slot>
+		<slot name="label">
+			<span v-text="title"></span>
+		</slot>
+		<slot name="append"></slot>
+	</a>
+	<slot name="after"></slot>
+</li>

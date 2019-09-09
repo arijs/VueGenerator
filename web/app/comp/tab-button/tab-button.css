@@ -1,0 +1,12 @@
+.app--tab-button {
+}
+
+@media (orientation:portrait) {
+	.app--tab-button {
+	}
+}
+
+@media (max-width: 1024px) {
+	.app--tab-button {
+	}
+}

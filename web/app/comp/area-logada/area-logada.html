@@ -1,0 +1,39 @@
+<div class="app--area-logada">
+	<template v-if="loading">
+		<p>Carregando...</p>
+	</template>
+	<template v-if="!loading && error">
+		<p><strong>Erro ao carregar a sessão do usuário</strong></p>
+		<p>Detalhes: {{errorText}}</p>
+		<!-- <p>Atualize a página para tentar novamente.</p> -->
+		<template v-if="redirectLoginSeconds >= 0">
+			<p>
+				Você será redirecionado para o login em
+				{{redirectLoginSeconds}}
+				segundo{{1 == redirectLoginSeconds ? '' : 's'}}...
+			</p>
+		</template>
+		<template v-else>
+			<p>Atualize a página para tentar novamente.</p>
+		</template>
+		<p><router-link to="/login">Ir para o login</router-link></p>
+	</template>
+	<template v-if="!loading && !error && !data">
+		<p><strong>Erro ao carregar a sessão do usuário</strong></p>
+		<p>Sessão do usuário não encontrada</p>
+		<template v-if="redirectLoginSeconds >= 0">
+			<p>
+				Você será redirecionado para o login em
+				{{redirectLoginSeconds}}
+				segundo{{1 == redirectLoginSeconds ? '' : 's'}}...
+			</p>
+		</template>
+		<template v-else>
+			<p>Atualize a página para tentar novamente.</p>
+		</template>
+		<p><router-link to="/login">Ir para o login</router-link></p>
+	</template>
+	<template v-if="!loading && !error && data">
+		<router-view></router-view>
+	</template>
+</div>
